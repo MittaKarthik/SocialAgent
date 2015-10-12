@@ -21,6 +21,7 @@ class InstagramAgent: SocialAgentDelegate
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool
     {
+        UIApplication.sharedApplication().keyWindow?.rootViewController
         return true
     }
     

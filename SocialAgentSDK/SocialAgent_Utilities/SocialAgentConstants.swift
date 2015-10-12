@@ -7,3 +7,12 @@
 //
 
 import Foundation
+
+class SocialAgentConstants
+{
+    static let instagramAppId : String =  "SAInstagramAppId"
+    static let instagramAppSecret : String =  "SAInsatagramAppSecret"
+    static let youtubeApikey : String =  "SAYoutubeApiKey"
+    static let youtubeClientId : String =  "SAYoutubeClientId"
+    static let youtubeClientSecret : String =  "SAYoutubeClientSecret"
+}
