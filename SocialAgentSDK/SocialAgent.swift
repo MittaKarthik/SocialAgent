@@ -10,14 +10,15 @@ import Foundation
 
 class SocialAgent {
     
-    func fbSharedInstance() ->SocialAgentDelegate
+    static func fbSharedInstance() ->SocialAgentDelegate
     {
         return FacebookAgent.sharedInstance
     }
     
-    func twitterSharedInstance() ->SocialAgentDelegate
+    static func twitterSharedInstance() ->SocialAgentDelegate
     {
         return TwitterAgent.sharedInstance
     }
+
 
 }
