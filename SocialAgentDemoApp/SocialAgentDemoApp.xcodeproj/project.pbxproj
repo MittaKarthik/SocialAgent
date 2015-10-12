@@ -16,6 +16,7 @@
 		82171B611BCBBBDE006F7E1D /* SocialAgentDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82171B601BCBBBDE006F7E1D /* SocialAgentDelegate.swift */; settings = {ASSET_TAGS = (); }; };
 		82171B631BCBBCAD006F7E1D /* FacebookAgent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82171B621BCBBCAD006F7E1D /* FacebookAgent.swift */; settings = {ASSET_TAGS = (); }; };
 		82171B651BCBC369006F7E1D /* TwitterAgent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82171B641BCBC369006F7E1D /* TwitterAgent.swift */; settings = {ASSET_TAGS = (); }; };
+		C94676701BCBE60A00AF7A56 /* InstagramAgent.swift in Sources */ = {isa = PBXBuildFile; fileRef = C946766F1BCBE60A00AF7A56 /* InstagramAgent.swift */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		82171B601BCBBBDE006F7E1D /* SocialAgentDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocialAgentDelegate.swift; sourceTree = "<group>"; };
 		82171B621BCBBCAD006F7E1D /* FacebookAgent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FacebookAgent.swift; sourceTree = "<group>"; };
 		82171B641BCBC369006F7E1D /* TwitterAgent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwitterAgent.swift; sourceTree = "<group>"; };
+		C946766F1BCBE60A00AF7A56 /* InstagramAgent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstagramAgent.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,6 +82,7 @@
 				82171B601BCBBBDE006F7E1D /* SocialAgentDelegate.swift */,
 				82171B621BCBBCAD006F7E1D /* FacebookAgent.swift */,
 				82171B641BCBC369006F7E1D /* TwitterAgent.swift */,
+				C946766F1BCBE60A00AF7A56 /* InstagramAgent.swift */,
 			);
 			name = SocialAgentSDK;
 			path = ../../SocialAgentSDK;
@@ -156,6 +159,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				82171B5F1BCBBB8F006F7E1D /* SocialAgent.swift in Sources */,
+				C94676701BCBE60A00AF7A56 /* InstagramAgent.swift in Sources */,
 				82171B611BCBBBDE006F7E1D /* SocialAgentDelegate.swift in Sources */,
 				82171B631BCBBCAD006F7E1D /* FacebookAgent.swift in Sources */,
 				82171B4B1BCBBAA3006F7E1D /* ViewController.swift in Sources */,
@@ -310,6 +314,7 @@
 				82171B591BCBBAA3006F7E1D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
