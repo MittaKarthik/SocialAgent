@@ -16,10 +16,9 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        socialSession.login { (error) -> () in
-            
+        socialSession.loginAndGetUserInfo { (error) -> () in
+            print(self.socialSession.userModel.subscriberCount!)
         }
-        
     }
     
     override func viewDidAppear(animated: Bool) {

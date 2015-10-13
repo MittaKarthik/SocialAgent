@@ -105,6 +105,19 @@ class InstagramAgent: SocialAgentDelegate, LoginDelegate
         }
     }
     
+    func loginAndGetUserInfo(completion: CompletionBlock) {
+        self.login { (error) -> () in
+            if error != nil {
+                completion(error: error)
+            }
+            else {
+                self.getUserInfo({ (error) -> () in
+                    completion(error: error)
+                })
+            }
+        }
+    }
+    
     func logout() {
         self.userModel.clearAllData()
     }

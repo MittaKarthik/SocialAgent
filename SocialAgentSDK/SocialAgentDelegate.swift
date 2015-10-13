@@ -14,7 +14,7 @@ protocol SocialAgentDelegate : class
 {
     func login(completion: CompletionBlock)
     func getUserInfo(completion: CompletionBlock)
-    
+    func loginAndGetUserInfo(completion: CompletionBlock)
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool
     
 

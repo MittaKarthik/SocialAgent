@@ -36,9 +36,7 @@ class YoutubeAgent: SocialAgentDelegate, LoginDelegate
         })
     }
     
-    func getUserInfo(completion: CompletionBlock) {
-        
-    }
+
     
     private func validateAccessToken(completion: (validationSuccess: Bool) -> Void) {
         
@@ -91,14 +89,13 @@ class YoutubeAgent: SocialAgentDelegate, LoginDelegate
                                         self.userModel.refreshToken = refreshToken
                                         count++
                                     }
-                                    if count == 3 {
+                                    if count >= 2 {
                                         completion(error: nil)
                                     }
+                                    else {
+                                        completion(error: NSError(domain: "Missing Data from API response", code: 2, userInfo: nil))
+                                    }
                                 }
-                                else {
-                                    completion(error: NSError(domain: "Missing Data from API response", code: 2, userInfo: nil))
-                                }
-                                
                             }
                             catch {
                                 
@@ -235,6 +232,19 @@ class YoutubeAgent: SocialAgentDelegate, LoginDelegate
             }
             else {
                 completion(error: NSError(domain: "No Token", code: 0, userInfo: nil))
+            }
+        }
+    }
+    
+    func loginAndGetUserInfo(completion: CompletionBlock) {
+        self.login { (error) -> () in
+            if error != nil {
+                completion(error: error)
+            }
+            else {
+                self.getChannelInfo({ (error) -> () in
+                    completion(error: error)
+                })
             }
         }
     }

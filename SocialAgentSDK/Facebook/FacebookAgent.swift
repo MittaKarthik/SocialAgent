@@ -95,6 +95,10 @@ class FacebookAgent: SocialAgentDelegate
         })
     }
     
+    func  loginAndGetUserInfo(completion: CompletionBlock) {
+        
+    }
+    
     func refreshAccessToken(compeltion : CompletionBlock)
     {
         

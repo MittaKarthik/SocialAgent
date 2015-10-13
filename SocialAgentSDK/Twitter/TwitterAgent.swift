@@ -31,5 +31,9 @@ class TwitterAgent: SocialAgentDelegate
     func getUserInfo(completion: CompletionBlock) {
     }
     
+    func  loginAndGetUserInfo(completion: CompletionBlock) {
+        
+    }
+    
 
 }

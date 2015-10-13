@@ -43,6 +43,41 @@ class LoginVC: UIViewController, UIWebViewDelegate {
     }
     
     func webView(webView: UIWebView, shouldStartLoadWithRequest request: NSURLRequest, navigationType: UIWebViewNavigationType) -> Bool {
+        
+        
+        if let url = webView.request?.URL
+        {
+//            let storage: NSHTTPCookieStorage = NSHTTPCookieStorage.sharedHTTPCookieStorage()
+//            let cookies: [NSHTTPCookie] = storage.cookiesForURL(url)!
+//            for index in 0..<cookies.count
+//            {
+//                storage.deleteCookie(cookies[index])
+//            }
+            
+            
+            let storage: NSHTTPCookieStorage = NSHTTPCookieStorage.sharedHTTPCookieStorage()
+            
+            for cookie: NSHTTPCookie in storage.cookies!
+            {
+                let domainName: String = cookie.domain
+                print(domainName)
+                if let domainRange : Range = domainName.rangeOfString("accounts.google.com")
+                {
+                    let length = domainRange.startIndex.distanceTo(domainRange.endIndex)
+                    if length > 0 {
+                        storage.deleteCookie(cookie)
+                    }
+                }
+            }
+            
+           
+            
+            
+            
+        }
+      
+
+        
         if (request.URL!.absoluteString.rangeOfString(localLoginData.rangeCheckingString) != nil) {
             if !isVerified {
                 isVerified = true
