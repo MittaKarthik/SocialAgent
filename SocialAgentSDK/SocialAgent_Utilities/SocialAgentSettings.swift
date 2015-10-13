@@ -26,6 +26,6 @@ class SocialAgentSettings
     private static func getRequiredAppKey( key : String ) -> String?
     {
         let infoDict : Dictionary = NSBundle.mainBundle().localizedInfoDictionary!
-       return infoDict[key] as? String
+        return infoDict[key] as? String
     }
 }

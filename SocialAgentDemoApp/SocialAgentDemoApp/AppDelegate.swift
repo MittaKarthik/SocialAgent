@@ -16,11 +16,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
-        SocialAgent.fbSharedInstance().login { (responseObject, error) -> () in
-            
-        }
-        
-        
+
         // Override point for customization after application launch.
         return true
     }
