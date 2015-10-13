@@ -63,6 +63,12 @@ class FacebookAgent: SocialAgentDelegate
 
     }
     
+    func logout(delegate: LoginDelegate, completion: CompletionBlock)
+    {
+        let fbLoginManager : FBSDKLoginManager = FBSDKLoginManager()
+        fbLoginManager.logOut()
+    }
+    
     func getUserInfo(completion: CompletionBlock)
     {
         FBSDKGraphRequest(graphPath:ThisConstants.fbUserInfoPath, parameters:ThisConstants.fbUserFields).startWithCompletionHandler({ (connection, result, error) -> Void in
