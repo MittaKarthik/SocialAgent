@@ -180,13 +180,19 @@ class SocialAgentUserModel
     
     func clearAllData() {
         self.accessToken = nil
+        self.expiresIn = nil
+        self.refreshToken = nil
         self.userID = nil
+        self.channelID = nil
         self.fullName = nil
         self.userName = nil
         self.bio = nil
         self.followedByCount = nil
         self.followsCount = nil
         self.mediaCount = nil
+        self.subscriberCount = nil
+        self.videoCount = nil
+        self.viewCount = nil
     }
 
     

@@ -9,6 +9,6 @@
 import UIKit
 
 protocol LoginDelegate {
-    func didLoginCompleteSuccessfully()
-    func didUserCancelLogin()
+    func didLoginCompleteSuccessfully(userInfo: [String: String]?)
+    func didUserCancelLogin(userInfo: [String: String]?)
 }

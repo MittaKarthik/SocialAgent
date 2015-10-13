@@ -8,7 +8,7 @@
 
 import UIKit
 
-class InstagramAgent: SocialAgentDelegate
+class InstagramAgent: SocialAgentDelegate, LoginDelegate
 {
     //Singleton Instance Creation
     static let sharedInstance = InstagramAgent()
@@ -16,16 +16,21 @@ class InstagramAgent: SocialAgentDelegate
         self.userModel.userConstants = setUpUserPersistanceConstants()
     }
     
+    var completionBlock: CompletionBlock?
+    
     var userModel = SocialAgentUserModel()
+    
     //MARK: - Login
-    func login(delegate: LoginDelegate, completion: CompletionBlock)
+    func login(completion: CompletionBlock)
     {
+        self.completionBlock = completion
         let window = UIApplication.sharedApplication().keyWindow
         let viewControllerOnTop = window?.rootViewController
         
-        let storyboard = UIStoryboard(name: ThisConstants.storyboardName, bundle: nil)
-        let instagramSignInVC = storyboard.instantiateViewControllerWithIdentifier(ThisConstants.instagramSignInVCStoryboardID) as! InstagramSignInVC
-        instagramSignInVC.delegate = delegate
+        let storyboard = UIStoryboard(name: SocialAgentConstants.storyboardName, bundle: nil)
+        let instagramSignInVC = storyboard.instantiateViewControllerWithIdentifier(SocialAgentConstants.loginVCStoryboardID) as! LoginVC
+        instagramSignInVC.delegate = self
+        instagramSignInVC.localLoginData = ThisConstants.IGloginData
         let naviCon = UINavigationController(rootViewController: instagramSignInVC)
         viewControllerOnTop?.presentViewController(naviCon, animated: true, completion: { () -> Void in
             print("Presented Instagram SignIn VC")
@@ -74,7 +79,7 @@ class InstagramAgent: SocialAgentDelegate
                                                     self.userModel.mediaCount = media
                                                 }
                                             }
-                                            completion(responseObject: json, error: nil)
+                                            completion(error: nil)
                                         }
                                     }
                                     else {
@@ -96,12 +101,30 @@ class InstagramAgent: SocialAgentDelegate
             task.resume()
         }
         else {
-            completion(responseObject: nil, error: NSError(domain: "No AccessToken", code: 0, userInfo: nil))
+            completion(error: NSError(domain: "No AccessToken", code: 0, userInfo: nil))
         }
     }
     
     func logout() {
         self.userModel.clearAllData()
+    }
+    
+
+    
+    //Login Delegate Methods
+    
+    func didLoginCompleteSuccessfully(userInfo: [String : String]?) {
+        print("Login success")
+        if let completion = self.completionBlock {
+            completion(error: nil)
+        }
+    }
+    
+    func didUserCancelLogin(userInfo: [String : String]?) {
+        print("cancelled")
+        if let completion = self.completionBlock {
+            completion(error: NSError(domain: "User Cancelled Login", code: 1, userInfo: nil))
+        }
     }
     
     
@@ -112,17 +135,28 @@ extension InstagramAgent {
     //MARK: - Constants
     private struct ThisConstants
     {
-        static let storyboardName = "SocialAgentUI"
-        static let instagramSignInVCStoryboardID = "InstagramSignInVC"
-        static let instagramSignInNCStoryboardID = "InstagramSignInNC"
-        static let accessTokenKey = "accessToken"
-        static let userIDKey = "userID"
-        static let fullNameKey = "fullName"
-        static let userNameKey = "userName"
-        static let bioKey = "bio"
-        static let followedByCountKey = "followedByCount"
-        static let followsCountKey = "followsCount"
-        static let mediaCountKey = "mediaCount"
+        static let accessTokenKey = "IGaccessToken"
+        static let userIDKey = "IGuserID"
+        static let fullNameKey = "IGfullName"
+        static let userNameKey = "IGuserName"
+        static let bioKey = "IGbio"
+        static let followedByCountKey = "IGfollowedByCount"
+        static let followsCountKey = "IGfollowsCount"
+        static let mediaCountKey = "IGmediaCount"
+        
+        static let accessTokenIssueTimeKey = "IGaccessTokenIssueTimeKey"
+        static let expiresInKey = "IGexpiresInKey"
+        static let refreshTokenKey = "IGrefreshTokenKey"
+        static let channelIDKey = "IGchannelIDKey"
+        static let subscriberCount = "IGsubscriberCount"
+        static let videoCountKey = "IGvideoCountKey"
+        static let viewCountKey = "IGviewCountKey"
+        static let IGloginData = loginData(
+            naviGationTitle: "Instagram Login",
+            requestURL: "https://instagram.com/oauth/authorize/?client_id=\(SocialAgentSettings.getInstagramClientId())&redirect_uri=\(SocialAgentConstants.instagramRedirectURI)&response_type=token",
+            rangeCheckingString: "http://localhost/oauth2#access_token=",
+            accessTokenLimiterString: "access_token=", socialProfile: SocialAgentType.Instagram
+        )
     }
     
     //MARK: - User Data Persistance Constants
@@ -137,6 +171,18 @@ extension InstagramAgent {
         instagramPersistanceConstants.followsCountKey = ThisConstants.followsCountKey
         instagramPersistanceConstants.mediaCountKey = ThisConstants.mediaCountKey
         
+        instagramPersistanceConstants.accessTokenIssueTimeKey = ThisConstants.accessTokenIssueTimeKey
+        instagramPersistanceConstants.expiresInKey = ThisConstants.expiresInKey
+        instagramPersistanceConstants.refreshTokenKey = ThisConstants.refreshTokenKey
+        instagramPersistanceConstants.channelIDKey = ThisConstants.channelIDKey
+        instagramPersistanceConstants.subscriberCount = ThisConstants.subscriberCount
+        instagramPersistanceConstants.videoCountKey = ThisConstants.videoCountKey
+        instagramPersistanceConstants.viewCountKey = ThisConstants.viewCountKey
+        
         return instagramPersistanceConstants
     }
+    
+    
+    
+    
 }

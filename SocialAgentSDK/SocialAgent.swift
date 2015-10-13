@@ -24,6 +24,11 @@ class SocialAgent {
     {
         return InstagramAgent.sharedInstance
     }
+    
+    static func youTubeSharedInstance() ->SocialAgentDelegate
+    {
+        return YoutubeAgent.sharedInstance
+    }
 
 
 }

@@ -11,15 +11,25 @@ import UIKit
 class SocialAgentSettings
 {
     
-    static func getInstagramClientId() -> String
-    {
+    static func getInstagramClientId() -> String {
         return self.getRequiredAppKey(SocialAgentConstants.instagramClientIdKey)!
     }
     
     
-    static func getInstagramClientSecret() -> String
-    {
+    static func getInstagramClientSecret() -> String {
         return self.getRequiredAppKey(SocialAgentConstants.instagramClientSecretKey)!
+    }
+    
+    static func getYouTubeClientID() -> String {
+        return self.getRequiredAppKey(SocialAgentConstants.youtubeClientIdKey)!
+    }
+    
+    static func getYouTubeClientSecret() -> String {
+        return self.getRequiredAppKey(SocialAgentConstants.youtubeClientSecretKey)!
+    }
+    
+    static func getYouTubeApiKey() -> String {
+        return self.getRequiredAppKey(SocialAgentConstants.youtubeApiKey)!
     }
     
     

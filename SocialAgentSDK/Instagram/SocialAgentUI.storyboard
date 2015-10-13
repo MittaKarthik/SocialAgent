@@ -5,27 +5,10 @@
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
-        <!--Navigation Controller-->
-        <scene sceneID="hrT-48-wMR">
-            <objects>
-                <navigationController storyboardIdentifier="InstagramSignInNC" id="w2w-Hp-hsn" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="OA8-M8-FaB">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                        <animations/>
-                    </navigationBar>
-                    <connections>
-                        <segue destination="hTe-oN-2ex" kind="relationship" relationship="rootViewController" id="Imh-dQ-uxE"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="gjm-tU-WCd" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-259" y="441"/>
-        </scene>
-        <!--Instagram Sign InVC-->
+        <!--LoginVC-->
         <scene sceneID="Doi-XN-iuC">
             <objects>
-                <viewController storyboardIdentifier="InstagramSignInVC" id="hTe-oN-2ex" customClass="InstagramSignInVC" customModule="SocialAgentDemoApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LoginVC" id="hTe-oN-2ex" customClass="LoginVC" customModule="SocialAgentDemoApp" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="W8P-WR-SYY"/>
                         <viewControllerLayoutGuide type="bottom" id="3aF-25-eev"/>
@@ -34,34 +17,85 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <webView contentMode="scaleToFill" scalesPageToFit="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qpe-DW-tfn">
-                                <rect key="frame" x="0.0" y="64" width="600" height="536"/>
+                            <webView contentMode="scaleToFill" misplaced="YES" scalesPageToFit="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qpe-DW-tfn">
+                                <rect key="frame" x="0.0" y="44" width="600" height="556"/>
                                 <animations/>
                             </webView>
+                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rR1-E6-Me9">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Ch-OY-uq3">
+                                        <rect key="frame" x="505" y="7" width="81" height="30"/>
+                                        <animations/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="81" id="OKm-04-ceA"/>
+                                            <constraint firstAttribute="height" constant="30" id="hsn-aF-TbI"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                        <state key="normal" title="Cancel">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <variation key="default">
+                                            <mask key="constraints">
+                                                <exclude reference="hsn-aF-TbI"/>
+                                            </mask>
+                                        </variation>
+                                        <connections>
+                                            <action selector="calcelButton:" destination="hTe-oN-2ex" eventType="touchUpInside" id="NSr-3Z-raX"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <animations/>
+                                <color key="backgroundColor" white="0.0" alpha="0.80000000000000004" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="7Ch-OY-uq3" secondAttribute="trailing" constant="14" id="3yj-Mx-Yxi"/>
+                                    <constraint firstItem="7Ch-OY-uq3" firstAttribute="top" secondItem="rR1-E6-Me9" secondAttribute="top" constant="7" id="9vF-uf-lhJ"/>
+                                    <constraint firstAttribute="height" constant="44" id="Nuu-Xq-6Ky"/>
+                                    <constraint firstItem="7Ch-OY-uq3" firstAttribute="top" secondItem="rR1-E6-Me9" secondAttribute="top" constant="7" id="XCo-f5-bY4"/>
+                                    <constraint firstAttribute="height" constant="44" id="mEn-Xa-Xfk"/>
+                                    <constraint firstItem="7Ch-OY-uq3" firstAttribute="centerY" secondItem="rR1-E6-Me9" secondAttribute="centerY" id="u8U-r7-nEc"/>
+                                    <constraint firstAttribute="bottom" secondItem="7Ch-OY-uq3" secondAttribute="bottom" constant="7" id="xqN-cN-d49"/>
+                                </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="mEn-Xa-Xfk"/>
+                                        <exclude reference="9vF-uf-lhJ"/>
+                                        <exclude reference="xqN-cN-d49"/>
+                                    </mask>
+                                </variation>
+                            </view>
                         </subviews>
                         <animations/>
                         <constraints>
+                            <constraint firstItem="qpe-DW-tfn" firstAttribute="top" secondItem="rR1-E6-Me9" secondAttribute="bottom" id="8Na-ap-Vvq"/>
                             <constraint firstAttribute="trailingMargin" secondItem="qpe-DW-tfn" secondAttribute="trailing" constant="-20" id="9sQ-GH-5K2"/>
+                            <constraint firstItem="rR1-E6-Me9" firstAttribute="leading" secondItem="J3K-CQ-GQw" secondAttribute="leading" id="AoV-Bg-xvV"/>
+                            <constraint firstAttribute="bottom" secondItem="rR1-E6-Me9" secondAttribute="bottom" constant="556" id="IMF-yn-MeZ"/>
+                            <constraint firstItem="qpe-DW-tfn" firstAttribute="top" secondItem="rR1-E6-Me9" secondAttribute="bottom" id="JZu-6q-7ga"/>
+                            <constraint firstAttribute="trailing" secondItem="rR1-E6-Me9" secondAttribute="trailing" id="JeG-O6-fwF"/>
+                            <constraint firstItem="rR1-E6-Me9" firstAttribute="top" secondItem="W8P-WR-SYY" secondAttribute="bottom" id="Xzd-kf-TEV"/>
                             <constraint firstItem="3aF-25-eev" firstAttribute="top" secondItem="qpe-DW-tfn" secondAttribute="bottom" id="cLU-kE-g6n"/>
                             <constraint firstItem="qpe-DW-tfn" firstAttribute="leading" secondItem="J3K-CQ-GQw" secondAttribute="leadingMargin" constant="-20" id="gWH-Sx-tQu"/>
-                            <constraint firstItem="qpe-DW-tfn" firstAttribute="top" secondItem="W8P-WR-SYY" secondAttribute="bottom" id="ur8-A5-3vn"/>
+                            <constraint firstItem="qpe-DW-tfn" firstAttribute="top" secondItem="W8P-WR-SYY" secondAttribute="bottom" constant="24" id="ilY-Lr-883"/>
+                            <constraint firstItem="rR1-E6-Me9" firstAttribute="top" secondItem="W8P-WR-SYY" secondAttribute="bottom" id="lOR-cc-CAM"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="IMF-yn-MeZ"/>
+                                <exclude reference="Xzd-kf-TEV"/>
+                                <exclude reference="JZu-6q-7ga"/>
+                                <exclude reference="ilY-Lr-883"/>
+                            </mask>
+                        </variation>
                     </view>
-                    <navigationItem key="navigationItem" id="CUq-h2-T8u">
-                        <barButtonItem key="rightBarButtonItem" systemItem="cancel" id="D4V-jg-RBF">
-                            <color key="tintColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                            <connections>
-                                <action selector="calcelButton:" destination="hTe-oN-2ex" id="Hp7-8s-Wi7"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
                     <connections>
-                        <outlet property="instagramWebView" destination="qpe-DW-tfn" id="lLZ-o1-pUD"/>
+                        <outlet property="loginWebView" destination="qpe-DW-tfn" id="8m7-1y-tcy"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="R88-M0-phZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="414" y="441"/>
+            <point key="canvasLocation" x="238" y="380"/>
         </scene>
     </scenes>
 </document>

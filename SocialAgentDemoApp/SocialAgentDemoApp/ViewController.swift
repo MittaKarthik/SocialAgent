@@ -8,25 +8,23 @@
 
 import UIKit
 
-class ViewController: UIViewController, LoginDelegate {
+class ViewController: UIViewController {
 
-    let x = SocialAgent.instagramSharedInstance()
+    let socialSession = SocialAgent.youTubeSharedInstance()
     var didLogin = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
-
-        x.login(self) { (responseObject, error) -> () in
-            print("Done Login")
+        socialSession.login { (error) -> () in
+            
         }
         
     }
     
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-        
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+       
     }
 
     override func didReceiveMemoryWarning() {
@@ -34,16 +32,7 @@ class ViewController: UIViewController, LoginDelegate {
         // Dispose of any resources that can be recreated.
     }
     
-    func didLoginCompleteSuccessfully() {
-        print("Login success")
-        self.x.getUserInfo({ (responseObject, error) -> () in
-            print(responseObject)
-        })
-    }
     
-    func didUserCancelLogin() {
-        print("cancelled")
-    }
 
 
 }
