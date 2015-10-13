@@ -31,6 +31,7 @@
 		82171B8D1BCBECEA006F7E1D /* TwitterCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 82171B8A1BCBECEA006F7E1D /* TwitterCore.framework */; settings = {ASSET_TAGS = (); }; };
 		82171B8E1BCBECEA006F7E1D /* TwitterKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 82171B8B1BCBECEA006F7E1D /* TwitterKit.framework */; settings = {ASSET_TAGS = (); }; };
 		82171B8F1BCBECEA006F7E1D /* TwitterKitResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 82171B8C1BCBECEA006F7E1D /* TwitterKitResources.bundle */; settings = {ASSET_TAGS = (); }; };
+		827ADCDA1BCCE5BD00E97362 /* SocialAgentDelegateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 827ADCD91BCCE5BD00E97362 /* SocialAgentDelegateExtension.swift */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -60,6 +61,8 @@
 		82171B8A1BCBECEA006F7E1D /* TwitterCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TwitterCore.framework; sourceTree = "<group>"; };
 		82171B8B1BCBECEA006F7E1D /* TwitterKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TwitterKit.framework; sourceTree = "<group>"; };
 		82171B8C1BCBECEA006F7E1D /* TwitterKitResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = TwitterKitResources.bundle; sourceTree = "<group>"; };
+		827ADCD51BCCE1A800E97362 /* SocialAgentDemoApp-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SocialAgentDemoApp-Bridging-Header.h"; sourceTree = "<group>"; };
+		827ADCD91BCCE5BD00E97362 /* SocialAgentDelegateExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocialAgentDelegateExtension.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,6 +109,7 @@
 				82171B4F1BCBBAA3006F7E1D /* Assets.xcassets */,
 				82171B511BCBBAA3006F7E1D /* LaunchScreen.storyboard */,
 				82171B541BCBBAA3006F7E1D /* Info.plist */,
+				827ADCD51BCCE1A800E97362 /* SocialAgentDemoApp-Bridging-Header.h */,
 			);
 			path = SocialAgentDemoApp;
 			sourceTree = "<group>";
@@ -115,6 +119,7 @@
 			children = (
 				82171B5E1BCBBB8F006F7E1D /* SocialAgent.swift */,
 				82171B601BCBBBDE006F7E1D /* SocialAgentDelegate.swift */,
+				827ADCD91BCCE5BD00E97362 /* SocialAgentDelegateExtension.swift */,
 				82171B731BCBE904006F7E1D /* SocialAgent_Utilities */,
 				82171B671BCBE8A4006F7E1D /* Facebook */,
 				82171B691BCBE8A4006F7E1D /* Instagram */,
@@ -219,6 +224,7 @@
 		82171B3D1BCBBAA3006F7E1D /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 0700;
 				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = MittaKarthik;
 				TargetAttributes = {
@@ -273,6 +279,7 @@
 				82171B701BCBE8A4006F7E1D /* TwitterAgent.swift in Sources */,
 				82171B6E1BCBE8A4006F7E1D /* FacebookAgent.swift in Sources */,
 				82171B771BCBE95F006F7E1D /* SocialAgentSettings.swift in Sources */,
+				827ADCDA1BCCE5BD00E97362 /* SocialAgentDelegateExtension.swift in Sources */,
 				82171B4B1BCBBAA3006F7E1D /* ViewController.swift in Sources */,
 				82171B6F1BCBE8A4006F7E1D /* InstagramAgent.swift in Sources */,
 				82171B491BCBBAA3006F7E1D /* AppDelegate.swift in Sources */,
@@ -389,6 +396,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)",
@@ -398,6 +406,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.karthikmitta.SocialAgentDemoApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "SocialAgentDemoApp/SocialAgentDemoApp-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
@@ -405,6 +415,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)",
@@ -414,6 +425,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.karthikmitta.SocialAgentDemoApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "SocialAgentDemoApp/SocialAgentDemoApp-Bridging-Header.h";
 			};
 			name = Release;
 		};

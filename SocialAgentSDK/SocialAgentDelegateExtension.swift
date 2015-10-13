@@ -1,19 +1,28 @@
 //
-//  SocialAgentDelegate.swift
+//  SocialAgentDelegateExtension.swift
 //  SocialAgentDemoApp
 //
-//  Created by MittaKarthik on 12/10/15.
+//  Created by MittaKarthik on 13/10/15.
 //  Copyright © 2015 MittaKarthik. All rights reserved.
 //
 
 import UIKit
 
-typealias CompletionBlock = ( responseObject : AnyObject?, error : NSError?) -> ()
-
-protocol SocialAgentDelegate : class
+extension SocialAgentDelegate
 {
-    func login(_: CompletionBlock)
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool
+    {
+        
+        return true
+    }
+    
     func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject) -> Bool
+    {
+        return true
+    }
+    
     func applicationDidBecomeActive(application: UIApplication)
+    {
+        
+    }
 }

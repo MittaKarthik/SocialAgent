@@ -20,11 +20,6 @@ class YoutubeAgent: SocialAgentDelegate
 
     }
     
-    func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool
-    {
-        return true
-    }
-    
     func login(_: CompletionBlock)
     {
         
