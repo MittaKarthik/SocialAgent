@@ -13,13 +13,13 @@ class SocialAgentSettings
     
     static func getInstagramAppId() -> String
     {
-        return self.getRequiredAppKey(SocialAgentConstants.instagramAppId)!
+        return self.getRequiredAppKey(SocialAgentConstants.instagramClientIdKey)!
     }
     
     
     static func getInstagramAppSecret() -> String
     {
-        return self.getRequiredAppKey(SocialAgentConstants.instagramAppSecret)!
+        return self.getRequiredAppKey(SocialAgentConstants.instagramClientSecretKey)!
     }
     
     

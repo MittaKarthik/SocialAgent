@@ -10,9 +10,9 @@ import Foundation
 
 class SocialAgentConstants
 {
-    static let instagramAppId : String =  "SAInstagramAppId"
-    static let instagramAppSecret : String =  "SAInsatagramAppSecret"
+    static let instagramClientIdKey : String =  "SAInstagramAppId"
+    static let instagramClientSecretKey : String =  "SAInsatagramAppSecret"
     static let youtubeApikey : String =  "SAYoutubeApiKey"
-    static let youtubeClientId : String =  "SAYoutubeClientId"
-    static let youtubeClientSecret : String =  "SAYoutubeClientSecret"
+    static let youtubeClientIdKey : String =  "SAYoutubeClientId"
+    static let youtubeClientSecretKey : String =  "SAYoutubeClientSecret"
 }

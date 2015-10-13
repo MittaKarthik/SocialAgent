@@ -19,6 +19,11 @@ class SocialAgent {
     {
         return TwitterAgent.sharedInstance
     }
+    
+    static func instagramSharedInstance() ->SocialAgentDelegate
+    {
+        return InstagramAgent.sharedInstance
+    }
 
 
 }

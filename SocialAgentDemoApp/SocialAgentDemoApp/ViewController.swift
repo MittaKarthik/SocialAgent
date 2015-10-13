@@ -17,6 +17,7 @@ class ViewController: UIViewController {
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
+        SocialAgent.instagramSharedInstance()
         // Dispose of any resources that can be recreated.
     }
 

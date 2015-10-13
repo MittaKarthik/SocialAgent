@@ -31,6 +31,10 @@
 		82171B8D1BCBECEA006F7E1D /* TwitterCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 82171B8A1BCBECEA006F7E1D /* TwitterCore.framework */; settings = {ASSET_TAGS = (); }; };
 		82171B8E1BCBECEA006F7E1D /* TwitterKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 82171B8B1BCBECEA006F7E1D /* TwitterKit.framework */; settings = {ASSET_TAGS = (); }; };
 		82171B8F1BCBECEA006F7E1D /* TwitterKitResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 82171B8C1BCBECEA006F7E1D /* TwitterKitResources.bundle */; settings = {ASSET_TAGS = (); }; };
+		C9C47D8B1BCCD9AF0000DBC9 /* InstagramSignInVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9C47D8A1BCCD9AF0000DBC9 /* InstagramSignInVC.swift */; settings = {ASSET_TAGS = (); }; };
+		C9C47D8F1BCCDA5F0000DBC9 /* InstagramUI.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C9C47D8E1BCCDA5F0000DBC9 /* InstagramUI.storyboard */; settings = {ASSET_TAGS = (); }; };
+		C9C47D911BCCDCA80000DBC9 /* InstagramUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9C47D901BCCDCA80000DBC9 /* InstagramUser.swift */; settings = {ASSET_TAGS = (); }; };
+		C9C47D931BCCDD900000DBC9 /* InstagramConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9C47D921BCCDD900000DBC9 /* InstagramConstants.swift */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -60,6 +64,10 @@
 		82171B8A1BCBECEA006F7E1D /* TwitterCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TwitterCore.framework; sourceTree = "<group>"; };
 		82171B8B1BCBECEA006F7E1D /* TwitterKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TwitterKit.framework; sourceTree = "<group>"; };
 		82171B8C1BCBECEA006F7E1D /* TwitterKitResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = TwitterKitResources.bundle; sourceTree = "<group>"; };
+		C9C47D8A1BCCD9AF0000DBC9 /* InstagramSignInVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstagramSignInVC.swift; sourceTree = "<group>"; };
+		C9C47D8E1BCCDA5F0000DBC9 /* InstagramUI.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = InstagramUI.storyboard; sourceTree = "<group>"; };
+		C9C47D901BCCDCA80000DBC9 /* InstagramUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstagramUser.swift; sourceTree = "<group>"; };
+		C9C47D921BCCDD900000DBC9 /* InstagramConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstagramConstants.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -137,7 +145,11 @@
 		82171B691BCBE8A4006F7E1D /* Instagram */ = {
 			isa = PBXGroup;
 			children = (
+				C9C47D921BCCDD900000DBC9 /* InstagramConstants.swift */,
+				C9C47D901BCCDCA80000DBC9 /* InstagramUser.swift */,
 				82171B6A1BCBE8A4006F7E1D /* InstagramAgent.swift */,
+				C9C47D8A1BCCD9AF0000DBC9 /* InstagramSignInVC.swift */,
+				C9C47D8E1BCCDA5F0000DBC9 /* InstagramUI.storyboard */,
 			);
 			path = Instagram;
 			sourceTree = "<group>";
@@ -251,6 +263,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				82171B531BCBBAA3006F7E1D /* LaunchScreen.storyboard in Resources */,
+				C9C47D8F1BCCDA5F0000DBC9 /* InstagramUI.storyboard in Resources */,
 				82171B8F1BCBECEA006F7E1D /* TwitterKitResources.bundle in Resources */,
 				82171B501BCBBAA3006F7E1D /* Assets.xcassets in Resources */,
 				82171B4E1BCBBAA3006F7E1D /* Main.storyboard in Resources */,
@@ -274,8 +287,11 @@
 				82171B6E1BCBE8A4006F7E1D /* FacebookAgent.swift in Sources */,
 				82171B771BCBE95F006F7E1D /* SocialAgentSettings.swift in Sources */,
 				82171B4B1BCBBAA3006F7E1D /* ViewController.swift in Sources */,
+				C9C47D931BCCDD900000DBC9 /* InstagramConstants.swift in Sources */,
+				C9C47D911BCCDCA80000DBC9 /* InstagramUser.swift in Sources */,
 				82171B6F1BCBE8A4006F7E1D /* InstagramAgent.swift in Sources */,
 				82171B491BCBBAA3006F7E1D /* AppDelegate.swift in Sources */,
+				C9C47D8B1BCCD9AF0000DBC9 /* InstagramSignInVC.swift in Sources */,
 				82171B751BCBE934006F7E1D /* SocialAgentConstants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

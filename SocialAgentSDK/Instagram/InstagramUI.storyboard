@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="15A282b" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+    </dependencies>
+    <scenes>
+        <!--Navigation Controller-->
+        <scene sceneID="uO3-Ah-u5p">
+            <objects>
+                <navigationController id="nF6-A8-4Y3" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="jzs-X3-VQM">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <animations/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="hTe-oN-2ex" kind="relationship" relationship="rootViewController" id="jKF-Af-5sk"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="kSC-Y0-zvZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-268" y="441"/>
+        </scene>
+        <!--Instagram Sign InVC-->
+        <scene sceneID="Doi-XN-iuC">
+            <objects>
+                <viewController storyboardIdentifier="InstagramSignInVC" id="hTe-oN-2ex" customClass="InstagramSignInVC" customModule="SocialAgentDemoApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="W8P-WR-SYY"/>
+                        <viewControllerLayoutGuide type="bottom" id="3aF-25-eev"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="J3K-CQ-GQw">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qpe-DW-tfn">
+                                <rect key="frame" x="0.0" y="64" width="600" height="536"/>
+                                <animations/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </webView>
+                        </subviews>
+                        <animations/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="qpe-DW-tfn" firstAttribute="leading" secondItem="J3K-CQ-GQw" secondAttribute="leading" id="5cS-6A-jWB"/>
+                            <constraint firstAttribute="trailing" secondItem="qpe-DW-tfn" secondAttribute="trailing" id="UfS-GB-buH"/>
+                            <constraint firstItem="3aF-25-eev" firstAttribute="top" secondItem="qpe-DW-tfn" secondAttribute="bottom" id="cLU-kE-g6n"/>
+                            <constraint firstItem="qpe-DW-tfn" firstAttribute="top" secondItem="W8P-WR-SYY" secondAttribute="bottom" id="ur8-A5-3vn"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="CUq-h2-T8u">
+                        <barButtonItem key="rightBarButtonItem" systemItem="cancel" id="D4V-jg-RBF">
+                            <connections>
+                                <action selector="calcelButton:" destination="hTe-oN-2ex" id="Hp7-8s-Wi7"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="googleWebView" destination="qpe-DW-tfn" id="RL1-2t-fmy"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="R88-M0-phZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="414" y="441"/>
+        </scene>
+    </scenes>
+</document>
