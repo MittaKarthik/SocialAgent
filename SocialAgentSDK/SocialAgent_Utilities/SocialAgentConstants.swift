@@ -10,6 +10,10 @@ import Foundation
 
 class SocialAgentConstants
 {
+    //MARK: - Common constants
+    
+    static let authenticationCancelMsg : String = "Authentication Cancelled"
+    
     //MARK: - Instagram Constants
     static let instagramClientIdKey : String =  "SAInstagramClientId"
     static let instagramClientSecretKey : String =  "SAInsatagramClientSecret"

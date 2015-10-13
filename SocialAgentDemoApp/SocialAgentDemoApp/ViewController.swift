@@ -10,7 +10,7 @@ import UIKit
 
 class ViewController: UIViewController, LoginDelegate {
 
-    let x = SocialAgent.instagramSharedInstance()
+    let x = SocialAgent.fbSharedInstance()
     var didLogin = false
     
     override func viewDidLoad() {
