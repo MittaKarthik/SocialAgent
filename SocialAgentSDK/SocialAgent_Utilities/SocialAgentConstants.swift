@@ -14,6 +14,9 @@ class SocialAgentConstants
     
     static let storyboardName = "SocialAgentUI"
     static let loginVCStoryboardID = "LoginVC"
+    //MARK: - Common constants
+    
+    static let authenticationCancelMsg : String = "Authentication Cancelled"
     
     //MARK: - Instagram Constants
     static let instagramClientIdKey : String =  "SAInstagramClientId"

@@ -101,6 +101,17 @@ class SocialAgentUserModel
         }
     }
     
+    var userEmailId : String? {
+        get {
+            let persistedCredentials = NSUserDefaults.standardUserDefaults()
+            return persistedCredentials.stringForKey(userConstants.emailKey)
+        }
+        set {
+            let persistedCredentials = NSUserDefaults.standardUserDefaults()
+            persistedCredentials.setValue(newValue, forKey: userConstants.emailKey)
+        }
+    }
+    
     var bio : String? {
         get {
             let persistedCredentials = NSUserDefaults.standardUserDefaults()
@@ -109,6 +120,39 @@ class SocialAgentUserModel
         set {
             let persistedCredentials = NSUserDefaults.standardUserDefaults()
             persistedCredentials.setValue(newValue, forKey: userConstants.bioKey)
+        }
+    }
+    
+    var age : String? {
+        get {
+            let persistedCredentials = NSUserDefaults.standardUserDefaults()
+            return persistedCredentials.stringForKey(userConstants.ageKey)
+        }
+        set {
+            let persistedCredentials = NSUserDefaults.standardUserDefaults()
+            persistedCredentials.setValue(newValue, forKey: userConstants.ageKey)
+        }
+    }
+    
+    var gender : String? {
+        get {
+            let persistedCredentials = NSUserDefaults.standardUserDefaults()
+            return persistedCredentials.stringForKey(userConstants.genderKey)
+        }
+        set {
+            let persistedCredentials = NSUserDefaults.standardUserDefaults()
+            persistedCredentials.setValue(newValue, forKey: userConstants.genderKey)
+        }
+    }
+    
+    var profilePicUrl : String? {
+        get {
+            let persistedCredentials = NSUserDefaults.standardUserDefaults()
+            return persistedCredentials.stringForKey(userConstants.profilePicUrlKey)
+        }
+        set {
+            let persistedCredentials = NSUserDefaults.standardUserDefaults()
+            persistedCredentials.setValue(newValue, forKey: userConstants.profilePicUrlKey)
         }
     }
     
