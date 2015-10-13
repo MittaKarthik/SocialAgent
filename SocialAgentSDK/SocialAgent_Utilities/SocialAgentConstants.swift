@@ -10,9 +10,14 @@ import Foundation
 
 class SocialAgentConstants
 {
-    static let instagramClientIdKey : String =  "SAInstagramAppId"
-    static let instagramClientSecretKey : String =  "SAInsatagramAppSecret"
-    static let youtubeApikey : String =  "SAYoutubeApiKey"
+    //MARK: - Instagram Constants
+    static let instagramClientIdKey : String =  "SAInstagramClientId"
+    static let instagramClientSecretKey : String =  "SAInsatagramClientSecret"
+    static let instagramRedirectURI : String = "http://localhost/oauth2"
+    
+    //<ARK: - Youtube Constants
+    static let youtubeApiKey : String =  "SAYoutubeApiKey"
     static let youtubeClientIdKey : String =  "SAYoutubeClientId"
     static let youtubeClientSecretKey : String =  "SAYoutubeClientSecret"
+    static let youtubeScope : String = "https://www.googleapis.com/auth/youtube https://www.googleapis.com/auth/youtube.readonly https://www.googleapis.com/auth/youtubepartner https://www.googleapis.com/auth/youtubepartner-channel-audit https://www.googleapis.com/auth/youtube.upload https://www.googleapis.com/auth/userinfo.profile"
 }

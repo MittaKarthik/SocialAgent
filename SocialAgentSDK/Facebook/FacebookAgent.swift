@@ -42,8 +42,11 @@ class FacebookAgent: SocialAgentDelegate
         FBSDKAppEvents.activateApp()
     }
 
-    func login(_: CompletionBlock)
+    func login(delegate: LoginDelegate, completion: CompletionBlock)
     {
         
+    }
+    
+    func getUserInfo(completion: CompletionBlock) {
     }
 }

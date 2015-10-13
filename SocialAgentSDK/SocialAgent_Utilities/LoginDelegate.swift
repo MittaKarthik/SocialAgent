@@ -1,5 +1,5 @@
 //
-//  UserDataProtocol.swift
+//  File.swift
 //  SocialAgentDemoApp
 //
 //  Created by Vishal on 10/13/15.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol UserData : class
-{
-    
+protocol LoginDelegate {
+    func didLoginCompleteSuccessfully()
+    func didUserCancelLogin()
 }

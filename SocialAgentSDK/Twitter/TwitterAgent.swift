@@ -23,8 +23,11 @@ class TwitterAgent: SocialAgentDelegate
     var userModel = SocialAgentUserModel()
 
     
-    func login(_: CompletionBlock)
+    func login(delegate: LoginDelegate, completion: CompletionBlock)
     {
         
+    }
+    
+    func getUserInfo(completion: CompletionBlock) {
     }
 }

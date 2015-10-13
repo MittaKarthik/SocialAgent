@@ -34,9 +34,9 @@
 		827ADCDA1BCCE5BD00E97362 /* SocialAgentDelegateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 827ADCD91BCCE5BD00E97362 /* SocialAgentDelegateExtension.swift */; settings = {ASSET_TAGS = (); }; };
 		C9C47D8B1BCCD9AF0000DBC9 /* InstagramSignInVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9C47D8A1BCCD9AF0000DBC9 /* InstagramSignInVC.swift */; settings = {ASSET_TAGS = (); }; };
 		C9C47D8F1BCCDA5F0000DBC9 /* SocialAgentUI.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C9C47D8E1BCCDA5F0000DBC9 /* SocialAgentUI.storyboard */; settings = {ASSET_TAGS = (); }; };
-		C9C47D951BCCF3040000DBC9 /* UserDataProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9C47D941BCCF3040000DBC9 /* UserDataProtocol.swift */; settings = {ASSET_TAGS = (); }; };
 		C9C47D971BCCFC100000DBC9 /* SocialAgentPersistanceConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9C47D961BCCFC100000DBC9 /* SocialAgentPersistanceConstants.swift */; settings = {ASSET_TAGS = (); }; };
 		C9C47D991BCCFC620000DBC9 /* SocialAgentUserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9C47D981BCCFC620000DBC9 /* SocialAgentUserModel.swift */; settings = {ASSET_TAGS = (); }; };
+		C9C47D9B1BCD295E0000DBC9 /* LoginDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9C47D9A1BCD295E0000DBC9 /* LoginDelegate.swift */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -70,9 +70,9 @@
 		827ADCD91BCCE5BD00E97362 /* SocialAgentDelegateExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocialAgentDelegateExtension.swift; sourceTree = "<group>"; };
 		C9C47D8A1BCCD9AF0000DBC9 /* InstagramSignInVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstagramSignInVC.swift; sourceTree = "<group>"; };
 		C9C47D8E1BCCDA5F0000DBC9 /* SocialAgentUI.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = SocialAgentUI.storyboard; path = ../Instagram/SocialAgentUI.storyboard; sourceTree = "<group>"; };
-		C9C47D941BCCF3040000DBC9 /* UserDataProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDataProtocol.swift; sourceTree = "<group>"; };
 		C9C47D961BCCFC100000DBC9 /* SocialAgentPersistanceConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocialAgentPersistanceConstants.swift; sourceTree = "<group>"; };
 		C9C47D981BCCFC620000DBC9 /* SocialAgentUserModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocialAgentUserModel.swift; sourceTree = "<group>"; };
+		C9C47D9A1BCD295E0000DBC9 /* LoginDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginDelegate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -134,8 +134,8 @@
 				C9C47D981BCCFC620000DBC9 /* SocialAgentUserModel.swift */,
 				82171B731BCBE904006F7E1D /* SocialAgent_Utilities */,
 				82171B671BCBE8A4006F7E1D /* Facebook */,
-				82171B691BCBE8A4006F7E1D /* Instagram */,
 				82171B6B1BCBE8A4006F7E1D /* Twitter */,
+				82171B691BCBE8A4006F7E1D /* Instagram */,
 				82171B6D1BCBE8A4006F7E1D /* Youtube */,
 			);
 			name = SocialAgentSDK;
@@ -180,10 +180,10 @@
 		82171B731BCBE904006F7E1D /* SocialAgent_Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				C9C47D8E1BCCDA5F0000DBC9 /* SocialAgentUI.storyboard */,
 				82171B741BCBE934006F7E1D /* SocialAgentConstants.swift */,
 				82171B761BCBE95F006F7E1D /* SocialAgentSettings.swift */,
-				C9C47D941BCCF3040000DBC9 /* UserDataProtocol.swift */,
-				C9C47D8E1BCCDA5F0000DBC9 /* SocialAgentUI.storyboard */,
+				C9C47D9A1BCD295E0000DBC9 /* LoginDelegate.swift */,
 			);
 			path = SocialAgent_Utilities;
 			sourceTree = "<group>";
@@ -295,11 +295,11 @@
 				82171B701BCBE8A4006F7E1D /* TwitterAgent.swift in Sources */,
 				82171B6E1BCBE8A4006F7E1D /* FacebookAgent.swift in Sources */,
 				82171B771BCBE95F006F7E1D /* SocialAgentSettings.swift in Sources */,
-				C9C47D951BCCF3040000DBC9 /* UserDataProtocol.swift in Sources */,
 				827ADCDA1BCCE5BD00E97362 /* SocialAgentDelegateExtension.swift in Sources */,
 				82171B4B1BCBBAA3006F7E1D /* ViewController.swift in Sources */,
 				82171B6F1BCBE8A4006F7E1D /* InstagramAgent.swift in Sources */,
 				C9C47D991BCCFC620000DBC9 /* SocialAgentUserModel.swift in Sources */,
+				C9C47D9B1BCD295E0000DBC9 /* LoginDelegate.swift in Sources */,
 				82171B491BCBBAA3006F7E1D /* AppDelegate.swift in Sources */,
 				C9C47D971BCCFC100000DBC9 /* SocialAgentPersistanceConstants.swift in Sources */,
 				C9C47D8B1BCCD9AF0000DBC9 /* InstagramSignInVC.swift in Sources */,

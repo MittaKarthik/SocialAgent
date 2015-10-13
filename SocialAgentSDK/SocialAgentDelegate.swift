@@ -8,11 +8,12 @@
 
 import UIKit
 
-typealias CompletionBlock = ( responseObject : AnyObject?, error : NSError?) -> ()
+typealias CompletionBlock = (responseObject : AnyObject?, error : NSError?) -> ()
 
 protocol SocialAgentDelegate : class
 {
-    func login(_: CompletionBlock)
+    func login(delegate: LoginDelegate, completion: CompletionBlock)
+    func getUserInfo(completion: CompletionBlock)
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool
     
 

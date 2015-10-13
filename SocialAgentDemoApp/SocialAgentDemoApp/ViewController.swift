@@ -8,21 +8,41 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, LoginDelegate {
 
+    let x = SocialAgent.instagramSharedInstance()
+    var didLogin = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("\(SocialAgent.instagramSharedInstance())")
-        print("\(SocialAgent.instagramSharedInstance())")
-        print("\(SocialAgent.instagramSharedInstance())")
-        print("\(SocialAgent.instagramSharedInstance())")
+        
+        
 
-        // Do any additional setup after loading the view, typically from a nib.
+        x.login(self) { (responseObject, error) -> () in
+            print("Done Login")
+        }
+        
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func didLoginCompleteSuccessfully() {
+        print("Login success")
+        self.x.getUserInfo({ (responseObject, error) -> () in
+            print(responseObject)
+        })
+    }
+    
+    func didUserCancelLogin() {
+        print("cancelled")
     }
 
 

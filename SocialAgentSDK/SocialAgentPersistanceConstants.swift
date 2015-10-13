@@ -10,17 +10,23 @@ import Foundation
 
 class SocialAgentPersistanceConstants {
     
-    
-    
+    //Instagram
     var accessTokenKey : String!
     var userIDKey : String!
-    var fullName : String!
-    var userName : String!
-    var bio : String!
-    var followedByCount : String!
-    var followsCount: String!
-    var mediaCount: String!
-    var redirectURI : String!
+    var fullNameKey : String!
+    var userNameKey : String!
+    var bioKey : String!
+    var followedByCountKey : String!
+    var followsCountKey: String!
+    var mediaCountKey: String!
+    var redirectURIKey : String!
 
-    
+    //YouTube
+    var accessTokenIssueTimeKey : String!
+    var expiresInKey : String!
+    var refreshTokenKey : String!
+    var channelIDKey : String!
+    var subscriberCount : String!
+    var videoCountKey : String!
+    var viewCountKey : String!
 }
