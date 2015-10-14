@@ -22,10 +22,34 @@ class LoginVC: UIViewController, UIWebViewDelegate {
         loginWebView.delegate = self
     }
     
-    override func viewWillAppear(animated: Bool) {
-        let url = NSURL(string: localLoginData.requestURL.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!)!
-        let request = NSURLRequest(URL: url)
-        loginWebView.loadRequest(request)
+    override func viewWillAppear(animated: Bool)
+    {
+        if localLoginData.socialProfile == SocialAgentType.Twitter {
+            clearCookies()
+        }
+        else {
+            clearCookies()
+            let url = NSURL(string: localLoginData.requestURL.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!)!
+            let request = NSURLRequest(URL: url)
+            loginWebView.loadRequest(request)
+        }
+    }
+    
+    func clearCookies() {
+        let storage: NSHTTPCookieStorage = NSHTTPCookieStorage.sharedHTTPCookieStorage()
+        
+        for cookie: NSHTTPCookie in storage.cookies!
+        {
+            let domainName: String = cookie.domain
+            print(domainName)
+            if let domainRange : Range = domainName.rangeOfString(localLoginData.cookieDomainName)
+            {
+                let length = domainRange.startIndex.distanceTo(domainRange.endIndex)
+                if length > 0 {
+                    storage.deleteCookie(cookie)
+                }
+            }
+        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -43,40 +67,6 @@ class LoginVC: UIViewController, UIWebViewDelegate {
     }
     
     func webView(webView: UIWebView, shouldStartLoadWithRequest request: NSURLRequest, navigationType: UIWebViewNavigationType) -> Bool {
-        
-        
-        if let url = webView.request?.URL
-        {
-//            let storage: NSHTTPCookieStorage = NSHTTPCookieStorage.sharedHTTPCookieStorage()
-//            let cookies: [NSHTTPCookie] = storage.cookiesForURL(url)!
-//            for index in 0..<cookies.count
-//            {
-//                storage.deleteCookie(cookies[index])
-//            }
-            
-            
-            let storage: NSHTTPCookieStorage = NSHTTPCookieStorage.sharedHTTPCookieStorage()
-            
-            for cookie: NSHTTPCookie in storage.cookies!
-            {
-                let domainName: String = cookie.domain
-                print(domainName)
-                if let domainRange : Range = domainName.rangeOfString("accounts.google.com")
-                {
-                    let length = domainRange.startIndex.distanceTo(domainRange.endIndex)
-                    if length > 0 {
-                        storage.deleteCookie(cookie)
-                    }
-                }
-            }
-            
-           
-            
-            
-            
-        }
-      
-
         
         if (request.URL!.absoluteString.rangeOfString(localLoginData.rangeCheckingString) != nil) {
             if !isVerified {
@@ -97,7 +87,17 @@ class LoginVC: UIViewController, UIWebViewDelegate {
                     sToken = request.URL!.absoluteString.componentsSeparatedByString(localLoginData.accessTokenLimiterString)[1]
                     
                     if let delegate = self.delegate {
-                        delegate.didLoginCompleteSuccessfully(["sToken": self.sToken])
+                        delegate.didLoginCompleteSuccessfully([ThisConstants.sTokenUserInfoKey: self.sToken])
+                    }
+                    self.dismissViewControllerAnimated(true, completion: { () -> Void in
+                        
+                    })
+                }
+                else if localLoginData.socialProfile == SocialAgentType.Twitter {
+                    let oauthVerifier = request.URL!.absoluteString.componentsSeparatedByString(localLoginData.accessTokenLimiterString)[1]
+                    
+                    if let delegate = self.delegate {
+                        delegate.didLoginCompleteSuccessfully([ThisConstants.oAuthVerifierKey : oauthVerifier])
                     }
                     self.dismissViewControllerAnimated(true, completion: { () -> Void in
                         
@@ -120,4 +120,11 @@ class LoginVC: UIViewController, UIWebViewDelegate {
         
     }
     
+}
+
+extension LoginVC {
+    struct ThisConstants {
+        static let sTokenUserInfoKey = "sToken"
+        static let oAuthVerifierKey = "oAuthVerifier"
+    }
 }

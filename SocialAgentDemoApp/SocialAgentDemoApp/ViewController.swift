@@ -16,8 +16,11 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        socialSession.loginAndGetUserInfo { (error) -> () in
-            print(self.socialSession.userModel.subscriberCount!)
+        print(socialSession.userModel.accessToken)
+        
+        
+        socialSession.getChannelInfo { (error) -> () in
+            
         }
     }
     

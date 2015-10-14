@@ -31,7 +31,7 @@ class YoutubeAgent: SocialAgentDelegate, LoginDelegate
         let storyboard = UIStoryboard(name: SocialAgentConstants.storyboardName, bundle: nil)
         let instagramSignInVC = storyboard.instantiateViewControllerWithIdentifier(SocialAgentConstants.loginVCStoryboardID) as! LoginVC
         instagramSignInVC.delegate = self
-        instagramSignInVC.localLoginData = ThisConstants.IGloginData
+        instagramSignInVC.localLoginData = ThisConstants.YTLoginData
         viewControllerOnTop?.presentViewController(instagramSignInVC, animated: true, completion: { () -> Void in
         })
     }
@@ -78,7 +78,12 @@ class YoutubeAgent: SocialAgentDelegate, LoginDelegate
     private func validateAccessToken(completion: (validationSuccess: Bool) -> Void) {
         
         if self.userModel.accessToken != nil {
-            let timeIntervalSinceTokenIssue = self.userModel.accessTokenIssueTime?.timeIntervalSinceNow
+            var timeIntervalSinceTokenIssue = self.userModel.accessTokenIssueTime!.timeIntervalSinceNow
+            if timeIntervalSinceTokenIssue < 0 {
+                timeIntervalSinceTokenIssue = timeIntervalSinceTokenIssue * (-1)
+            }
+            print(timeIntervalSinceTokenIssue)
+            print(self.userModel.expiresIn!)
             if timeIntervalSinceTokenIssue < self.userModel.expiresIn! {
                 completion(validationSuccess: true)
             }
@@ -99,7 +104,7 @@ class YoutubeAgent: SocialAgentDelegate, LoginDelegate
         let postLength: String = "\(postData.length)"
         let request: NSMutableURLRequest = NSMutableURLRequest()
         request.URL = NSURL(string: "https://accounts.google.com/o/oauth2/token")
-        request.HTTPMethod = "POST"
+        request.HTTPMethod = HTTPMethodString.POST.getString()
         request.setValue(postLength, forHTTPHeaderField: "Content-Length")
         request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
         request.HTTPBody = postData
@@ -147,13 +152,13 @@ class YoutubeAgent: SocialAgentDelegate, LoginDelegate
         task.resume()
     }
     
-    private func refreshAccessToken(completion: () -> Void) {
+    func refreshAccessToken(completion: () -> Void) {
         let postbody: String = "client_id=\(SocialAgentSettings.getYouTubeClientID())&client_secret=\(SocialAgentSettings.getYouTubeClientSecret())&refresh_token=\(self.userModel.refreshToken)&grant_type=refresh_token"
         let postData: NSData = postbody.dataUsingEncoding(NSASCIIStringEncoding, allowLossyConversion: true)!
         let postLength: String = "\(postData.length)"
         let request: NSMutableURLRequest = NSMutableURLRequest()
         request.URL = NSURL(string: "https://accounts.google.com/o/oauth2/token")
-        request.HTTPMethod = "POST"
+        request.HTTPMethod = HTTPMethodString.POST.getString()
         request.setValue(postLength, forHTTPHeaderField: "Content-Length")
         request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
         request.HTTPBody = postData
@@ -196,6 +201,7 @@ class YoutubeAgent: SocialAgentDelegate, LoginDelegate
                 }
             }
             else {
+                
             }
         }
         task.resume()
@@ -207,7 +213,7 @@ class YoutubeAgent: SocialAgentDelegate, LoginDelegate
             if validationSuccess {
                 let request: NSMutableURLRequest = NSMutableURLRequest()
                 request.URL = NSURL(string: "https://www.googleapis.com/youtube/v3/channels?part=id,auditDetails,contentDetails,statistics,status,topicDetails&mine=true&key=\(SocialAgentSettings.getYouTubeApiKey())")
-                request.HTTPMethod = "GET"
+                request.HTTPMethod = HTTPMethodString.GET.getString()
                 request.setValue("Bearer \(self.userModel.accessToken!)", forHTTPHeaderField: "Authorization")
                 let session = NSURLSession.sharedSession()
                 let task = session.dataTaskWithRequest(request) { (data, response, error) -> Void in
@@ -292,12 +298,19 @@ extension YoutubeAgent {
         static let videoCountKey = "YTvideoCountKey"
         static let viewCountKey = "YTviewCountKey"
         
-        static let IGloginData = loginData(
+        
+        static let oAuthToken = "YToAuthToken"
+        static let oAuthTokenSecret = "YToAuthTokenSecret"
+        
+        static let YTLoginData = loginData(
             naviGationTitle: "Google Login",
             requestURL: "https://accounts.google.com/o/oauth2/auth?client_id=\(SocialAgentSettings.getYouTubeClientID())&redirect_uri=http://localhost/oauth2callback&scope=\(SocialAgentConstants.youtubeScope)&response_type=code&access_type=offline",
+            cookieDomainName: "accounts.google.com",
             rangeCheckingString: "http://localhost/oauth2callback?code=",
-            accessTokenLimiterString: "code=", socialProfile: SocialAgentType.YouTube
+            accessTokenLimiterString: "code=",
+            socialProfile: SocialAgentType.YouTube
         )
+        
     }
     
     //MARK: - User Data Persistance Constants

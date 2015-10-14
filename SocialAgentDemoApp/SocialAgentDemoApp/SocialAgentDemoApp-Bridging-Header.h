@@ -7,7 +7,7 @@
 
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
-#import <TwitterKit/TwitterKit.h>
-#import <TwitterCore/TwitterCore.h>
+#import "STTwitter.h"
+#import <Accounts/Accounts.h>
 
 #endif /* SocialAgentDemoApp_Bridging_Header_h */

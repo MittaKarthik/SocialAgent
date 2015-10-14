@@ -185,6 +185,24 @@ class SocialAgentUserModel
         }
     }
     
+    var oAuthToken : String? {
+        get {
+            return persistedCredentials.stringForKey(userConstants.oAuthTokenKey)
+        }
+        set {
+            persistedCredentials.setValue(newValue, forKey: userConstants.oAuthTokenKey)
+        }
+    }
+    
+    var oAuthTokenSecret : String? {
+        get {
+            return persistedCredentials.stringForKey(userConstants.oAuthTokenSecretKey)
+        }
+        set {
+            persistedCredentials.setValue(newValue, forKey: userConstants.oAuthTokenSecretKey)
+        }
+    }
+    
     func clearAllData() {
         self.accessToken = nil
         self.expiresIn = nil
@@ -204,6 +222,8 @@ class SocialAgentUserModel
         self.userEmailId = nil
         self.gender = nil
         self.profilePicUrl = nil
+        self.oAuthToken = nil
+        self.oAuthTokenSecret = nil
     }
 
     

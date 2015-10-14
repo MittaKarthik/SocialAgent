@@ -2,21 +2,25 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>SATwitterConsumerSecret</key>
+	<string>V4Pcv99z3SzfqXWW01FPKM8fHMFHDuSL20Ls5UiIUZqVQe4qA3</string>
+	<key>SATwitterConsumerKey</key>
+	<string>OihfQF1N2Az08SrpkhGOW7AxP</string>
 	<key>SAYoutubeClientSecret</key>
 	<string>Q1ttVoRCkKVhsHdQCbENzRQ2</string>
 	<key>SAYoutubeClientId</key>
 	<string>262394207888-hb143omv178r8ehnfs44sjcor21chv9i.apps.googleusercontent.com</string>
 	<key>SAYoutubeApiKey</key>
 	<string>AIzaSyAep-CQyYgYzL8mkOVrqpbe8F_eOyro5q0</string>
+	<key>SAInstagramClientId</key>
+	<string>e73ba0cad38846079459680228815568</string>
+	<key>SAInsatagramClientSecret</key>
+	<string>909fad98d1cc459f8b28e4b861a957a5</string>
 	<key>NSAppTransportSecurity</key>
 	<dict>
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
 	</dict>
-	<key>SAInstagramClientId</key>
-	<string>e73ba0cad38846079459680228815568</string>
-	<key>SAInsatagramClientSecret</key>
-	<string>909fad98d1cc459f8b28e4b861a957a5</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleExecutable</key>

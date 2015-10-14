@@ -33,7 +33,6 @@ class InstagramAgent: SocialAgentDelegate, LoginDelegate
         instagramSignInVC.localLoginData = ThisConstants.IGloginData
         let naviCon = UINavigationController(rootViewController: instagramSignInVC)
         viewControllerOnTop?.presentViewController(naviCon, animated: true, completion: { () -> Void in
-            print("Presented Instagram SignIn VC")
         })
     }
     
@@ -42,13 +41,12 @@ class InstagramAgent: SocialAgentDelegate, LoginDelegate
         if let accessToken = userModel.accessToken {
             let request: NSMutableURLRequest = NSMutableURLRequest()
             request.URL = NSURL(string: "https://api.instagram.com/v1/users/self/?access_token=\(accessToken)")
-            request.HTTPMethod = "GET"
+            request.HTTPMethod = HTTPMethodString.GET.getString()
             let session = NSURLSession.sharedSession()
             let task = session.dataTaskWithRequest(request) { (data, response, error) -> Void in
                 if error == nil {
                     if let httpResponse = response as? NSHTTPURLResponse {
                         if httpResponse.statusCode == 0 {
-                            print("Logout")
                         }
                         else if httpResponse.statusCode == 200 {
                             if let dataObtained = data {
@@ -105,6 +103,8 @@ class InstagramAgent: SocialAgentDelegate, LoginDelegate
         }
     }
     
+    //Login+UserInfo
+    
     func loginAndGetUserInfo(completion: CompletionBlock) {
         self.login { (error) -> () in
             if error != nil {
@@ -117,6 +117,13 @@ class InstagramAgent: SocialAgentDelegate, LoginDelegate
             }
         }
     }
+    
+    func getChannelInfo(completion: CompletionBlock) {
+        
+    }
+    
+    
+    //Logout
     
     func logout(completion: CompletionBlock)
     {
@@ -166,12 +173,19 @@ extension InstagramAgent {
         static let subscriberCount = "IGsubscriberCount"
         static let videoCountKey = "IGvideoCountKey"
         static let viewCountKey = "IGviewCountKey"
+        
+        static let oAuthToken = "IGoAuthToken"
+        static let oAuthTokenSecret = "IGoAuthTokenSecret"
+        
         static let IGloginData = loginData(
             naviGationTitle: "Instagram Login",
             requestURL: "https://instagram.com/oauth/authorize/?client_id=\(SocialAgentSettings.getInstagramClientId())&redirect_uri=\(SocialAgentConstants.instagramRedirectURI)&response_type=token",
+            cookieDomainName: "instagram.com",
             rangeCheckingString: "http://localhost/oauth2#access_token=",
-            accessTokenLimiterString: "access_token=", socialProfile: SocialAgentType.Instagram
+            accessTokenLimiterString: "access_token=",
+            socialProfile: SocialAgentType.Instagram
         )
+        
     }
     
     //MARK: - User Data Persistance Constants

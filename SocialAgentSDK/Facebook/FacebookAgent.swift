@@ -88,6 +88,10 @@ class FacebookAgent: SocialAgentDelegate
         completion(error: nil)
     }
     
+    func getChannelInfo(completion: CompletionBlock) {
+        
+    }
+    
     
     //MARK: - Getting user info methods
       func getUserInfo(completion: CompletionBlock)

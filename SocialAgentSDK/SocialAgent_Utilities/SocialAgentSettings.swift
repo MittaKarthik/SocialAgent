@@ -32,6 +32,14 @@ class SocialAgentSettings
         return self.getRequiredAppKey(SocialAgentConstants.youtubeApiKey)!
     }
     
+    static func getTwitterConsumerKey() -> String {
+        return self.getRequiredAppKey(SocialAgentConstants.twitterConsumerKey)!
+    }
+    
+    static func getTwitterConsumerSecret() -> String {
+        return self.getRequiredAppKey(SocialAgentConstants.twitterConsumerSecret)!
+    }
+    
     
     private static func getRequiredAppKey( key : String ) -> String?
     {

@@ -36,4 +36,8 @@ class SocialAgentPersistanceConstants {
     var profilePicUrlKey : String!
     var pageFollowCountKey : String!
     var emailKey : String!
+    
+    //MARK: - Twitter
+    var oAuthTokenKey : String!
+    var oAuthTokenSecretKey : String!
 }
