@@ -87,7 +87,7 @@ class LoginVC: UIViewController, UIWebViewDelegate {
                     sToken = request.URL!.absoluteString.componentsSeparatedByString(localLoginData.accessTokenLimiterString)[1]
                     
                     if let delegate = self.delegate {
-                        delegate.didLoginCompleteSuccessfully([ThisConstants.sTokenUserInfoKey: self.sToken])
+                        delegate.didLoginCompleteSuccessfully([SocialAgentConstants.youtubeSTokenKey: self.sToken])
                     }
                     self.dismissViewControllerAnimated(true, completion: { () -> Void in
                         
@@ -97,7 +97,7 @@ class LoginVC: UIViewController, UIWebViewDelegate {
                     let oauthVerifier = request.URL!.absoluteString.componentsSeparatedByString(localLoginData.accessTokenLimiterString)[1]
                     
                     if let delegate = self.delegate {
-                        delegate.didLoginCompleteSuccessfully([ThisConstants.oAuthVerifierKey : oauthVerifier])
+                        delegate.didLoginCompleteSuccessfully([SocialAgentConstants.twitterOAuthVerifierKey : oauthVerifier])
                     }
                     self.dismissViewControllerAnimated(true, completion: { () -> Void in
                         
@@ -124,7 +124,5 @@ class LoginVC: UIViewController, UIWebViewDelegate {
 
 extension LoginVC {
     struct ThisConstants {
-        static let sTokenUserInfoKey = "sToken"
-        static let oAuthVerifierKey = "oAuthVerifier"
     }
 }

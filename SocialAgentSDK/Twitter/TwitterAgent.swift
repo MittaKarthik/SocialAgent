@@ -45,7 +45,6 @@ class TwitterAgent: SocialAgentDelegate, LoginDelegate
             })
             
             }, authenticateInsteadOfAuthorize: false, forceLogin: true, screenName: nil, oauthCallback: ThisConstants.TWTloginData.rangeCheckingString, errorBlock: {(error: NSError!) in
-                print("Error:", error)
         })
     }
     
@@ -77,19 +76,19 @@ class TwitterAgent: SocialAgentDelegate, LoginDelegate
             if let dict = outPut[0] as? NSDictionary {
                 print(dict)
                 
-                if let bio = dict["description"] as? String {
+                if let bio = dict[APIResponseDictionaryKeys.bioKey] as? String {
                     self.userModel.bio = bio
                 }
-                if let followedByCount = dict["followers_count"] as? Int {
+                if let followedByCount = dict[APIResponseDictionaryKeys.followedByCountKey] as? Int {
                     self.userModel.followedByCount = followedByCount
                 }
-                if let followersCount = dict["friends_count"] as? Int {
+                if let followersCount = dict[APIResponseDictionaryKeys.followsCountKey] as? Int {
                     self.userModel.followsCount = followersCount
                 }
-                if let username = dict["screen_name"] as? String {
+                if let username = dict[APIResponseDictionaryKeys.userNameKey] as? String {
                     self.userModel.userName = username
                 }
-                if let fullName = dict["name"] as? String {
+                if let fullName = dict[APIResponseDictionaryKeys.fullNameKey] as? String {
                     self.userModel.fullName = fullName
                 }
                 
@@ -111,7 +110,7 @@ class TwitterAgent: SocialAgentDelegate, LoginDelegate
     
     func didLoginCompleteSuccessfully(userInfo: [String : String]?) {
         let dict = userInfo!
-        let oAuthVerifier = dict["oAuthVerifier"]!
+        let oAuthVerifier = dict[SocialAgentConstants.twitterOAuthVerifierKey]!
         twitterHandle.postAuthAccessTokenRequestWith(oAuthVerifier, successBlock: { (oAuth_token, oAuth_tokenSecret, userId, screenName) -> Void in
             
             self.userModel.oAuthToken = oAuth_token
@@ -173,6 +172,14 @@ extension TwitterAgent {
             socialProfile: SocialAgentType.Twitter
         )
         
+    }
+    
+    private struct APIResponseDictionaryKeys {
+        static let bioKey = "description"
+        static let followedByCountKey = "followers_count"
+        static let followsCountKey = "friends_count"
+        static let userNameKey = "screen_name"
+        static let fullNameKey = "name"
     }
     
     //MARK: - User Data Persistance Constants

@@ -59,7 +59,7 @@ class YoutubeAgent: SocialAgentDelegate, LoginDelegate
     
     func didLoginCompleteSuccessfully(userInfo: [String : String]?) {
         let dict = userInfo!
-        let sToken = dict["sToken"]!
+        let sToken = dict[SocialAgentConstants.youtubeSTokenKey]!
         self.getAccessToken(sToken) { (error) -> () in
             if let completion = self.completionBlock {
                 completion(error: nil)

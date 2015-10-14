@@ -28,10 +28,12 @@ class SocialAgentConstants
     static let youtubeClientIdKey : String =  "SAYoutubeClientId"
     static let youtubeClientSecretKey : String =  "SAYoutubeClientSecret"
     static let youtubeScope : String = "https://www.googleapis.com/auth/youtube https://www.googleapis.com/auth/youtube.readonly https://www.googleapis.com/auth/youtubepartner https://www.googleapis.com/auth/youtubepartner-channel-audit https://www.googleapis.com/auth/youtube.upload https://www.googleapis.com/auth/userinfo.profile"
+    static let youtubeSTokenKey : String = "sToken"
     
     //MARK: - Twitter Constants
     static let twitterConsumerKey : String =  "SATwitterConsumerKey"
     static let twitterConsumerSecret : String =  "SATwitterConsumerSecret"
+    static let twitterOAuthVerifierKey : String = "oAuthVerifier"
     
 }
 
