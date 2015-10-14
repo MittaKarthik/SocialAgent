@@ -11,29 +11,48 @@ import UIKit
 class TwitterAgent: SocialAgentDelegate
 {
     
+    //MARK: - Initializers
     static let sharedInstance = TwitterAgent()
     private init() {} //This prevents others from using the default '()' initializer for this class.
     
-    //MARK: - Constants
-    struct ThisConstants
-    {
- 
-    }
-    
     var userModel = SocialAgentUserModel()
 
-    
+    //MARK: - Authentication methods
     func login(completion: CompletionBlock)
     {
         
     }
     
-    func getUserInfo(completion: CompletionBlock) {
-    }
-    
-    func  loginAndGetUserInfo(completion: CompletionBlock) {
+    func loginAndGetUserInfo(completion: CompletionBlock)
+    {
         
     }
     
+    func logout(completion: CompletionBlock)
+    {
+        
+    }
+    
+    //MARK: - Getting user info methods
+    func getUserInfo(completion: CompletionBlock)
+    {
+        
+    }
+    
+    //MARK: - Validation and refreshing methods
+}
 
+
+extension FacebookAgent {
+    
+    //MARK: - Constants
+    private struct ThisConstants
+    {
+       
+    }
+    
+//    //MARK: - User Data Persistance Constants
+//    private func setUpUserPersistanceConstants() -> SocialAgentPersistanceConstants
+//    {
+//    }
 }

@@ -10,7 +10,7 @@ import UIKit
 
 class YoutubeAgent: SocialAgentDelegate, LoginDelegate
 {
-    
+    //MARK: - Initializers
     static let sharedInstance = YoutubeAgent()
     private init() {
         self.userModel.userConstants = setUpUserPersistanceConstants()
@@ -21,6 +21,7 @@ class YoutubeAgent: SocialAgentDelegate, LoginDelegate
     var userModel = SocialAgentUserModel()
 
     
+    //MARK: - Authentication methods
     func login(completion: CompletionBlock)
     {
         self.completionBlock = completion
@@ -32,12 +33,48 @@ class YoutubeAgent: SocialAgentDelegate, LoginDelegate
         instagramSignInVC.delegate = self
         instagramSignInVC.localLoginData = ThisConstants.IGloginData
         viewControllerOnTop?.presentViewController(instagramSignInVC, animated: true, completion: { () -> Void in
-            print("Presented Youtube SignIn VC")
         })
     }
     
-
+    func loginAndGetUserInfo(completion: CompletionBlock) {
+        self.login { (error) -> () in
+            if error != nil {
+                completion(error: error)
+            }
+            else {
+                self.getChannelInfo({ (error) -> () in
+                    completion(error: error)
+                })
+            }
+        }
+    }
     
+    func logout(completion: CompletionBlock)
+    {
+        self.userModel.clearAllData()
+        completion(error: nil)
+    }
+    
+    //Login Delegate Methods
+    
+    func didLoginCompleteSuccessfully(userInfo: [String : String]?) {
+        let dict = userInfo!
+        let sToken = dict["sToken"]!
+        self.getAccessToken(sToken) { (error) -> () in
+            if let completion = self.completionBlock {
+                completion(error: nil)
+            }
+        }
+        
+    }
+    
+    func didUserCancelLogin(userInfo: [String : String]?) {
+        if let completion = self.completionBlock {
+            completion(error: NSError(domain: "User Cancelled Login", code: 1, userInfo: nil))
+        }
+    }
+    
+    //MARK: - Validation and refreshing methods
     private func validateAccessToken(completion: (validationSuccess: Bool) -> Void) {
         
         if self.userModel.accessToken != nil {
@@ -68,14 +105,12 @@ class YoutubeAgent: SocialAgentDelegate, LoginDelegate
         request.HTTPBody = postData
         let session = NSURLSession.sharedSession()
         let task = session.dataTaskWithRequest(request) { (data, response, error) -> Void in
-            print("task response")
             if error == nil {
                 if let httpResponse = response as? NSHTTPURLResponse {
                     if httpResponse.statusCode == 200 {
                         if let dataObtained = data {
                             do {
                                 if let json = try NSJSONSerialization.JSONObjectWithData(dataObtained, options: .MutableLeaves) as? NSDictionary {
-                                    print(json)
                                     var count = 0
                                     if let accessToken = json["access_token"] as? String {
                                         self.userModel.accessToken = accessToken
@@ -124,14 +159,12 @@ class YoutubeAgent: SocialAgentDelegate, LoginDelegate
         request.HTTPBody = postData
         let session = NSURLSession.sharedSession()
         let task = session.dataTaskWithRequest(request) { (data, response, error) -> Void in
-            print("task response")
             if error == nil {
                 if let httpResponse = response as? NSHTTPURLResponse {
                     if httpResponse.statusCode == 200 {
                         if let dataObtained = data {
                             do {
                                 if let json = try NSJSONSerialization.JSONObjectWithData(dataObtained, options: .MutableLeaves) as? NSDictionary {
-                                    print(json)
                                     completion()
                                 }
                                 else {
@@ -148,7 +181,6 @@ class YoutubeAgent: SocialAgentDelegate, LoginDelegate
                         if let dataObtained = data {
                             do {
                                 if let json = try NSJSONSerialization.JSONObjectWithData(dataObtained, options: .MutableLeaves) as? NSDictionary {
-                                    print(json)
                                     completion()
                                 }
                                 else {
@@ -164,14 +196,14 @@ class YoutubeAgent: SocialAgentDelegate, LoginDelegate
                 }
             }
             else {
-                NSLog("Get Token Error: %@", error!.description)
             }
         }
         task.resume()
     }
     
+    //MARK: - Getting user info methods
     func getChannelInfo(completion: CompletionBlock) {
-        validateAccessToken { (validationSuccess) -> Void in
+        self.validateAccessToken { (validationSuccess) -> Void in
             if validationSuccess {
                 let request: NSMutableURLRequest = NSMutableURLRequest()
                 request.URL = NSURL(string: "https://www.googleapis.com/youtube/v3/channels?part=id,auditDetails,contentDetails,statistics,status,topicDetails&mine=true&key=\(SocialAgentSettings.getYouTubeApiKey())")
@@ -179,17 +211,14 @@ class YoutubeAgent: SocialAgentDelegate, LoginDelegate
                 request.setValue("Bearer \(self.userModel.accessToken!)", forHTTPHeaderField: "Authorization")
                 let session = NSURLSession.sharedSession()
                 let task = session.dataTaskWithRequest(request) { (data, response, error) -> Void in
-                    print("task response")
                     if error == nil {
                         if let httpResponse = response as? NSHTTPURLResponse {
                             if httpResponse.statusCode == 0 {
-                                print("Logout")
                             }
                             else {
                                 if let dataObtained = data {
                                     do {
                                         if let json = try NSJSONSerialization.JSONObjectWithData(dataObtained, options: .MutableLeaves) as? NSDictionary {
-                                            print(json)
                                             if let channels = json["items"] as? NSArray {
                                                 if let channelDetails = channels[0] as? NSDictionary {
                                                     if let channelStatistics = channelDetails["statistics"] as? NSDictionary {
@@ -224,7 +253,6 @@ class YoutubeAgent: SocialAgentDelegate, LoginDelegate
                         }
                     }
                     else {
-                        NSLog("Get Token Error: %@", error!.description)
                         completion(error: error)
                     }
                 }
@@ -236,43 +264,6 @@ class YoutubeAgent: SocialAgentDelegate, LoginDelegate
         }
     }
     
-    func loginAndGetUserInfo(completion: CompletionBlock) {
-        self.login { (error) -> () in
-            if error != nil {
-                completion(error: error)
-            }
-            else {
-                self.getChannelInfo({ (error) -> () in
-                    completion(error: error)
-                })
-            }
-        }
-    }
-    
-    func logout() {
-        self.userModel.clearAllData()
-    }
-    
-    //Login Delegate Methods
-    
-    func didLoginCompleteSuccessfully(userInfo: [String : String]?) {
-        print("Login success")
-        let dict = userInfo!
-        let sToken = dict["sToken"]!
-        self.getAccessToken(sToken) { (error) -> () in
-            if let completion = self.completionBlock {
-                completion(error: nil)
-            }
-        }
-        
-    }
-    
-    func didUserCancelLogin(userInfo: [String : String]?) {
-        print("cancelled")
-        if let completion = self.completionBlock {
-            completion(error: NSError(domain: "User Cancelled Login", code: 1, userInfo: nil))
-        }
-    }
 }
 
 extension YoutubeAgent {

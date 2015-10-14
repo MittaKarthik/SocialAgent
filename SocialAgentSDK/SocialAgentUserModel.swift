@@ -11,14 +11,12 @@ import Foundation
 class SocialAgentUserModel
 {
     var userConstants = SocialAgentPersistanceConstants()
-    
+    let persistedCredentials = NSUserDefaults.standardUserDefaults()
     var accessToken : String? {
         get {
-            let persistedCredentials = NSUserDefaults.standardUserDefaults()
             return persistedCredentials.stringForKey(userConstants.accessTokenKey)
         }
         set {
-            let persistedCredentials = NSUserDefaults.standardUserDefaults()
             persistedCredentials.setValue(newValue, forKey: userConstants.accessTokenKey)
             let myDate: NSDate = NSDate()
             let myDateTimeInterval: NSTimeInterval = myDate.timeIntervalSince1970
@@ -28,7 +26,6 @@ class SocialAgentUserModel
     
     var accessTokenIssueTime: NSDate? {
         get {
-            let persistedCredentials = NSUserDefaults.standardUserDefaults()
             let myDateTimeInterval: NSTimeInterval = persistedCredentials.doubleForKey(userConstants.accessTokenIssueTimeKey)
             let dateInterval = NSDate(timeIntervalSince1970: myDateTimeInterval)
             return dateInterval
@@ -37,187 +34,153 @@ class SocialAgentUserModel
     
     var expiresIn : Double? {
         get {
-            let persistedCredentials = NSUserDefaults.standardUserDefaults()
             return persistedCredentials.doubleForKey(userConstants.expiresInKey)
         }
         set {
-            let persistedCredentials = NSUserDefaults.standardUserDefaults()
             persistedCredentials.setValue(newValue, forKey: userConstants.expiresInKey)
         }
     }
     
     var refreshToken : String? {
         get {
-            let persistedCredentials = NSUserDefaults.standardUserDefaults()
             return persistedCredentials.stringForKey(userConstants.refreshTokenKey)
         }
         set {
-            let persistedCredentials = NSUserDefaults.standardUserDefaults()
             persistedCredentials.setValue(newValue, forKey: userConstants.refreshTokenKey)
         }
     }
     
     var userID : String? {
         get {
-            let persistedCredentials = NSUserDefaults.standardUserDefaults()
             return persistedCredentials.stringForKey(userConstants.userIDKey)
         }
         set {
-            let persistedCredentials = NSUserDefaults.standardUserDefaults()
             persistedCredentials.setValue(newValue, forKey: userConstants.userIDKey)
         }
     }
     
     var channelID : String? {
         get {
-            let persistedCredentials = NSUserDefaults.standardUserDefaults()
             return persistedCredentials.stringForKey(userConstants.channelIDKey)
         }
         set {
-            let persistedCredentials = NSUserDefaults.standardUserDefaults()
             persistedCredentials.setValue(newValue, forKey: userConstants.channelIDKey)
         }
     }
     
     var fullName : String? {
         get {
-            let persistedCredentials = NSUserDefaults.standardUserDefaults()
             return persistedCredentials.stringForKey(userConstants.fullNameKey)
         }
         set {
-            let persistedCredentials = NSUserDefaults.standardUserDefaults()
             persistedCredentials.setValue(newValue, forKey: userConstants.fullNameKey)
         }
     }
     
     var userName : String? {
         get {
-            let persistedCredentials = NSUserDefaults.standardUserDefaults()
             return persistedCredentials.stringForKey(userConstants.userNameKey)
         }
         set {
-            let persistedCredentials = NSUserDefaults.standardUserDefaults()
             persistedCredentials.setValue(newValue, forKey: userConstants.userNameKey)
         }
     }
     
     var userEmailId : String? {
         get {
-            let persistedCredentials = NSUserDefaults.standardUserDefaults()
             return persistedCredentials.stringForKey(userConstants.emailKey)
         }
         set {
-            let persistedCredentials = NSUserDefaults.standardUserDefaults()
             persistedCredentials.setValue(newValue, forKey: userConstants.emailKey)
         }
     }
     
     var bio : String? {
         get {
-            let persistedCredentials = NSUserDefaults.standardUserDefaults()
             return persistedCredentials.stringForKey(userConstants.bioKey)
         }
         set {
-            let persistedCredentials = NSUserDefaults.standardUserDefaults()
             persistedCredentials.setValue(newValue, forKey: userConstants.bioKey)
         }
     }
     
     var age : String? {
         get {
-            let persistedCredentials = NSUserDefaults.standardUserDefaults()
             return persistedCredentials.stringForKey(userConstants.ageKey)
         }
         set {
-            let persistedCredentials = NSUserDefaults.standardUserDefaults()
             persistedCredentials.setValue(newValue, forKey: userConstants.ageKey)
         }
     }
     
     var gender : String? {
         get {
-            let persistedCredentials = NSUserDefaults.standardUserDefaults()
             return persistedCredentials.stringForKey(userConstants.genderKey)
         }
         set {
-            let persistedCredentials = NSUserDefaults.standardUserDefaults()
             persistedCredentials.setValue(newValue, forKey: userConstants.genderKey)
         }
     }
     
     var profilePicUrl : String? {
         get {
-            let persistedCredentials = NSUserDefaults.standardUserDefaults()
             return persistedCredentials.stringForKey(userConstants.profilePicUrlKey)
         }
         set {
-            let persistedCredentials = NSUserDefaults.standardUserDefaults()
             persistedCredentials.setValue(newValue, forKey: userConstants.profilePicUrlKey)
         }
     }
     
     var followedByCount : Int? {
         get {
-            let persistedCredentials = NSUserDefaults.standardUserDefaults()
             return persistedCredentials.integerForKey(userConstants.followedByCountKey)
         }
         set {
-            let persistedCredentials = NSUserDefaults.standardUserDefaults()
             persistedCredentials.setValue(newValue, forKey: userConstants.followedByCountKey)
         }
     }
     
     var followsCount : Int? {
         get {
-            let persistedCredentials = NSUserDefaults.standardUserDefaults()
             return persistedCredentials.integerForKey(userConstants.followsCountKey)
         }
         set {
-            let persistedCredentials = NSUserDefaults.standardUserDefaults()
             persistedCredentials.setValue(newValue, forKey: userConstants.followsCountKey)
         }
     }
     
     var mediaCount : Int? {
         get {
-            let persistedCredentials = NSUserDefaults.standardUserDefaults()
             return persistedCredentials.integerForKey(userConstants.mediaCountKey)
         }
         set {
-            let persistedCredentials = NSUserDefaults.standardUserDefaults()
             persistedCredentials.setValue(newValue, forKey: userConstants.mediaCountKey)
         }
     }
     
     var subscriberCount : String? {
         get {
-            let persistedCredentials = NSUserDefaults.standardUserDefaults()
             return persistedCredentials.stringForKey(userConstants.subscriberCount)
         }
         set {
-            let persistedCredentials = NSUserDefaults.standardUserDefaults()
             persistedCredentials.setValue(newValue, forKey: userConstants.subscriberCount)
         }
     }
     
     var videoCount : String? {
         get {
-            let persistedCredentials = NSUserDefaults.standardUserDefaults()
             return persistedCredentials.stringForKey(userConstants.videoCountKey)
         }
         set {
-            let persistedCredentials = NSUserDefaults.standardUserDefaults()
             persistedCredentials.setValue(newValue, forKey: userConstants.videoCountKey)
         }
     }
     
     var viewCount : String? {
         get {
-            let persistedCredentials = NSUserDefaults.standardUserDefaults()
             return persistedCredentials.stringForKey(userConstants.viewCountKey)
         }
         set {
-            let persistedCredentials = NSUserDefaults.standardUserDefaults()
             persistedCredentials.setValue(newValue, forKey: userConstants.viewCountKey)
         }
     }
@@ -237,6 +200,10 @@ class SocialAgentUserModel
         self.subscriberCount = nil
         self.videoCount = nil
         self.viewCount = nil
+        self.age = nil
+        self.userEmailId = nil
+        self.gender = nil
+        self.profilePicUrl = nil
     }
 
     

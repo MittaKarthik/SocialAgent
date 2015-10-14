@@ -10,6 +10,7 @@ import UIKit
 
 class FacebookAgent: SocialAgentDelegate
 {
+    //MARK: - Initializers
     static let sharedInstance = FacebookAgent()
     private init() {
         self.userModel.userConstants = setUpUserPersistanceConstants()
@@ -20,6 +21,7 @@ class FacebookAgent: SocialAgentDelegate
     var userModel = SocialAgentUserModel()
 
     
+    //MARK: - Application level observers
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool
     {
         
@@ -36,6 +38,7 @@ class FacebookAgent: SocialAgentDelegate
         FBSDKAppEvents.activateApp()
     }
 
+    //MARK: - Authentication methods
     func login(completion: CompletionBlock)
     {
         let fbLoginManager : FBSDKLoginManager = FBSDKLoginManager()
@@ -62,50 +65,109 @@ class FacebookAgent: SocialAgentDelegate
         })
 
     }
+
+    func loginAndGetUserInfo(completion: CompletionBlock) {
+        self.login { (error) -> () in
+            if error != nil {
+                completion(error: error)
+            }
+            else {
+                self.getUserInfo({ (error) -> () in
+                    completion(error: error)
+                })
+            }
+        }
+    }
     
-    func logout(delegate: LoginDelegate, completion: CompletionBlock)
+    func logout(completion: CompletionBlock)
     {
         let fbLoginManager : FBSDKLoginManager = FBSDKLoginManager()
         fbLoginManager.logOut()
+        FBSDKAccessToken.setCurrentAccessToken(nil)
+        self.userModel.clearAllData()
+        completion(error: nil)
     }
     
-    func getUserInfo(completion: CompletionBlock)
-    {
-        FBSDKGraphRequest(graphPath:ThisConstants.fbUserInfoPath, parameters:ThisConstants.fbUserFields).startWithCompletionHandler({ (connection, result, error) -> Void in
+    
+    //MARK: - Getting user info methods
+      func getUserInfo(completion: CompletionBlock)
+      {
+        self.validateAccessToken { (validationSuccess) -> Void in
+            if validationSuccess == true
+            {
+                FBSDKGraphRequest(graphPath:ThisConstants.fbUserInfoPath, parameters:ThisConstants.fbUserFields).startWithCompletionHandler({ (connection, result, error) -> Void in
+                    
+                    if (error == nil)
+                    {
+                        self.userModel.userID = FBSDKAccessToken.currentAccessToken().userID ?? ""
+                        self.userModel.accessToken = FBSDKAccessToken.currentAccessToken().tokenString ?? ""
+                        self.userModel.expiresIn = FBSDKAccessToken.currentAccessToken().expirationDate.timeIntervalSince1970
+                        self.userModel.userName = result[ThisConstants.fbName] as? String
+                        self.userModel.userEmailId = result[ThisConstants.fbEmail] as? String ?? ""
+                        self.userModel.age = result.objectForKey(ThisConstants.fbAgeRange)?.objectForKey(ThisConstants.fbAgeMin) as? String ?? ""
+                        if let profilePicURL = result.objectForKey(ThisConstants.fbPicture)?.objectForKey(ThisConstants.fbPicData)?.objectForKey(ThisConstants.fbPicUrl) {
+                            self.userModel.profilePicUrl = profilePicURL as? String
+                        }
+                        self.userModel.gender = result[ThisConstants.gender] as? String ?? ""
+                        
+                        completion(error: nil)
+                        
+                    }
+                    else
+                    {
+                        completion(error: error)
+                    }
+                })
 
-            if (error == nil)
-            {
-                self.userModel.userID = FBSDKAccessToken.currentAccessToken().userID ?? ""
-                self.userModel.accessToken = FBSDKAccessToken.currentAccessToken().tokenString ?? ""
-                self.userModel.userName = result[ThisConstants.fbName] as? String
-                self.userModel.userEmailId = result[ThisConstants.fbEmail] as? String ?? ""
-                self.userModel.age = result.objectForKey(ThisConstants.fbAgeRange)?.objectForKey(ThisConstants.fbAgeMin) as? String ?? ""
-                if let profilePicURL = result.objectForKey(ThisConstants.fbPicture)?.objectForKey(ThisConstants.fbPicData)?.objectForKey(ThisConstants.fbPicUrl) {
-                    self.userModel.profilePicUrl = profilePicURL as? String
+            }
+            }
+        }
+    
+
+    //MARK: - Validation and refreshing methods
+    private func validateAccessToken(completion: (validationSuccess: Bool) -> Void) {
+        
+        if self.userModel.accessToken != nil {
+            let timeIntervalSinceTokenIssue = self.userModel.accessTokenIssueTime?.timeIntervalSinceNow
+            if timeIntervalSinceTokenIssue < self.userModel.expiresIn! {
+                completion(validationSuccess: true)
+            }
+            else {
+               self.refreshAccessToken({ (error) -> () in
+                if error != nil
+                {
+                    completion(validationSuccess: false)
                 }
-                self.userModel.gender = result[ThisConstants.gender] as? String ?? ""
-                
-                completion(error: nil)
-                
+                else
+                {
+                    completion(validationSuccess: true)
+                }
+               })
             }
-            else
-            {
-                completion(error: error)
-            }
-        })
+        }
+        else {
+            completion(validationSuccess: false)
+        }
     }
     
-    func  loginAndGetUserInfo(completion: CompletionBlock) {
-        
-    }
     
     func refreshAccessToken(compeltion : CompletionBlock)
     {
-        
+        FBSDKAccessToken.refreshCurrentAccessToken { (connection, result, error) -> Void in
+            self.userModel.accessToken = FBSDKAccessToken.currentAccessToken().tokenString ?? ""
+            self.userModel.expiresIn = FBSDKAccessToken.currentAccessToken().expirationDate.timeIntervalSince1970
+            compeltion(error: error)
+        }
     }
     
     func getPageInfo()
     {
+        
+//        /me/accounts - get graph api service
+//        
+//        /1575574989362988?fields=country_page_likes - get graph api service for page likes
+//            
+//            /me/friends - get graph api service for friends list.
         
         
         //                FBSDKGraphRequest(graphPath:"me/posts", parameters: ["fields": "likes"] , HTTPMethod: "GET").startWithCompletionHandler({ (connection, result, error) -> Void in

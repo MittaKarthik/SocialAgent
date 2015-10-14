@@ -118,8 +118,10 @@ class InstagramAgent: SocialAgentDelegate, LoginDelegate
         }
     }
     
-    func logout() {
+    func logout(completion: CompletionBlock)
+    {
         self.userModel.clearAllData()
+        completion(error: nil)
     }
     
 
