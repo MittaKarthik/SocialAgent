@@ -26,12 +26,31 @@ extension SocialAgentDelegate
         
     }
     
-    func getUserInfo(completion: CompletionBlock) {
+    
+    //MARK: - Twitter Methods
+    
+    func getUserInfoFor(screenName: String?, userID: String?, completion: CompletionBlock)
+    {
         
     }
     
-    func getChannelInfo(completion: CompletionBlock) {
+    
+    //MARK: - Instagram Methods
+    
+    func getUserInfoFor(userID: String, completion: CompletionBlock)
+    {
         
     }
+    
+    
+    //MARK: - YouTube Methods
+    
+    func getChannelInfoFor(channelID: String?, completion: CompletionBlock)
+    {
+        
+    }
+    
+    
+    
 
 }

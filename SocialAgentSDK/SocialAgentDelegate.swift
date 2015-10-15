@@ -13,10 +13,9 @@ typealias CompletionBlock = (error : NSError?) -> ()
 protocol SocialAgentDelegate : class
 {
     func login(completion: CompletionBlock)
-    func getUserInfo(completion: CompletionBlock)
     func loginAndGetUserInfo(completion: CompletionBlock)
     func logout(completion: CompletionBlock)
-    func getChannelInfo(completion: CompletionBlock)
+    
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool
     func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject) -> Bool

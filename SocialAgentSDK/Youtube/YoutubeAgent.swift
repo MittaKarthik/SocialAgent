@@ -48,8 +48,9 @@ class YoutubeAgent: SocialAgentDelegate, LoginDelegate
                 completion(error: error)
             }
             else {
-                self.getChannelInfo({ (error) -> () in
+                self.getChannelInfoFor(nil, completion: { (error) -> () in
                     completion(error: error)
+
                 })
             }
         }
@@ -207,11 +208,18 @@ class YoutubeAgent: SocialAgentDelegate, LoginDelegate
     }
     
     //MARK: - Getting user info methods
-    func getChannelInfo(completion: CompletionBlock) {
+    func getChannelInfoFor(channelID: String?, completion: CompletionBlock) {
         self.validateAccessToken { (validationSuccess) -> Void in
             if validationSuccess {
                 let request: NSMutableURLRequest = NSMutableURLRequest()
-                request.URL = NSURL(string: "https://www.googleapis.com/youtube/v3/channels?part=id,auditDetails,contentDetails,statistics,status,topicDetails&mine=true&key=\(SocialAgentSettings.getYouTubeApiKey())")
+                var URLString = ""
+                if let channelID = channelID {
+                    URLString = APIResponseDictionaryKeys.APIBaseURL + "id=\(channelID)&key=\(SocialAgentSettings.getYouTubeApiKey())"
+                }
+                else {
+                    URLString = APIResponseDictionaryKeys.APIBaseURL + "mine=true&key=\(SocialAgentSettings.getYouTubeApiKey())"
+                }
+                request.URL = NSURL(string: URLString)
                 request.HTTPMethod = HTTPMethodString.GET.getString()
                 request.setValue("Bearer \(self.userModel.accessToken!)", forHTTPHeaderField: "Authorization")
                 let session = NSURLSession.sharedSession()
@@ -341,6 +349,16 @@ extension YoutubeAgent {
         )
         
     }
+    
+    private struct APIResponseDictionaryKeys {
+        static let APIBaseURL = "https://www.googleapis.com/youtube/v3/channels?part=id,statistics,status,topicDetails&"
+        static let bioKey = "description"
+        static let followedByCountKey = "followers_count"
+        static let followsCountKey = "friends_count"
+        static let userNameKey = "screen_name"
+        static let fullNameKey = "name"
+    }
+    
     
     //MARK: - User Data Persistance Constants
     private func setUpUserPersistanceConstants() -> SocialAgentPersistanceConstants {

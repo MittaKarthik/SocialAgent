@@ -40,10 +40,10 @@ class InstagramAgent: SocialAgentDelegate, LoginDelegate
     }
     
     //MARK: - User Info
-    func getUserInfo(completion: CompletionBlock) {
+    func getUserInfoFor(userID: String, completion: CompletionBlock) {
         if let accessToken = userModel.accessToken {
             let request: NSMutableURLRequest = NSMutableURLRequest()
-            request.URL = NSURL(string: APIResponseDictionaryKeys.getUserInfoURL + "\(accessToken)")
+            request.URL = NSURL(string: APIResponseDictionaryKeys.getUserInfoURL + userID + "/?access_token=\(accessToken)")
             request.HTTPMethod = HTTPMethodString.GET.getString()
             let session = NSURLSession.sharedSession()
             let task = session.dataTaskWithRequest(request) { (data, response, error) -> Void in
@@ -113,7 +113,7 @@ class InstagramAgent: SocialAgentDelegate, LoginDelegate
                 completion(error: error)
             }
             else {
-                self.getUserInfo({ (error) -> () in
+                self.getUserInfoFor("self", completion: { (error) -> () in
                     completion(error: error)
                 })
             }
@@ -195,7 +195,7 @@ extension InstagramAgent {
     }
     
     private struct APIResponseDictionaryKeys {
-        static let getUserInfoURL = "https://api.instagram.com/v1/users/self/?access_token="
+        static let getUserInfoURL = "https://api.instagram.com/v1/users/"
         static let bioKey = "description"
         static let followedByCountKey = "followers_count"
         static let followsCountKey = "friends_count"

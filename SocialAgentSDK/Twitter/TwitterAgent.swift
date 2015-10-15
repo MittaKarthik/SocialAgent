@@ -58,7 +58,7 @@ class TwitterAgent: SocialAgentDelegate, LoginDelegate
     func loginAndGetUserInfo(completion: CompletionBlock) {
         self.login { (error) -> () in
             if error == nil {
-                self.getUserInfo(nil, userID: self.userModel.userID, completion: { (error) -> () in
+                self.getUserInfoFor(nil, userID: self.userModel.userID, completion: { (error) -> () in
                     completion(error: error)
                 })
             }
@@ -68,14 +68,9 @@ class TwitterAgent: SocialAgentDelegate, LoginDelegate
         }
     }
     
-    func logout(completion: CompletionBlock)
-    {
-        self.userModel.clearAllData()
-        completion(error: nil)
-    }
     
     //MARK: - Getting user info methods
-    func getUserInfo(screenName: String?, userID: String?, completion: CompletionBlock)
+    func getUserInfoFor(screenName: String?, userID: String?, completion: CompletionBlock)
     {
         twitterHandle.getUsersLookupForScreenName(screenName, orUserID: userID, includeEntities: 5, successBlock: { (outPut) -> Void in
             if let dict = outPut[0] as? NSDictionary {
@@ -103,8 +98,13 @@ class TwitterAgent: SocialAgentDelegate, LoginDelegate
         }
     }
     
-    func getChannelInfo(completion: CompletionBlock) {
-        
+    
+    //Logout
+    
+    func logout(completion: CompletionBlock)
+    {
+        self.userModel.clearAllData()
+        completion(error: nil)
     }
     
     //MARK: - Validation and refreshing methods
