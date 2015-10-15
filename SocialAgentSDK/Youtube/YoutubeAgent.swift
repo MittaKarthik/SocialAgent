@@ -55,24 +55,7 @@ class YoutubeAgent: SocialAgentDelegate, LoginDelegate
         completion(error: nil)
     }
     
-    //Login Delegate Methods
     
-    func didLoginCompleteSuccessfully(userInfo: [String : String]?) {
-        let dict = userInfo!
-        let sToken = dict[SocialAgentConstants.youtubeSTokenKey]!
-        self.getAccessToken(sToken) { (error) -> () in
-            if let completion = self.completionBlock {
-                completion(error: nil)
-            }
-        }
-        
-    }
-    
-    func didUserCancelLogin(userInfo: [String : String]?) {
-        if let completion = self.completionBlock {
-            completion(error: NSError(domain: "User Cancelled Login", code: 1, userInfo: nil))
-        }
-    }
     
     //MARK: - Validation and refreshing methods
     private func validateAccessToken(completion: (validationSuccess: Bool) -> Void) {
@@ -88,8 +71,10 @@ class YoutubeAgent: SocialAgentDelegate, LoginDelegate
                 completion(validationSuccess: true)
             }
             else {
-                self.refreshAccessToken({ () -> Void in
-                    completion(validationSuccess: true)
+                self.refreshAccessToken({ (error) -> Void in
+                    if error == nil {
+                        completion(validationSuccess: true)
+                    }
                 })
             }
         }
@@ -152,8 +137,8 @@ class YoutubeAgent: SocialAgentDelegate, LoginDelegate
         task.resume()
     }
     
-    func refreshAccessToken(completion: () -> Void) {
-        let postbody: String = "client_id=\(SocialAgentSettings.getYouTubeClientID())&client_secret=\(SocialAgentSettings.getYouTubeClientSecret())&refresh_token=\(self.userModel.refreshToken)&grant_type=refresh_token"
+    func refreshAccessToken(completion: (error: NSError?) -> Void) {
+        let postbody: String = "client_id=\(SocialAgentSettings.getYouTubeClientID())&client_secret=\(SocialAgentSettings.getYouTubeClientSecret())&refresh_token=\(self.userModel.refreshToken!)&grant_type=refresh_token"
         let postData: NSData = postbody.dataUsingEncoding(NSASCIIStringEncoding, allowLossyConversion: true)!
         let postLength: String = "\(postData.length)"
         let request: NSMutableURLRequest = NSMutableURLRequest()
@@ -170,10 +155,25 @@ class YoutubeAgent: SocialAgentDelegate, LoginDelegate
                         if let dataObtained = data {
                             do {
                                 if let json = try NSJSONSerialization.JSONObjectWithData(dataObtained, options: .MutableLeaves) as? NSDictionary {
-                                    completion()
+                                    var count = 0
+                                    if let accessToken = json["access_token"] as? String {
+                                        self.userModel.accessToken = accessToken
+                                        count++
+                                    }
+                                    if let expiresIn = json["expires_in"] as? Double {
+                                        self.userModel.expiresIn = expiresIn
+                                        count++
+                                    }
+                                    if count == 2 {
+                                        completion(error: nil)
+                                    }
+                                    else {
+                                        completion(error: NSError(domain: "Missing Data from API response", code: 2, userInfo: nil))
+                                    }
+                                    
                                 }
                                 else {
-                                    
+                                    completion(error: NSError(domain: "No JSON response", code: 5, userInfo: nil))
                                 }
                                 
                             }
@@ -185,13 +185,8 @@ class YoutubeAgent: SocialAgentDelegate, LoginDelegate
                     else {
                         if let dataObtained = data {
                             do {
-                                if let json = try NSJSONSerialization.JSONObjectWithData(dataObtained, options: .MutableLeaves) as? NSDictionary {
-                                    completion()
-                                }
-                                else {
-                                    
-                                }
-                                
+                                    let json = try NSJSONSerialization.JSONObjectWithData(dataObtained, options: .MutableLeaves)
+                                    completion(error: NSError(domain: "Response code not 200", code: 6, userInfo: json as? [NSObject : AnyObject]))
                             }
                             catch {
                                 
@@ -201,7 +196,7 @@ class YoutubeAgent: SocialAgentDelegate, LoginDelegate
                 }
             }
             else {
-                
+                completion(error: error)
             }
         }
         task.resume()
@@ -267,6 +262,26 @@ class YoutubeAgent: SocialAgentDelegate, LoginDelegate
             else {
                 completion(error: NSError(domain: "No Token", code: 0, userInfo: nil))
             }
+        }
+    }
+    
+    
+    //Login Delegate Methods
+    
+    func didLoginCompleteSuccessfully(userInfo: [String : String]?) {
+        let dict = userInfo!
+        let sToken = dict[SocialAgentConstants.youtubeSTokenKey]!
+        self.getAccessToken(sToken) { (error) -> () in
+            if let completion = self.completionBlock {
+                completion(error: nil)
+            }
+        }
+        
+    }
+    
+    func didUserCancelLogin(userInfo: [String : String]?) {
+        if let completion = self.completionBlock {
+            completion(error: NSError(domain: SocialAgentConstants.authenticationCancelMsg, code: 1, userInfo: nil))
         }
     }
     

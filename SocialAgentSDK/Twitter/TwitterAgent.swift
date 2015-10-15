@@ -132,7 +132,7 @@ class TwitterAgent: SocialAgentDelegate, LoginDelegate
     
     func didUserCancelLogin(userInfo: [String : String]?) {
         if let completion = self.completionBlock {
-            completion(error: NSError(domain: "User Cancelled Login", code: 1, userInfo: nil))
+            completion(error: NSError(domain: SocialAgentConstants.authenticationCancelMsg, code: 1, userInfo: nil))
         }
     }
 }

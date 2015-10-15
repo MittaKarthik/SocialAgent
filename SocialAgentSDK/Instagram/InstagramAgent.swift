@@ -40,7 +40,7 @@ class InstagramAgent: SocialAgentDelegate, LoginDelegate
     func getUserInfo(completion: CompletionBlock) {
         if let accessToken = userModel.accessToken {
             let request: NSMutableURLRequest = NSMutableURLRequest()
-            request.URL = NSURL(string: "https://api.instagram.com/v1/users/self/?access_token=\(accessToken)")
+            request.URL = NSURL(string: APIResponseDictionaryKeys.getUserInfoURL + "\(accessToken)")
             request.HTTPMethod = HTTPMethodString.GET.getString()
             let session = NSURLSession.sharedSession()
             let task = session.dataTaskWithRequest(request) { (data, response, error) -> Void in
@@ -145,7 +145,7 @@ class InstagramAgent: SocialAgentDelegate, LoginDelegate
     func didUserCancelLogin(userInfo: [String : String]?) {
         print("cancelled")
         if let completion = self.completionBlock {
-            completion(error: NSError(domain: "User Cancelled Login", code: 1, userInfo: nil))
+            completion(error: NSError(domain: SocialAgentConstants.authenticationCancelMsg, code: 1, userInfo: nil))
         }
     }
     
@@ -186,6 +186,15 @@ extension InstagramAgent {
             socialProfile: SocialAgentType.Instagram
         )
         
+    }
+    
+    private struct APIResponseDictionaryKeys {
+        static let getUserInfoURL = "https://api.instagram.com/v1/users/self/?access_token="
+        static let bioKey = "description"
+        static let followedByCountKey = "followers_count"
+        static let followsCountKey = "friends_count"
+        static let userNameKey = "screen_name"
+        static let fullNameKey = "name"
     }
     
     //MARK: - User Data Persistance Constants

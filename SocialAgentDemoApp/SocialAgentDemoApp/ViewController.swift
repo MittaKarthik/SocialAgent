@@ -17,6 +17,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         print(socialSession.userModel.accessToken)
+        print(socialSession.userModel.refreshToken)
         
         
         socialSession.getChannelInfo { (error) -> () in
