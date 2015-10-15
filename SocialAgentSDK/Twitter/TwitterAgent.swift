@@ -20,6 +20,7 @@ class TwitterAgent: SocialAgentDelegate, LoginDelegate
     var completionBlock: CompletionBlock?
     
     var userModel = SocialAgentUserModel()
+    private var loginView : SocialAgentLoginView!
 
     var twitterHandle = STTwitterAPI()
     let accountStore = ACAccountStore()
@@ -31,19 +32,23 @@ class TwitterAgent: SocialAgentDelegate, LoginDelegate
         self.completionBlock = completion
         
         twitterHandle.postTokenRequest({(url: NSURL!, oauthToken: String!) in
-            let window = UIApplication.sharedApplication().keyWindow
-            let viewControllerOnTop = window?.rootViewController
+     
+            if self.loginView != nil
+            {
+                self.loginView == nil
+            }
             
-            let storyboard = UIStoryboard(name: SocialAgentConstants.storyboardName, bundle: nil)
-            let twitterSignInVC = storyboard.instantiateViewControllerWithIdentifier(SocialAgentConstants.loginVCStoryboardID) as! LoginVC
-            twitterSignInVC.delegate = self
-            twitterSignInVC.localLoginData = ThisConstants.TWTloginData
-            let naviCon = UINavigationController(rootViewController: twitterSignInVC)
-            viewControllerOnTop?.presentViewController(naviCon, animated: true, completion: { () -> Void in
-                let request: NSURLRequest = NSURLRequest(URL: url)
-                twitterSignInVC.loginWebView.loadRequest(request)
-            })
+            let topViewController = UIApplication.sharedApplication().keyWindow?.rootViewController
             
+            self.loginView = NSBundle.mainBundle().loadNibNamed("SocialAgentLoginView", owner:topViewController, options: nil)[0] as! SocialAgentLoginView
+            self.loginView.delegate = self
+            self.loginView.localLoginData = ThisConstants.TWTloginData
+            self.loginView.createTheWebviewRequest()
+            topViewController?.view.addSubview(self.loginView)
+            topViewController?.view.bringSubviewToFront(self.loginView)
+            let request: NSURLRequest = NSURLRequest(URL: url)
+            self.loginView.loginWebview.loadRequest(request)
+
             }, authenticateInsteadOfAuthorize: false, forceLogin: true, screenName: nil, oauthCallback: ThisConstants.TWTloginData.rangeCheckingString, errorBlock: {(error: NSError!) in
         })
     }
@@ -74,8 +79,6 @@ class TwitterAgent: SocialAgentDelegate, LoginDelegate
     {
         twitterHandle.getUsersLookupForScreenName(screenName, orUserID: userID, includeEntities: 5, successBlock: { (outPut) -> Void in
             if let dict = outPut[0] as? NSDictionary {
-                print(dict)
-                
                 if let bio = dict[APIResponseDictionaryKeys.bioKey] as? String {
                     self.userModel.bio = bio
                 }
@@ -119,11 +122,13 @@ class TwitterAgent: SocialAgentDelegate, LoginDelegate
             self.userModel.userName = screenName
             
             if let completion = self.completionBlock {
+                self.removeTheLoginView()
                 completion(error: nil)
             }
             
             }) { (error) -> Void in
                 if let completion = self.completionBlock {
+                    self.removeTheLoginView()
                     completion(error: error)
                 }
         }
@@ -132,7 +137,17 @@ class TwitterAgent: SocialAgentDelegate, LoginDelegate
     
     func didUserCancelLogin(userInfo: [String : String]?) {
         if let completion = self.completionBlock {
+            self.removeTheLoginView()
             completion(error: NSError(domain: SocialAgentConstants.authenticationCancelMsg, code: 1, userInfo: nil))
+        }
+    }
+    
+    func removeTheLoginView()
+    {
+        if self.loginView != nil
+        {
+            self.loginView.removeFromSuperview()
+            self.loginView = nil
         }
     }
 }

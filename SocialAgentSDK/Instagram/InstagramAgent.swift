@@ -17,23 +17,26 @@ class InstagramAgent: SocialAgentDelegate, LoginDelegate
     }
     
     var completionBlock: CompletionBlock?
-    
     var userModel = SocialAgentUserModel()
+    private var loginView : SocialAgentLoginView!
     
     //MARK: - Login
     func login(completion: CompletionBlock)
     {
         self.completionBlock = completion
-        let window = UIApplication.sharedApplication().keyWindow
-        let viewControllerOnTop = window?.rootViewController
+        if self.loginView != nil
+        {
+            self.loginView == nil
+        }
+
+        let topViewController = UIApplication.sharedApplication().keyWindow?.rootViewController
         
-        let storyboard = UIStoryboard(name: SocialAgentConstants.storyboardName, bundle: nil)
-        let instagramSignInVC = storyboard.instantiateViewControllerWithIdentifier(SocialAgentConstants.loginVCStoryboardID) as! LoginVC
-        instagramSignInVC.delegate = self
-        instagramSignInVC.localLoginData = ThisConstants.IGloginData
-        let naviCon = UINavigationController(rootViewController: instagramSignInVC)
-        viewControllerOnTop?.presentViewController(naviCon, animated: true, completion: { () -> Void in
-        })
+        self.loginView = NSBundle.mainBundle().loadNibNamed("SocialAgentLoginView", owner:topViewController, options: nil)[0] as! SocialAgentLoginView
+        self.loginView.delegate = self
+        self.loginView.localLoginData = ThisConstants.IGloginData
+        self.loginView.createTheWebviewRequest()
+        topViewController?.view.addSubview(self.loginView)
+        topViewController?.view.bringSubviewToFront(self.loginView)
     }
     
     //MARK: - User Info
@@ -52,7 +55,6 @@ class InstagramAgent: SocialAgentDelegate, LoginDelegate
                             if let dataObtained = data {
                                 do {
                                     if let json = try NSJSONSerialization.JSONObjectWithData(dataObtained, options: .MutableLeaves) as? NSDictionary {
-                                        print(json)
                                         if let userInfo = json["data"] as? NSDictionary {
                                             if let bio = userInfo["bio"] as? String {
                                                 self.userModel.bio = bio
@@ -93,7 +95,7 @@ class InstagramAgent: SocialAgentDelegate, LoginDelegate
                     }
                 }
                 else {
-                    print("Get Token Error: %@", error!.description)
+                    completion(error: error)
                 }
             }
             task.resume()
@@ -118,11 +120,7 @@ class InstagramAgent: SocialAgentDelegate, LoginDelegate
         }
     }
     
-    func getChannelInfo(completion: CompletionBlock) {
-        
-    }
-    
-    
+ 
     //Logout
     
     func logout(completion: CompletionBlock)
@@ -136,20 +134,28 @@ class InstagramAgent: SocialAgentDelegate, LoginDelegate
     //Login Delegate Methods
     
     func didLoginCompleteSuccessfully(userInfo: [String : String]?) {
-        print("Login success")
-        if let completion = self.completionBlock {
+        if let completion = self.completionBlock
+        {
+            self.removeTheLoginView()
             completion(error: nil)
         }
     }
     
     func didUserCancelLogin(userInfo: [String : String]?) {
-        print("cancelled")
         if let completion = self.completionBlock {
+         self.removeTheLoginView()
             completion(error: NSError(domain: SocialAgentConstants.authenticationCancelMsg, code: 1, userInfo: nil))
         }
     }
     
-    
+    func removeTheLoginView()
+    {
+        if self.loginView != nil
+        {
+            self.loginView.removeFromSuperview()
+            self.loginView = nil
+        }
+    }
 }
 
 extension InstagramAgent {

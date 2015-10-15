@@ -44,7 +44,7 @@ class FacebookAgent: SocialAgentDelegate
         let fbLoginManager : FBSDKLoginManager = FBSDKLoginManager()
         fbLoginManager.loginBehavior = FBSDKLoginBehavior.Web
         
-        fbLoginManager.logInWithReadPermissions(ThisConstants.fbPermissionsArray, handler: { (result, error) -> Void in
+        fbLoginManager.logInWithReadPermissions(nil, handler: { (result, error) -> Void in
             if ((error) != nil)
             {
                 // Process error
@@ -124,6 +124,10 @@ class FacebookAgent: SocialAgentDelegate
                 })
 
             }
+            else
+            {
+                completion(error:  NSError(domain:SocialAgentConstants.authenticationCancelMsg, code: 1, userInfo: nil))
+            }
             }
         }
     
@@ -150,7 +154,7 @@ class FacebookAgent: SocialAgentDelegate
             }
         }
         else {
-            completion(validationSuccess: false)
+            completion(validationSuccess: true)
         }
     }
     

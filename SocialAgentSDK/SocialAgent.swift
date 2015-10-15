@@ -10,7 +10,7 @@ import Foundation
 
 class SocialAgent {
     
-    static func fbSharedInstance() ->SocialAgentDelegate
+    static func facebookSharedInstance() ->SocialAgentDelegate
     {
         return FacebookAgent.sharedInstance
     }

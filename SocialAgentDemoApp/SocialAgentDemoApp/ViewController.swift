@@ -10,20 +10,18 @@ import UIKit
 
 class ViewController: UIViewController {
 
-    let socialSession = SocialAgent.youTubeSharedInstance()
+    let socialSession = SocialAgent.instagramSharedInstance()
     var didLogin = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         print(socialSession.userModel.accessToken)
-        print(socialSession.userModel.refreshToken)
         
         
-        socialSession.getChannelInfo { (error) -> () in
+        socialSession.loginAndGetUserInfo { (error) -> () in
             
-        }
-    }
+        }    }
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)

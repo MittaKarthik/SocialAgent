@@ -29,5 +29,9 @@ extension SocialAgentDelegate
     func getUserInfo(completion: CompletionBlock) {
         
     }
+    
+    func getChannelInfo(completion: CompletionBlock) {
+        
+    }
 
 }

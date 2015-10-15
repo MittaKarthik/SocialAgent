@@ -19,21 +19,27 @@ class YoutubeAgent: SocialAgentDelegate, LoginDelegate
     var completionBlock: CompletionBlock?
     
     var userModel = SocialAgentUserModel()
+    private var loginView : SocialAgentLoginView!
 
     
     //MARK: - Authentication methods
     func login(completion: CompletionBlock)
     {
         self.completionBlock = completion
-        let window = UIApplication.sharedApplication().keyWindow
-        let viewControllerOnTop = window?.rootViewController
+        if self.loginView != nil
+        {
+            self.loginView == nil
+        }
         
-        let storyboard = UIStoryboard(name: SocialAgentConstants.storyboardName, bundle: nil)
-        let instagramSignInVC = storyboard.instantiateViewControllerWithIdentifier(SocialAgentConstants.loginVCStoryboardID) as! LoginVC
-        instagramSignInVC.delegate = self
-        instagramSignInVC.localLoginData = ThisConstants.YTLoginData
-        viewControllerOnTop?.presentViewController(instagramSignInVC, animated: true, completion: { () -> Void in
-        })
+        let topViewController = UIApplication.sharedApplication().keyWindow?.rootViewController
+        
+        self.loginView = NSBundle.mainBundle().loadNibNamed("SocialAgentLoginView", owner:topViewController, options: nil)[0] as! SocialAgentLoginView
+        self.loginView.delegate = self
+        self.loginView.localLoginData = ThisConstants.YTLoginData
+        self.loginView.createTheWebviewRequest()
+        topViewController?.view.addSubview(self.loginView)
+        topViewController?.view.bringSubviewToFront(self.loginView)
+
     }
     
     func loginAndGetUserInfo(completion: CompletionBlock) {
@@ -65,8 +71,6 @@ class YoutubeAgent: SocialAgentDelegate, LoginDelegate
             if timeIntervalSinceTokenIssue < 0 {
                 timeIntervalSinceTokenIssue = timeIntervalSinceTokenIssue * (-1)
             }
-            print(timeIntervalSinceTokenIssue)
-            print(self.userModel.expiresIn!)
             if timeIntervalSinceTokenIssue < self.userModel.expiresIn! {
                 completion(validationSuccess: true)
             }
@@ -223,7 +227,6 @@ class YoutubeAgent: SocialAgentDelegate, LoginDelegate
                                             if let channels = json["items"] as? NSArray {
                                                 if let channelDetails = channels[0] as? NSDictionary {
                                                     if let channelStatistics = channelDetails["statistics"] as? NSDictionary {
-                                                        print(channelStatistics)
                                                         if let subscriberCount = channelStatistics["subscriberCount"] as? String {
                                                             self.userModel.subscriberCount = subscriberCount
                                                         }
@@ -273,6 +276,7 @@ class YoutubeAgent: SocialAgentDelegate, LoginDelegate
         let sToken = dict[SocialAgentConstants.youtubeSTokenKey]!
         self.getAccessToken(sToken) { (error) -> () in
             if let completion = self.completionBlock {
+                self.removeTheLoginView()
                 completion(error: nil)
             }
         }
@@ -281,7 +285,17 @@ class YoutubeAgent: SocialAgentDelegate, LoginDelegate
     
     func didUserCancelLogin(userInfo: [String : String]?) {
         if let completion = self.completionBlock {
+            self.removeTheLoginView()
             completion(error: NSError(domain: SocialAgentConstants.authenticationCancelMsg, code: 1, userInfo: nil))
+        }
+    }
+    
+    func removeTheLoginView()
+    {
+        if self.loginView != nil
+        {
+            self.loginView.removeFromSuperview()
+            self.loginView = nil
         }
     }
     
