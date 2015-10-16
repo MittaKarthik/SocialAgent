@@ -40,7 +40,7 @@ class TwitterAgent: SocialAgentDelegate, LoginDelegate
             
             let topViewController = UIApplication.sharedApplication().keyWindow?.rootViewController
             
-            self.loginView = NSBundle.mainBundle().loadNibNamed("SocialAgentLoginView", owner:topViewController, options: nil)[0] as! SocialAgentLoginView
+            self.loginView = NSBundle.mainBundle().loadNibNamed(ThisConstants.loginNIBName, owner:topViewController, options: nil)[0] as! SocialAgentLoginView
             self.loginView.delegate = self
             self.loginView.localLoginData = ThisConstants.TWTloginData
             self.loginView.createTheWebviewRequest()
@@ -158,6 +158,7 @@ extension TwitterAgent {
     //MARK: - Constants
     private struct ThisConstants
     {
+        static let loginNIBName = "SocialAgentLoginView"
         static let accessTokenKey = "TWTaccessToken"
         static let userIDKey = "TWTuserID"
         static let fullNameKey = "TWTfullName"

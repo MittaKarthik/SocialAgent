@@ -33,7 +33,7 @@ class YoutubeAgent: SocialAgentDelegate, LoginDelegate
         
         let topViewController = UIApplication.sharedApplication().keyWindow?.rootViewController
         
-        self.loginView = NSBundle.mainBundle().loadNibNamed("SocialAgentLoginView", owner:topViewController, options: nil)[0] as! SocialAgentLoginView
+        self.loginView = NSBundle.mainBundle().loadNibNamed(ThisConstants.loginNIBName, owner:topViewController, options: nil)[0] as! SocialAgentLoginView
         self.loginView.delegate = self
         self.loginView.localLoginData = ThisConstants.YTLoginData
         self.loginView.createTheWebviewRequest()
@@ -314,9 +314,7 @@ extension YoutubeAgent {
     //MARK: - Constants
     struct ThisConstants
     {
-        static let storyboardName = "SocialAgentUI"
-        static let instagramSignInVCStoryboardID = "InstagramSignInVC"
-        static let instagramSignInNCStoryboardID = "InstagramSignInNC"
+        static let loginNIBName = "SocialAgentLoginView"
         
         static let accessTokenKey = "YTaccessToken"
         static let userIDKey = "YTuserID"

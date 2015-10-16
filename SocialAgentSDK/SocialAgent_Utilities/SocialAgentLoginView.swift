@@ -9,7 +9,7 @@
 import UIKit
 
 class SocialAgentLoginView: UIView, UIWebViewDelegate {
-
+    
     @IBOutlet weak var loginWebview: UIWebView!
     @IBOutlet weak var closeButton: UIButton!
     @IBOutlet weak var loginBackgroundView: UIView!
@@ -19,7 +19,7 @@ class SocialAgentLoginView: UIView, UIWebViewDelegate {
     var sToken: String!
     let activityIndicator : UIActivityIndicatorView = UIActivityIndicatorView()
     let activityView : UIView = UIView()
-
+    
     override func awakeFromNib()
     {
         self.hidden = true
@@ -29,9 +29,9 @@ class SocialAgentLoginView: UIView, UIWebViewDelegate {
     override func didMoveToSuperview()
     {
         self.hidden = false
-       // self.loginBackgroundView.transform = CGAffineTransformScale(self.loginWebview.transform, 0.3, 0.3);
+        // self.loginBackgroundView.transform = CGAffineTransformScale(self.loginWebview.transform, 0.3, 0.3);
         self.loginBackgroundView.transform  = CGAffineTransformMakeScale(0.3, 0.3);
-
+        
         UIView.animateWithDuration(0.6, animations: { () -> Void in
             self.loginBackgroundView.transform  = CGAffineTransformMakeScale(1.1, 1.1);
             }) { (completed) -> Void in
@@ -46,10 +46,10 @@ class SocialAgentLoginView: UIView, UIWebViewDelegate {
                 }
         }
         
-//        let basicAnimation : CABasicAnimation = CABasicAnimation(keyPath:"transform")
-//        basicAnimation.autoreverses = true
-//        basicAnimation.duration = 0.4
-//        self.loginWebview.layer.addAnimation(basicAnimation, forKey: nil)
+        //        let basicAnimation : CABasicAnimation = CABasicAnimation(keyPath:"transform")
+        //        basicAnimation.autoreverses = true
+        //        basicAnimation.duration = 0.4
+        //        self.loginWebview.layer.addAnimation(basicAnimation, forKey: nil)
     }
     
     func createTheWebviewRequest()
@@ -137,7 +137,7 @@ class SocialAgentLoginView: UIView, UIWebViewDelegate {
         self.stopActivityIndicator(self)
     }
     
-     func startActivityIndicator(view : UIView)  {
+    func startActivityIndicator(view : UIView)  {
         
         view.userInteractionEnabled = false
         
@@ -156,7 +156,7 @@ class SocialAgentLoginView: UIView, UIWebViewDelegate {
         
     }
     
-     func stopActivityIndicator(view : UIView) {
+    func stopActivityIndicator(view : UIView) {
         
         view.userInteractionEnabled = true
         activityIndicator.stopAnimating()

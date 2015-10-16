@@ -31,7 +31,7 @@ class InstagramAgent: SocialAgentDelegate, LoginDelegate
 
         let topViewController = UIApplication.sharedApplication().keyWindow?.rootViewController
         
-        self.loginView = NSBundle.mainBundle().loadNibNamed("SocialAgentLoginView", owner:topViewController, options: nil)[0] as! SocialAgentLoginView
+        self.loginView = NSBundle.mainBundle().loadNibNamed(ThisConstants.loginNIBName, owner:topViewController, options: nil)[0] as! SocialAgentLoginView
         self.loginView.delegate = self
         self.loginView.localLoginData = ThisConstants.IGloginData
         self.loginView.createTheWebviewRequest()
@@ -43,7 +43,7 @@ class InstagramAgent: SocialAgentDelegate, LoginDelegate
     func getUserInfoFor(userID: String, completion: CompletionBlock) {
         if let accessToken = userModel.accessToken {
             let request: NSMutableURLRequest = NSMutableURLRequest()
-            request.URL = NSURL(string: APIResponseDictionaryKeys.getUserInfoURL + userID + "/?access_token=\(accessToken)")
+            request.URL = NSURL(string: APIResponseDictionaryKeys.getUserInfoURLA + userID + APIResponseDictionaryKeys.getUserInfoURLB + accessToken)
             request.HTTPMethod = HTTPMethodString.GET.getString()
             let session = NSURLSession.sharedSession()
             let task = session.dataTaskWithRequest(request) { (data, response, error) -> Void in
@@ -55,27 +55,27 @@ class InstagramAgent: SocialAgentDelegate, LoginDelegate
                             if let dataObtained = data {
                                 do {
                                     if let json = try NSJSONSerialization.JSONObjectWithData(dataObtained, options: .MutableLeaves) as? NSDictionary {
-                                        if let userInfo = json["data"] as? NSDictionary {
-                                            if let bio = userInfo["bio"] as? String {
+                                        if let userInfo = json[APIResponseDictionaryKeys.userInfoKey] as? NSDictionary {
+                                            if let bio = userInfo[APIResponseDictionaryKeys.bioKey] as? String {
                                                 self.userModel.bio = bio
                                             }
-                                            if let fullName = userInfo["full_name"] as? String {
+                                            if let fullName = userInfo[APIResponseDictionaryKeys.fullNameKey] as? String {
                                                 self.userModel.fullName = fullName
                                             }
-                                            if let id = userInfo["id"] as? String {
+                                            if let id = userInfo[APIResponseDictionaryKeys.userIDKey] as? String {
                                                 self.userModel.userID = id
                                             }
-                                            if let username = userInfo["username"] as? String {
+                                            if let username = userInfo[APIResponseDictionaryKeys.userNameKey] as? String {
                                                 self.userModel.userName = username
                                             }
-                                            if let counts = userInfo["counts"] {
-                                                if let followedBy = counts["followed_by"] as? Int {
+                                            if let counts = userInfo[APIResponseDictionaryKeys.countsKey] {
+                                                if let followedBy = counts[APIResponseDictionaryKeys.followedByCountKey] as? Int {
                                                     self.userModel.followedByCount = followedBy
                                                 }
-                                                if let follows = counts["follows"] as? Int {
+                                                if let follows = counts[APIResponseDictionaryKeys.followsCountKey] as? Int {
                                                     self.userModel.followsCount = follows
                                                 }
-                                                if let media = counts["media"] as? Int {
+                                                if let media = counts[APIResponseDictionaryKeys.mediaCount] as? Int {
                                                     self.userModel.mediaCount = media
                                                 }
                                             }
@@ -101,7 +101,7 @@ class InstagramAgent: SocialAgentDelegate, LoginDelegate
             task.resume()
         }
         else {
-            completion(error: NSError(domain: "No AccessToken", code: 0, userInfo: nil))
+            completion(error: NSError(domain: SocialAgentConstants.invalidAccesToken, code: 0, userInfo: nil))
         }
     }
     
@@ -113,7 +113,7 @@ class InstagramAgent: SocialAgentDelegate, LoginDelegate
                 completion(error: error)
             }
             else {
-                self.getUserInfoFor("self", completion: { (error) -> () in
+                self.getUserInfoFor(ThisConstants.selfString, completion: { (error) -> () in
                     completion(error: error)
                 })
             }
@@ -163,6 +163,8 @@ extension InstagramAgent {
     //MARK: - Constants
     private struct ThisConstants
     {
+        static let loginNIBName = "SocialAgentLoginView"
+    
         static let accessTokenKey = "IGaccessToken"
         static let userIDKey = "IGuserID"
         static let fullNameKey = "IGfullName"
@@ -183,6 +185,8 @@ extension InstagramAgent {
         static let oAuthToken = "IGoAuthToken"
         static let oAuthTokenSecret = "IGoAuthTokenSecret"
         
+        static let selfString = "self"
+        
         static let IGloginData = loginData(
             naviGationTitle: "Instagram Login",
             requestURL: "https://instagram.com/oauth/authorize/?client_id=\(SocialAgentSettings.getInstagramClientId())&redirect_uri=\(SocialAgentConstants.instagramRedirectURI)&response_type=token",
@@ -191,16 +195,20 @@ extension InstagramAgent {
             accessTokenLimiterString: "access_token=",
             socialProfile: SocialAgentType.Instagram
         )
-        
     }
     
     private struct APIResponseDictionaryKeys {
-        static let getUserInfoURL = "https://api.instagram.com/v1/users/"
-        static let bioKey = "description"
-        static let followedByCountKey = "followers_count"
-        static let followsCountKey = "friends_count"
-        static let userNameKey = "screen_name"
-        static let fullNameKey = "name"
+        static let getUserInfoURLA = "https://api.instagram.com/v1/users/"
+        static let getUserInfoURLB = "/?access_token="
+        static let userInfoKey = "data"
+        static let bioKey = "bio"
+        static let followedByCountKey = "followed_by"
+        static let followsCountKey = "follows"
+        static let mediaCount = "media"
+        static let userNameKey = "username"
+        static let fullNameKey = "full_name"
+        static let userIDKey = "id"
+        static let countsKey = "counts"
     }
     
     //MARK: - User Data Persistance Constants
