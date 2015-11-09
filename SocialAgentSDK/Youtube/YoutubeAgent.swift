@@ -28,7 +28,7 @@ class YoutubeAgent: SocialAgentDelegate, LoginDelegate
         self.completionBlock = completion
         if self.loginView != nil
         {
-            self.loginView == nil
+            self.loginView = nil
         }
         
         let topViewController = UIApplication.sharedApplication().keyWindow?.rootViewController
@@ -43,12 +43,12 @@ class YoutubeAgent: SocialAgentDelegate, LoginDelegate
     }
     
     func loginAndGetUserInfo(completion: CompletionBlock) {
-        self.login { (error) -> () in
+        self.login { [weak self] (error) -> () in
             if error != nil {
                 completion(error: error)
             }
             else {
-                self.getChannelInfoFor(nil, completion: { (error) -> () in
+                self?.getChannelInfoFor(nil, completion: { (error) -> () in
                     completion(error: error)
 
                 })
@@ -284,8 +284,10 @@ class YoutubeAgent: SocialAgentDelegate, LoginDelegate
         let sToken = dict[SocialAgentConstants.youtubeSTokenKey]!
         self.getAccessToken(sToken) { (error) -> () in
             if let completion = self.completionBlock {
-                self.removeTheLoginView()
-                completion(error: nil)
+                dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                    self.removeTheLoginView()
+                    completion(error: nil)
+                })
             }
         }
         
@@ -293,8 +295,10 @@ class YoutubeAgent: SocialAgentDelegate, LoginDelegate
     
     func didUserCancelLogin(userInfo: [String : String]?) {
         if let completion = self.completionBlock {
-            self.removeTheLoginView()
-            completion(error: NSError(domain: SocialAgentConstants.authenticationCancelMsg, code: 1, userInfo: nil))
+            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                self.removeTheLoginView()
+                completion(error: NSError(domain: SocialAgentConstants.authenticationCancelMsg, code: 1, userInfo: nil))
+            })
         }
     }
     

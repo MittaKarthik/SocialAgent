@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol LoginDelegate {
+protocol LoginDelegate : class {
     func didLoginCompleteSuccessfully(userInfo: [String: String]?)
     func didUserCancelLogin(userInfo: [String: String]?)
 }

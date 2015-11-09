@@ -42,20 +42,20 @@ class FacebookAgent: SocialAgentDelegate
     func login(completion: CompletionBlock)
     {
         let fbLoginManager : FBSDKLoginManager = FBSDKLoginManager()
-        fbLoginManager.loginBehavior = FBSDKLoginBehavior.Web
+        fbLoginManager.loginBehavior = FBSDKLoginBehavior.SystemAccount
         
         fbLoginManager.logInWithReadPermissions(nil, handler: { (result, error) -> Void in
             if ((error) != nil)
             {
                 // Process error
                 fbLoginManager.logOut()
-                completion(error: error)
+                completion(error: NSError(domain:SocialAgentConstants.authenticationCancelMsg, code: 1, userInfo: [NSLocalizedDescriptionKey: SocialAgentConstants.authenticationCancelMsg,NSLocalizedFailureReasonErrorKey: SocialAgentConstants.authenticationCancelMsg]))
             }
             else if result.isCancelled
             {
                 // Handle cancellations
                 fbLoginManager.logOut()
-                completion(error: NSError(domain:SocialAgentConstants.authenticationCancelMsg, code: 1, userInfo: nil))
+                completion(error: NSError(domain:SocialAgentConstants.authenticationCancelMsg, code: 1, userInfo: [NSLocalizedDescriptionKey: SocialAgentConstants.authenticationCancelMsg,NSLocalizedFailureReasonErrorKey: SocialAgentConstants.authenticationCancelMsg]))
             }
             else {
                 
@@ -68,7 +68,7 @@ class FacebookAgent: SocialAgentDelegate
 
     func loginAndGetUserInfo(completion: CompletionBlock) {
         self.login { (error) -> () in
-            if error != nil {
+            if let error = error {
                 completion(error: error)
             }
             else {
@@ -96,9 +96,9 @@ class FacebookAgent: SocialAgentDelegate
     //MARK: - Getting user info methods
       func getUserInfo(completion: CompletionBlock)
       {
-        self.validateAccessToken { (validationSuccess) -> Void in
-            if validationSuccess == true
-            {
+//        self.validateAccessToken { (validationSuccess) -> Void in
+//            if validationSuccess == true
+//            {
                 FBSDKGraphRequest(graphPath:ThisConstants.fbUserInfoPath, parameters:ThisConstants.fbUserFields).startWithCompletionHandler({ (connection, result, error) -> Void in
                     
                     if (error == nil)
@@ -123,12 +123,12 @@ class FacebookAgent: SocialAgentDelegate
                     }
                 })
 
-            }
-            else
-            {
-                completion(error:  NSError(domain:SocialAgentConstants.authenticationCancelMsg, code: 1, userInfo: nil))
-            }
-            }
+//            }
+//            else
+//            {
+//                completion(error: NSError(domain:SocialAgentConstants.authenticationFailedMsg, code: 1, userInfo: [NSLocalizedDescriptionKey: SocialAgentConstants.authenticationFailedMsg,NSLocalizedFailureReasonErrorKey: SocialAgentConstants.authenticationFailedMsg]))
+//            }
+//            }
         }
     
 
@@ -164,7 +164,7 @@ class FacebookAgent: SocialAgentDelegate
         FBSDKAccessToken.refreshCurrentAccessToken { (connection, result, error) -> Void in
             self.userModel.accessToken = FBSDKAccessToken.currentAccessToken().tokenString ?? ""
             self.userModel.expiresIn = FBSDKAccessToken.currentAccessToken().expirationDate.timeIntervalSince1970
-            compeltion(error: error)
+            compeltion(error: nil)
         }
     }
     
@@ -209,6 +209,9 @@ extension FacebookAgent {
         static let fbPicUrl = "url"
 
         static let accessTokenKey = "fbAccessToken"
+        static let accessTokenIssueTimeKey = "fbAccessTokenIssueTimeKey"
+        static let expiresInKey = "fbExpiresInKey"
+        static let profilePicUrlKey = "fbProfilePicUrlKey"
         static let userIDKey = "fbUserID"
         static let userNameKey = "fbUserName"
         static let ageKey = "fbUserAge"
@@ -231,6 +234,9 @@ extension FacebookAgent {
         facebookPersistanceConstants.genderKey = ThisConstants.gender
         facebookPersistanceConstants.pageFollowCountKey = ThisConstants.pageFollowCount
         facebookPersistanceConstants.emailKey = ThisConstants.email
+        facebookPersistanceConstants.accessTokenIssueTimeKey = ThisConstants.accessTokenIssueTimeKey
+        facebookPersistanceConstants.expiresInKey = ThisConstants.expiresInKey
+        facebookPersistanceConstants.profilePicUrlKey = ThisConstants.profilePicUrlKey
         return facebookPersistanceConstants
     }
     

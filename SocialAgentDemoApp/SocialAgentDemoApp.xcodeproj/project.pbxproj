@@ -12,43 +12,43 @@
 		82171B4E1BCBBAA3006F7E1D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 82171B4C1BCBBAA3006F7E1D /* Main.storyboard */; };
 		82171B501BCBBAA3006F7E1D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 82171B4F1BCBBAA3006F7E1D /* Assets.xcassets */; };
 		82171B531BCBBAA3006F7E1D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 82171B511BCBBAA3006F7E1D /* LaunchScreen.storyboard */; };
-		82171B5F1BCBBB8F006F7E1D /* SocialAgent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82171B5E1BCBBB8F006F7E1D /* SocialAgent.swift */; settings = {ASSET_TAGS = (); }; };
-		82171B611BCBBBDE006F7E1D /* SocialAgentDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82171B601BCBBBDE006F7E1D /* SocialAgentDelegate.swift */; settings = {ASSET_TAGS = (); }; };
-		82171B6E1BCBE8A4006F7E1D /* FacebookAgent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82171B681BCBE8A4006F7E1D /* FacebookAgent.swift */; settings = {ASSET_TAGS = (); }; };
-		82171B6F1BCBE8A4006F7E1D /* InstagramAgent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82171B6A1BCBE8A4006F7E1D /* InstagramAgent.swift */; settings = {ASSET_TAGS = (); }; };
-		82171B701BCBE8A4006F7E1D /* TwitterAgent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82171B6C1BCBE8A4006F7E1D /* TwitterAgent.swift */; settings = {ASSET_TAGS = (); }; };
-		82171B721BCBE8BD006F7E1D /* YoutubeAgent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82171B711BCBE8BD006F7E1D /* YoutubeAgent.swift */; settings = {ASSET_TAGS = (); }; };
-		82171B751BCBE934006F7E1D /* SocialAgentConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82171B741BCBE934006F7E1D /* SocialAgentConstants.swift */; settings = {ASSET_TAGS = (); }; };
-		82171B771BCBE95F006F7E1D /* SocialAgentSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82171B761BCBE95F006F7E1D /* SocialAgentSettings.swift */; settings = {ASSET_TAGS = (); }; };
-		82171B811BCBECC4006F7E1D /* FacebookSDKStrings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 82171B791BCBECC4006F7E1D /* FacebookSDKStrings.bundle */; settings = {ASSET_TAGS = (); }; };
-		82171B821BCBECC4006F7E1D /* FBAudienceNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 82171B7A1BCBECC4006F7E1D /* FBAudienceNetwork.framework */; settings = {ASSET_TAGS = (); }; };
-		82171B831BCBECC4006F7E1D /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 82171B7B1BCBECC4006F7E1D /* FBSDKCoreKit.framework */; settings = {ASSET_TAGS = (); }; };
-		82171B841BCBECC4006F7E1D /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 82171B7C1BCBECC4006F7E1D /* FBSDKLoginKit.framework */; settings = {ASSET_TAGS = (); }; };
-		82171B851BCBECC4006F7E1D /* FBSDKMessengerShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 82171B7D1BCBECC4006F7E1D /* FBSDKMessengerShareKit.framework */; settings = {ASSET_TAGS = (); }; };
-		82171B861BCBECC4006F7E1D /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 82171B7E1BCBECC4006F7E1D /* FBSDKShareKit.framework */; settings = {ASSET_TAGS = (); }; };
-		82171B871BCBECC4006F7E1D /* LICENSE.txt in Resources */ = {isa = PBXBuildFile; fileRef = 82171B7F1BCBECC4006F7E1D /* LICENSE.txt */; settings = {ASSET_TAGS = (); }; };
-		82171B881BCBECC4006F7E1D /* README.txt in Resources */ = {isa = PBXBuildFile; fileRef = 82171B801BCBECC4006F7E1D /* README.txt */; settings = {ASSET_TAGS = (); }; };
-		826CF9D21BCFCBBC0082C748 /* SocialAgentLoginView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 826CF9D11BCFCBBC0082C748 /* SocialAgentLoginView.xib */; settings = {ASSET_TAGS = (); }; };
-		826CF9D41BCFCEA70082C748 /* close_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 826CF9D31BCFCEA70082C748 /* close_icon.png */; settings = {ASSET_TAGS = (); }; };
-		826CF9D61BCFCF860082C748 /* SocialAgentLoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 826CF9D51BCFCF860082C748 /* SocialAgentLoginView.swift */; settings = {ASSET_TAGS = (); }; };
-		827ADCDA1BCCE5BD00E97362 /* SocialAgentDelegateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 827ADCD91BCCE5BD00E97362 /* SocialAgentDelegateExtension.swift */; settings = {ASSET_TAGS = (); }; };
-		C962F1931BCE9E0C008E294E /* NSDateFormatter+STTwitter.m in Sources */ = {isa = PBXBuildFile; fileRef = C962F1741BCE9E0C008E294E /* NSDateFormatter+STTwitter.m */; settings = {ASSET_TAGS = (); }; };
-		C962F1941BCE9E0C008E294E /* NSError+STTwitter.m in Sources */ = {isa = PBXBuildFile; fileRef = C962F1761BCE9E0C008E294E /* NSError+STTwitter.m */; settings = {ASSET_TAGS = (); }; };
-		C962F1951BCE9E0C008E294E /* NSString+STTwitter.m in Sources */ = {isa = PBXBuildFile; fileRef = C962F1781BCE9E0C008E294E /* NSString+STTwitter.m */; settings = {ASSET_TAGS = (); }; };
-		C962F1961BCE9E0C008E294E /* STHTTPRequest+STTwitter.m in Sources */ = {isa = PBXBuildFile; fileRef = C962F17A1BCE9E0C008E294E /* STHTTPRequest+STTwitter.m */; settings = {ASSET_TAGS = (); }; };
-		C962F1971BCE9E0C008E294E /* STTwitterAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = C962F17D1BCE9E0C008E294E /* STTwitterAPI.m */; settings = {ASSET_TAGS = (); }; };
-		C962F1981BCE9E0C008E294E /* STTwitterAppOnly.m in Sources */ = {isa = PBXBuildFile; fileRef = C962F17F1BCE9E0C008E294E /* STTwitterAppOnly.m */; settings = {ASSET_TAGS = (); }; };
-		C962F1991BCE9E0C008E294E /* STTwitterHTML.m in Sources */ = {isa = PBXBuildFile; fileRef = C962F1811BCE9E0C008E294E /* STTwitterHTML.m */; settings = {ASSET_TAGS = (); }; };
-		C962F19A1BCE9E0C008E294E /* STTwitterOAuth.m in Sources */ = {isa = PBXBuildFile; fileRef = C962F1831BCE9E0C008E294E /* STTwitterOAuth.m */; settings = {ASSET_TAGS = (); }; };
-		C962F19B1BCE9E0C008E294E /* STTwitterOS.m in Sources */ = {isa = PBXBuildFile; fileRef = C962F1851BCE9E0C008E294E /* STTwitterOS.m */; settings = {ASSET_TAGS = (); }; };
-		C962F19C1BCE9E0C008E294E /* STTwitterOSRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = C962F1871BCE9E0C008E294E /* STTwitterOSRequest.m */; settings = {ASSET_TAGS = (); }; };
-		C962F19D1BCE9E0C008E294E /* STTwitterStreamParser.m in Sources */ = {isa = PBXBuildFile; fileRef = C962F18B1BCE9E0C008E294E /* STTwitterStreamParser.m */; settings = {ASSET_TAGS = (); }; };
-		C962F19E1BCE9E0C008E294E /* BAVPlistNode.m in Sources */ = {isa = PBXBuildFile; fileRef = C962F18E1BCE9E0C008E294E /* BAVPlistNode.m */; settings = {ASSET_TAGS = (); }; };
-		C962F19F1BCE9E0C008E294E /* JSONSyntaxHighlight.m in Sources */ = {isa = PBXBuildFile; fileRef = C962F1901BCE9E0C008E294E /* JSONSyntaxHighlight.m */; settings = {ASSET_TAGS = (); }; };
-		C962F1A01BCE9E0C008E294E /* STHTTPRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = C962F1921BCE9E0C008E294E /* STHTTPRequest.m */; settings = {ASSET_TAGS = (); }; };
-		C9C47D971BCCFC100000DBC9 /* SocialAgentPersistanceConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9C47D961BCCFC100000DBC9 /* SocialAgentPersistanceConstants.swift */; settings = {ASSET_TAGS = (); }; };
-		C9C47D991BCCFC620000DBC9 /* SocialAgentUserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9C47D981BCCFC620000DBC9 /* SocialAgentUserModel.swift */; settings = {ASSET_TAGS = (); }; };
-		C9C47D9B1BCD295E0000DBC9 /* LoginDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9C47D9A1BCD295E0000DBC9 /* LoginDelegate.swift */; settings = {ASSET_TAGS = (); }; };
+		82171B5F1BCBBB8F006F7E1D /* SocialAgent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82171B5E1BCBBB8F006F7E1D /* SocialAgent.swift */; };
+		82171B611BCBBBDE006F7E1D /* SocialAgentDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82171B601BCBBBDE006F7E1D /* SocialAgentDelegate.swift */; };
+		82171B6E1BCBE8A4006F7E1D /* FacebookAgent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82171B681BCBE8A4006F7E1D /* FacebookAgent.swift */; };
+		82171B6F1BCBE8A4006F7E1D /* InstagramAgent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82171B6A1BCBE8A4006F7E1D /* InstagramAgent.swift */; };
+		82171B701BCBE8A4006F7E1D /* TwitterAgent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82171B6C1BCBE8A4006F7E1D /* TwitterAgent.swift */; };
+		82171B721BCBE8BD006F7E1D /* YoutubeAgent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82171B711BCBE8BD006F7E1D /* YoutubeAgent.swift */; };
+		82171B751BCBE934006F7E1D /* SocialAgentConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82171B741BCBE934006F7E1D /* SocialAgentConstants.swift */; };
+		82171B771BCBE95F006F7E1D /* SocialAgentSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82171B761BCBE95F006F7E1D /* SocialAgentSettings.swift */; };
+		82171B811BCBECC4006F7E1D /* FacebookSDKStrings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 82171B791BCBECC4006F7E1D /* FacebookSDKStrings.bundle */; };
+		82171B831BCBECC4006F7E1D /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 82171B7B1BCBECC4006F7E1D /* FBSDKCoreKit.framework */; };
+		82171B841BCBECC4006F7E1D /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 82171B7C1BCBECC4006F7E1D /* FBSDKLoginKit.framework */; };
+		82171B851BCBECC4006F7E1D /* FBSDKMessengerShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 82171B7D1BCBECC4006F7E1D /* FBSDKMessengerShareKit.framework */; };
+		82171B861BCBECC4006F7E1D /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 82171B7E1BCBECC4006F7E1D /* FBSDKShareKit.framework */; };
+		82171B871BCBECC4006F7E1D /* LICENSE.txt in Resources */ = {isa = PBXBuildFile; fileRef = 82171B7F1BCBECC4006F7E1D /* LICENSE.txt */; };
+		82171B881BCBECC4006F7E1D /* README.txt in Resources */ = {isa = PBXBuildFile; fileRef = 82171B801BCBECC4006F7E1D /* README.txt */; };
+		826CF9D21BCFCBBC0082C748 /* SocialAgentLoginView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 826CF9D11BCFCBBC0082C748 /* SocialAgentLoginView.xib */; };
+		826CF9D41BCFCEA70082C748 /* close_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 826CF9D31BCFCEA70082C748 /* close_icon.png */; };
+		826CF9D61BCFCF860082C748 /* SocialAgentLoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 826CF9D51BCFCF860082C748 /* SocialAgentLoginView.swift */; };
+		827ADCDA1BCCE5BD00E97362 /* SocialAgentDelegateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 827ADCD91BCCE5BD00E97362 /* SocialAgentDelegateExtension.swift */; };
+		C903C9D71BEB477C00618A8E /* SoundCloud.swift in Sources */ = {isa = PBXBuildFile; fileRef = C903C9D61BEB477C00618A8E /* SoundCloud.swift */; };
+		C962F1931BCE9E0C008E294E /* NSDateFormatter+STTwitter.m in Sources */ = {isa = PBXBuildFile; fileRef = C962F1741BCE9E0C008E294E /* NSDateFormatter+STTwitter.m */; };
+		C962F1941BCE9E0C008E294E /* NSError+STTwitter.m in Sources */ = {isa = PBXBuildFile; fileRef = C962F1761BCE9E0C008E294E /* NSError+STTwitter.m */; };
+		C962F1951BCE9E0C008E294E /* NSString+STTwitter.m in Sources */ = {isa = PBXBuildFile; fileRef = C962F1781BCE9E0C008E294E /* NSString+STTwitter.m */; };
+		C962F1961BCE9E0C008E294E /* STHTTPRequest+STTwitter.m in Sources */ = {isa = PBXBuildFile; fileRef = C962F17A1BCE9E0C008E294E /* STHTTPRequest+STTwitter.m */; };
+		C962F1971BCE9E0C008E294E /* STTwitterAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = C962F17D1BCE9E0C008E294E /* STTwitterAPI.m */; };
+		C962F1981BCE9E0C008E294E /* STTwitterAppOnly.m in Sources */ = {isa = PBXBuildFile; fileRef = C962F17F1BCE9E0C008E294E /* STTwitterAppOnly.m */; };
+		C962F1991BCE9E0C008E294E /* STTwitterHTML.m in Sources */ = {isa = PBXBuildFile; fileRef = C962F1811BCE9E0C008E294E /* STTwitterHTML.m */; };
+		C962F19A1BCE9E0C008E294E /* STTwitterOAuth.m in Sources */ = {isa = PBXBuildFile; fileRef = C962F1831BCE9E0C008E294E /* STTwitterOAuth.m */; };
+		C962F19B1BCE9E0C008E294E /* STTwitterOS.m in Sources */ = {isa = PBXBuildFile; fileRef = C962F1851BCE9E0C008E294E /* STTwitterOS.m */; };
+		C962F19C1BCE9E0C008E294E /* STTwitterOSRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = C962F1871BCE9E0C008E294E /* STTwitterOSRequest.m */; };
+		C962F19D1BCE9E0C008E294E /* STTwitterStreamParser.m in Sources */ = {isa = PBXBuildFile; fileRef = C962F18B1BCE9E0C008E294E /* STTwitterStreamParser.m */; };
+		C962F19E1BCE9E0C008E294E /* BAVPlistNode.m in Sources */ = {isa = PBXBuildFile; fileRef = C962F18E1BCE9E0C008E294E /* BAVPlistNode.m */; };
+		C962F19F1BCE9E0C008E294E /* JSONSyntaxHighlight.m in Sources */ = {isa = PBXBuildFile; fileRef = C962F1901BCE9E0C008E294E /* JSONSyntaxHighlight.m */; };
+		C962F1A01BCE9E0C008E294E /* STHTTPRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = C962F1921BCE9E0C008E294E /* STHTTPRequest.m */; };
+		C9C47D971BCCFC100000DBC9 /* SocialAgentPersistanceConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9C47D961BCCFC100000DBC9 /* SocialAgentPersistanceConstants.swift */; };
+		C9C47D991BCCFC620000DBC9 /* SocialAgentUserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9C47D981BCCFC620000DBC9 /* SocialAgentUserModel.swift */; };
+		C9C47D9B1BCD295E0000DBC9 /* LoginDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9C47D9A1BCD295E0000DBC9 /* LoginDelegate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -68,7 +68,6 @@
 		82171B741BCBE934006F7E1D /* SocialAgentConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocialAgentConstants.swift; sourceTree = "<group>"; };
 		82171B761BCBE95F006F7E1D /* SocialAgentSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocialAgentSettings.swift; sourceTree = "<group>"; };
 		82171B791BCBECC4006F7E1D /* FacebookSDKStrings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = FacebookSDKStrings.bundle; sourceTree = "<group>"; };
-		82171B7A1BCBECC4006F7E1D /* FBAudienceNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBAudienceNetwork.framework; sourceTree = "<group>"; };
 		82171B7B1BCBECC4006F7E1D /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
 		82171B7C1BCBECC4006F7E1D /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
 		82171B7D1BCBECC4006F7E1D /* FBSDKMessengerShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKMessengerShareKit.framework; sourceTree = "<group>"; };
@@ -80,6 +79,7 @@
 		826CF9D51BCFCF860082C748 /* SocialAgentLoginView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocialAgentLoginView.swift; sourceTree = "<group>"; };
 		827ADCD51BCCE1A800E97362 /* SocialAgentDemoApp-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SocialAgentDemoApp-Bridging-Header.h"; sourceTree = "<group>"; };
 		827ADCD91BCCE5BD00E97362 /* SocialAgentDelegateExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocialAgentDelegateExtension.swift; sourceTree = "<group>"; };
+		C903C9D61BEB477C00618A8E /* SoundCloud.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SoundCloud.swift; sourceTree = "<group>"; };
 		C962F1731BCE9E0C008E294E /* NSDateFormatter+STTwitter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDateFormatter+STTwitter.h"; sourceTree = "<group>"; };
 		C962F1741BCE9E0C008E294E /* NSDateFormatter+STTwitter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDateFormatter+STTwitter.m"; sourceTree = "<group>"; };
 		C962F1751BCE9E0C008E294E /* NSError+STTwitter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSError+STTwitter.h"; sourceTree = "<group>"; };
@@ -122,7 +122,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				82171B851BCBECC4006F7E1D /* FBSDKMessengerShareKit.framework in Frameworks */,
-				82171B821BCBECC4006F7E1D /* FBAudienceNetwork.framework in Frameworks */,
 				82171B861BCBECC4006F7E1D /* FBSDKShareKit.framework in Frameworks */,
 				82171B831BCBECC4006F7E1D /* FBSDKCoreKit.framework in Frameworks */,
 				82171B841BCBECC4006F7E1D /* FBSDKLoginKit.framework in Frameworks */,
@@ -176,6 +175,7 @@
 				82171B6B1BCBE8A4006F7E1D /* Twitter */,
 				82171B691BCBE8A4006F7E1D /* Instagram */,
 				82171B6D1BCBE8A4006F7E1D /* Youtube */,
+				C903C9D51BEB476900618A8E /* SoundCloud */,
 			);
 			name = SocialAgentSDK;
 			path = ../../SocialAgentSDK;
@@ -232,7 +232,6 @@
 			isa = PBXGroup;
 			children = (
 				82171B791BCBECC4006F7E1D /* FacebookSDKStrings.bundle */,
-				82171B7A1BCBECC4006F7E1D /* FBAudienceNetwork.framework */,
 				82171B7B1BCBECC4006F7E1D /* FBSDKCoreKit.framework */,
 				82171B7C1BCBECC4006F7E1D /* FBSDKLoginKit.framework */,
 				82171B7D1BCBECC4006F7E1D /* FBSDKMessengerShareKit.framework */,
@@ -249,6 +248,14 @@
 				C962F1721BCE9E0C008E294E /* STTwitter */,
 			);
 			path = TwitterSdk;
+			sourceTree = "<group>";
+		};
+		C903C9D51BEB476900618A8E /* SoundCloud */ = {
+			isa = PBXGroup;
+			children = (
+				C903C9D61BEB477C00618A8E /* SoundCloud.swift */,
+			);
+			path = SoundCloud;
 			sourceTree = "<group>";
 		};
 		C962F1721BCE9E0C008E294E /* STTwitter */ = {
@@ -398,6 +405,7 @@
 				C9C47D9B1BCD295E0000DBC9 /* LoginDelegate.swift in Sources */,
 				82171B491BCBBAA3006F7E1D /* AppDelegate.swift in Sources */,
 				C962F1991BCE9E0C008E294E /* STTwitterHTML.m in Sources */,
+				C903C9D71BEB477C00618A8E /* SoundCloud.swift in Sources */,
 				C9C47D971BCCFC100000DBC9 /* SocialAgentPersistanceConstants.swift in Sources */,
 				C962F19A1BCE9E0C008E294E /* STTwitterOAuth.m in Sources */,
 				C962F1931BCE9E0C008E294E /* NSDateFormatter+STTwitter.m in Sources */,
@@ -521,6 +529,7 @@
 					"../SocialAgentSDK/**",
 				);
 				INFOPLIST_FILE = SocialAgentDemoApp/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.karthikmitta.SocialAgentDemoApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -540,6 +549,7 @@
 					"../SocialAgentSDK/**",
 				);
 				INFOPLIST_FILE = SocialAgentDemoApp/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.karthikmitta.SocialAgentDemoApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";

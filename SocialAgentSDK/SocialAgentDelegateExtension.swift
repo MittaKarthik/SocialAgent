@@ -50,7 +50,12 @@ extension SocialAgentDelegate
         
     }
     
+    //MARK: - SoundCloud Methods
     
+    func getUserInfoForSC(userID: String?, completion: CompletionBlock)
+    {
+        
+    }
     
 
 }

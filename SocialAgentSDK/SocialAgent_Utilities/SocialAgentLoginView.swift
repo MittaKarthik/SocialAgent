@@ -14,7 +14,7 @@ class SocialAgentLoginView: UIView, UIWebViewDelegate {
     @IBOutlet weak var closeButton: UIButton!
     @IBOutlet weak var loginBackgroundView: UIView!
     var isVerified = false
-    var delegate: LoginDelegate?
+    weak var delegate: LoginDelegate?
     var localLoginData: loginData!
     var sToken: String!
     let activityIndicator : UIActivityIndicatorView = UIActivityIndicatorView()
@@ -29,6 +29,7 @@ class SocialAgentLoginView: UIView, UIWebViewDelegate {
     override func didMoveToSuperview()
     {
         self.hidden = false
+        self.frame = CGRect(x: 0, y: 0, width: SocialAgentConstants.mainScreenWidth, height: SocialAgentConstants.mainScreenHeight)
         // self.loginBackgroundView.transform = CGAffineTransformScale(self.loginWebview.transform, 0.3, 0.3);
         self.loginBackgroundView.transform  = CGAffineTransformMakeScale(0.3, 0.3);
         
@@ -60,7 +61,7 @@ class SocialAgentLoginView: UIView, UIWebViewDelegate {
         else {
             clearCookies()
             let url = NSURL(string: localLoginData.requestURL.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!)!
-            let request = NSURLRequest(URL: url)
+            let request = NSMutableURLRequest(URL: url)
             self.loginWebview.loadRequest(request)
         }
     }
@@ -92,6 +93,7 @@ class SocialAgentLoginView: UIView, UIWebViewDelegate {
     
     func webView(webView: UIWebView, shouldStartLoadWithRequest request: NSURLRequest, navigationType: UIWebViewNavigationType) -> Bool {
         self.startActivityIndicator(self)
+        print(request.URL)
         if (request.URL!.absoluteString.rangeOfString(localLoginData.rangeCheckingString) != nil) {
             if !isVerified {
                 isVerified = true
@@ -118,6 +120,15 @@ class SocialAgentLoginView: UIView, UIWebViewDelegate {
                     if(self.delegate != nil && self.delegate?.didLoginCompleteSuccessfully != nil)
                     {
                         self.delegate!.didLoginCompleteSuccessfully([SocialAgentConstants.twitterOAuthVerifierKey : oauthVerifier])
+                    }
+                }
+                else if localLoginData.socialProfile == SocialAgentType.SoundCloud {
+                    print(request.URL)
+                    var authorizationCode = request.URL!.absoluteString.componentsSeparatedByString(localLoginData.accessTokenLimiterString)[1]
+                    authorizationCode.removeAtIndex(authorizationCode.endIndex.predecessor())
+                    if(self.delegate != nil && self.delegate?.didLoginCompleteSuccessfully != nil)
+                    {
+                        self.delegate!.didLoginCompleteSuccessfully([SocialAgentConstants.soundCloudAuthorizationCode : authorizationCode])
                     }
                 }
             }

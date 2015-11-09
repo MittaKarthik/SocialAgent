@@ -35,7 +35,7 @@ class TwitterAgent: SocialAgentDelegate, LoginDelegate
      
             if self.loginView != nil
             {
-                self.loginView == nil
+                self.loginView = nil
             }
             
             let topViewController = UIApplication.sharedApplication().keyWindow?.rootViewController
@@ -56,14 +56,16 @@ class TwitterAgent: SocialAgentDelegate, LoginDelegate
     //Login+UserInfo
     
     func loginAndGetUserInfo(completion: CompletionBlock) {
-        self.login { (error) -> () in
-            if error == nil {
-                self.getUserInfoFor(nil, userID: self.userModel.userID, completion: { (error) -> () in
+        self.login { [weak self] (error) -> () in
+            if let error = error
+            {
+                completion(error: error)
+            }
+            else
+            {
+                self?.getUserInfoFor(nil, userID: self?.userModel.userID, completion: { (error) -> () in
                     completion(error: error)
                 })
-            }
-            else {
-                completion(error: error)
             }
         }
     }
@@ -89,12 +91,13 @@ class TwitterAgent: SocialAgentDelegate, LoginDelegate
                 if let fullName = dict[APIResponseDictionaryKeys.fullNameKey] as? String {
                     self.userModel.fullName = fullName
                 }
-                
-                
             }
             completion(error: nil)
-            }) { (error) -> Void in
-                completion(error: error)
+            }) { (error : NSError!) -> Void in
+                if error.code != 0
+                {
+                    completion(error: error)
+                }
         }
     }
     
@@ -138,7 +141,7 @@ class TwitterAgent: SocialAgentDelegate, LoginDelegate
     func didUserCancelLogin(userInfo: [String : String]?) {
         if let completion = self.completionBlock {
             self.removeTheLoginView()
-            completion(error: NSError(domain: SocialAgentConstants.authenticationCancelMsg, code: 1, userInfo: nil))
+            completion(error: NSError(domain:SocialAgentConstants.authenticationCancelMsg, code: 1, userInfo: [NSLocalizedDescriptionKey: SocialAgentConstants.authenticationCancelMsg,NSLocalizedFailureReasonErrorKey: SocialAgentConstants.authenticationCancelMsg]))
         }
     }
     

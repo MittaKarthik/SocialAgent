@@ -12,11 +12,17 @@ class SocialAgentConstants
 {
     //MARK: - General Constants
     
+    static let mainScreenHeight                                                         = UIScreen.mainScreen().bounds.size.height
+    static let mainScreenWidth                                                          = UIScreen.mainScreen().bounds.size.width
+
+    
     static let storyboardName = "SocialAgentUI"
     static let loginVCStoryboardID = "LoginVC"
     //MARK: - Common constants
     
     static let authenticationCancelMsg : String = "Authentication Cancelled."
+    static let authenticationFailedMsg : String = "Authentication Failed."
+
     static let invalidAccesToken : String = "Access token is invalid."
 
     //MARK: - Instagram Constants
@@ -36,6 +42,10 @@ class SocialAgentConstants
     static let twitterConsumerSecret : String =  "SATwitterConsumerSecret"
     static let twitterOAuthVerifierKey : String = "oAuthVerifier"
     
+    //MARK: - SoundCloud Constants
+    static let soundCloudClientID : String = "SASoundCloudClientID"
+    static let soundCloudClientSecret : String = "SASoundCloudClientSecret"
+    static let soundCloudAuthorizationCode : String = "SCAuthorizationCode"
 }
 
 struct loginData {
@@ -62,6 +72,8 @@ enum SocialAgentType {
     case Twitter
     case Instagram
     case YouTube
+    case SoundCloud
+    case MixCloud
 }
 
 enum HTTPMethodString {

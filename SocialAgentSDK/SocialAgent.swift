@@ -10,25 +10,29 @@ import Foundation
 
 class SocialAgent {
     
-    static func facebookSharedInstance() ->SocialAgentDelegate
+    static func facebookSharedInstance() -> SocialAgentDelegate
     {
         return FacebookAgent.sharedInstance
     }
     
-    static func twitterSharedInstance() ->SocialAgentDelegate
+    static func twitterSharedInstance() -> SocialAgentDelegate
     {
         return TwitterAgent.sharedInstance
     }
     
-    static func instagramSharedInstance() ->SocialAgentDelegate
+    static func instagramSharedInstance() -> SocialAgentDelegate
     {
         return InstagramAgent.sharedInstance
     }
     
-    static func youTubeSharedInstance() ->SocialAgentDelegate
+    static func youTubeSharedInstance() -> SocialAgentDelegate
     {
         return YoutubeAgent.sharedInstance
     }
 
+    static func soundCloudSharedInstance() -> SocialAgentDelegate
+    {
+        return SoundCloudAgent.sharedInstance
+    }
 
 }

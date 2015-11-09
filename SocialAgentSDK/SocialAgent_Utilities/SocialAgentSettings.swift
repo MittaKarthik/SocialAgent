@@ -15,7 +15,6 @@ class SocialAgentSettings
         return self.getRequiredAppKey(SocialAgentConstants.instagramClientIdKey)!
     }
     
-    
     static func getInstagramClientSecret() -> String {
         return self.getRequiredAppKey(SocialAgentConstants.instagramClientSecretKey)!
     }
@@ -40,6 +39,13 @@ class SocialAgentSettings
         return self.getRequiredAppKey(SocialAgentConstants.twitterConsumerSecret)!
     }
     
+    static func getSoundCloudClientID() -> String {
+        return self.getRequiredAppKey(SocialAgentConstants.soundCloudClientID)!
+    }
+    
+    static func getSoundCloudClientSecret() -> String {
+        return self.getRequiredAppKey(SocialAgentConstants.soundCloudClientSecret)!
+    }
     
     private static func getRequiredAppKey( key : String ) -> String?
     {

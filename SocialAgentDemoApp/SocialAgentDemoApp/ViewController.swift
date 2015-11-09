@@ -10,16 +10,21 @@ import UIKit
 
 class ViewController: UIViewController {
     
-    let socialSession = SocialAgent.instagramSharedInstance()
+    let socialSession = SocialAgent.soundCloudSharedInstance()
     var didLogin = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        print(socialSession.userModel.accessToken)
         
-        socialSession.loginAndGetUserInfo { (error) -> () in
-            
+        socialSession.loginAndGetUserInfo { [weak self] (error) -> () in
+            print(error)
+            print(self?.socialSession.userModel.mediaCount)
+            print(self?.socialSession.userModel.followsCount)
+            print(self?.socialSession.userModel.followedByCount)
+            print(self?.socialSession.userModel.fullName)
+            print(self?.socialSession.userModel.userName)
+            print(self?.socialSession.userModel.userID)
         }
         
         

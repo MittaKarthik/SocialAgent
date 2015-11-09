@@ -16,6 +16,10 @@
 	<string>e73ba0cad38846079459680228815568</string>
 	<key>SAInsatagramClientSecret</key>
 	<string>909fad98d1cc459f8b28e4b861a957a5</string>
+	<key>SASoundCloudClientID</key>
+	<string>79c87746adc5d3f5d157e06001f3d370</string>
+	<key>SASoundCloudClientSecret</key>
+	<string>41c8e5fc788ee395c8340bfc3af20ed1</string>
 	<key>NSAppTransportSecurity</key>
 	<dict>
 		<key>NSAllowsArbitraryLoads</key>

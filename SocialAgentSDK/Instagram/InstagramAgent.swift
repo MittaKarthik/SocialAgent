@@ -26,7 +26,7 @@ class InstagramAgent: SocialAgentDelegate, LoginDelegate
         self.completionBlock = completion
         if self.loginView != nil
         {
-            self.loginView == nil
+            self.loginView = nil
         }
 
         let topViewController = UIApplication.sharedApplication().keyWindow?.rootViewController
@@ -108,12 +108,12 @@ class InstagramAgent: SocialAgentDelegate, LoginDelegate
     //Login+UserInfo
     
     func loginAndGetUserInfo(completion: CompletionBlock) {
-        self.login { (error) -> () in
+        self.login { [weak self] (error) -> () in
             if error != nil {
                 completion(error: error)
             }
             else {
-                self.getUserInfoFor(ThisConstants.selfString, completion: { (error) -> () in
+                self?.getUserInfoFor(ThisConstants.selfString, completion: { (error) -> () in
                     completion(error: error)
                 })
             }
