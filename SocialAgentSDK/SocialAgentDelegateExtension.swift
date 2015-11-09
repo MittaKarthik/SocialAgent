@@ -35,24 +35,9 @@ extension SocialAgentDelegate
     }
     
     
-    //MARK: - Instagram Methods
+    //MARK: - Other platforms
     
-    func getUserInfoFor(userID: String, completion: CompletionBlock)
-    {
-        
-    }
-    
-    
-    //MARK: - YouTube Methods
-    
-    func getChannelInfoFor(channelID: String?, completion: CompletionBlock)
-    {
-        
-    }
-    
-    //MARK: - SoundCloud Methods
-    
-    func getUserInfoForSC(userID: String?, completion: CompletionBlock)
+    func getUserInfoFor(identifier: String?, completion: CompletionBlock)
     {
         
     }

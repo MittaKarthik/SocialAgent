@@ -46,6 +46,10 @@ class SocialAgentConstants
     static let soundCloudClientID : String = "SASoundCloudClientID"
     static let soundCloudClientSecret : String = "SASoundCloudClientSecret"
     static let soundCloudAuthorizationCode : String = "SCAuthorizationCode"
+    //MARK: - MixCloud Constants
+    static let mixCloudClientID : String = "SAMixCloudClientID"
+    static let mixCloudClientSecret : String = "SAMixCloudClientSecret"
+
 }
 
 struct loginData {

@@ -71,6 +71,7 @@ class SocialAgentLoginView: UIView, UIWebViewDelegate {
         
         for cookie: NSHTTPCookie in storage.cookies!
         {
+            print(cookie)
             let domainName: String = cookie.domain
             if let domainRange : Range = domainName.rangeOfString(localLoginData.cookieDomainName)
             {
@@ -123,9 +124,16 @@ class SocialAgentLoginView: UIView, UIWebViewDelegate {
                     }
                 }
                 else if localLoginData.socialProfile == SocialAgentType.SoundCloud {
-                    print(request.URL)
                     var authorizationCode = request.URL!.absoluteString.componentsSeparatedByString(localLoginData.accessTokenLimiterString)[1]
                     authorizationCode.removeAtIndex(authorizationCode.endIndex.predecessor())
+                    if(self.delegate != nil && self.delegate?.didLoginCompleteSuccessfully != nil)
+                    {
+                        self.delegate!.didLoginCompleteSuccessfully([SocialAgentConstants.soundCloudAuthorizationCode : authorizationCode])
+                    }
+                }
+                else if localLoginData.socialProfile == SocialAgentType.MixCloud {
+                    print(request.URL)
+                    let authorizationCode = request.URL!.absoluteString.componentsSeparatedByString(localLoginData.accessTokenLimiterString)[1]
                     if(self.delegate != nil && self.delegate?.didLoginCompleteSuccessfully != nil)
                     {
                         self.delegate!.didLoginCompleteSuccessfully([SocialAgentConstants.soundCloudAuthorizationCode : authorizationCode])

@@ -39,7 +39,6 @@ class YoutubeAgent: SocialAgentDelegate, LoginDelegate
         self.loginView.createTheWebviewRequest()
         topViewController?.view.addSubview(self.loginView)
         topViewController?.view.bringSubviewToFront(self.loginView)
-
     }
     
     func loginAndGetUserInfo(completion: CompletionBlock) {
@@ -48,7 +47,7 @@ class YoutubeAgent: SocialAgentDelegate, LoginDelegate
                 completion(error: error)
             }
             else {
-                self?.getChannelInfoFor(nil, completion: { (error) -> () in
+                self?.getUserInfoFor(nil, completion: { (error) -> () in
                     completion(error: error)
 
                 })
@@ -61,8 +60,6 @@ class YoutubeAgent: SocialAgentDelegate, LoginDelegate
         self.userModel.clearAllData()
         completion(error: nil)
     }
-    
-    
     
     //MARK: - Validation and refreshing methods
     private func validateAccessToken(completion: (validationSuccess: Bool) -> Void) {
@@ -208,12 +205,13 @@ class YoutubeAgent: SocialAgentDelegate, LoginDelegate
     }
     
     //MARK: - Getting user info methods
-    func getChannelInfoFor(channelID: String?, completion: CompletionBlock) {
+    
+    func getUserInfoFor(identifier: String?, completion: CompletionBlock) {
         self.validateAccessToken { (validationSuccess) -> Void in
             if validationSuccess {
                 let request: NSMutableURLRequest = NSMutableURLRequest()
                 var URLString = ""
-                if let channelID = channelID {
+                if let channelID = identifier {
                     URLString = APIResponseDictionaryKeys.APIBaseURL + "id=\(channelID)&key=\(SocialAgentSettings.getYouTubeApiKey())"
                 }
                 else {

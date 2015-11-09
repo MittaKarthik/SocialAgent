@@ -34,5 +34,10 @@ class SocialAgent {
     {
         return SoundCloudAgent.sharedInstance
     }
+    
+    static func mixCloudSharedInstance() -> SocialAgentDelegate
+    {
+        return MixCloudAgent.sharedInstance
+    }
 
 }

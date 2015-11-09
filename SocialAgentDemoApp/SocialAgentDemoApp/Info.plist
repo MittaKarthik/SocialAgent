@@ -20,6 +20,10 @@
 	<string>79c87746adc5d3f5d157e06001f3d370</string>
 	<key>SASoundCloudClientSecret</key>
 	<string>41c8e5fc788ee395c8340bfc3af20ed1</string>
+	<key>SAMixCloudClientID</key>
+	<string>KqPEHhHGZBfV5uLzEc</string>
+	<key>SAMixCloudClientSecret</key>
+	<string>ddURGvyVTR8Sm7KvWeeDCqgJgkrHSAwN</string>
 	<key>NSAppTransportSecurity</key>
 	<dict>
 		<key>NSAllowsArbitraryLoads</key>

@@ -10,23 +10,26 @@ import UIKit
 
 class ViewController: UIViewController {
     
-    let socialSession = SocialAgent.soundCloudSharedInstance()
+    let socialSession = SocialAgent.mixCloudSharedInstance()
     var didLogin = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+//        socialSession.loginAndGetUserInfo { [weak self] (error) -> () in
+//            print(error)
+//            print(self?.socialSession.userModel.followedByCount)
+//            print(self?.socialSession.userModel.fullName)
+//            print(self?.socialSession.userModel.userName)
+//        }
         
-        socialSession.loginAndGetUserInfo { [weak self] (error) -> () in
+        SocialAgent.mixCloudSharedInstance().getUserInfoForMC("djrusske") { [weak self] (error) -> () in
             print(error)
-            print(self?.socialSession.userModel.mediaCount)
-            print(self?.socialSession.userModel.followsCount)
             print(self?.socialSession.userModel.followedByCount)
+            print(self?.socialSession.userModel.followsCount)
             print(self?.socialSession.userModel.fullName)
             print(self?.socialSession.userModel.userName)
-            print(self?.socialSession.userModel.userID)
         }
-        
         
     }
     

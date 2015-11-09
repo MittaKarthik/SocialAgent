@@ -40,10 +40,19 @@ class InstagramAgent: SocialAgentDelegate, LoginDelegate
     }
     
     //MARK: - User Info
-    func getUserInfoFor(userID: String, completion: CompletionBlock) {
+    
+    func getUserInfoFor(identifier: String?, completion: CompletionBlock) {
         if let accessToken = userModel.accessToken {
             let request: NSMutableURLRequest = NSMutableURLRequest()
-            request.URL = NSURL(string: APIResponseDictionaryKeys.getUserInfoURLA + userID + APIResponseDictionaryKeys.getUserInfoURLB + accessToken)
+            if let userID = identifier
+            {
+                request.URL = NSURL(string: APIResponseDictionaryKeys.getUserInfoURLA + userID + APIResponseDictionaryKeys.getUserInfoURLB + accessToken)
+            }
+            else
+            {
+                request.URL = NSURL(string: APIResponseDictionaryKeys.getUserInfoURLA + ThisConstants.selfString + APIResponseDictionaryKeys.getUserInfoURLB + accessToken)
+
+            }
             request.HTTPMethod = HTTPMethodString.GET.getString()
             let session = NSURLSession.sharedSession()
             let task = session.dataTaskWithRequest(request) { (data, response, error) -> Void in
@@ -113,8 +122,9 @@ class InstagramAgent: SocialAgentDelegate, LoginDelegate
                 completion(error: error)
             }
             else {
-                self?.getUserInfoFor(ThisConstants.selfString, completion: { (error) -> () in
+                self?.getUserInfoFor(nil, completion: { (error) -> () in
                     completion(error: error)
+
                 })
             }
         }

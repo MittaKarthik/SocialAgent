@@ -47,6 +47,14 @@ class SocialAgentSettings
         return self.getRequiredAppKey(SocialAgentConstants.soundCloudClientSecret)!
     }
     
+    static func getMixCloudClientID() -> String {
+        return self.getRequiredAppKey(SocialAgentConstants.mixCloudClientID)!
+    }
+    
+    static func getMixCloudClientSecret() -> String {
+        return self.getRequiredAppKey(SocialAgentConstants.mixCloudClientSecret)!
+    }
+    
     private static func getRequiredAppKey( key : String ) -> String?
     {
         let infoDict : Dictionary = NSBundle.mainBundle().infoDictionary!

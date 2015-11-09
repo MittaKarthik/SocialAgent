@@ -31,7 +31,8 @@
 		826CF9D41BCFCEA70082C748 /* close_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 826CF9D31BCFCEA70082C748 /* close_icon.png */; };
 		826CF9D61BCFCF860082C748 /* SocialAgentLoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 826CF9D51BCFCF860082C748 /* SocialAgentLoginView.swift */; };
 		827ADCDA1BCCE5BD00E97362 /* SocialAgentDelegateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 827ADCD91BCCE5BD00E97362 /* SocialAgentDelegateExtension.swift */; };
-		C903C9D71BEB477C00618A8E /* SoundCloud.swift in Sources */ = {isa = PBXBuildFile; fileRef = C903C9D61BEB477C00618A8E /* SoundCloud.swift */; };
+		C903C9D71BEB477C00618A8E /* SoundCloudAgent.swift in Sources */ = {isa = PBXBuildFile; fileRef = C903C9D61BEB477C00618A8E /* SoundCloudAgent.swift */; };
+		C94949341BF0B1F8001BC3A2 /* MixCloudAgent.swift in Sources */ = {isa = PBXBuildFile; fileRef = C94949331BF0B1F8001BC3A2 /* MixCloudAgent.swift */; };
 		C962F1931BCE9E0C008E294E /* NSDateFormatter+STTwitter.m in Sources */ = {isa = PBXBuildFile; fileRef = C962F1741BCE9E0C008E294E /* NSDateFormatter+STTwitter.m */; };
 		C962F1941BCE9E0C008E294E /* NSError+STTwitter.m in Sources */ = {isa = PBXBuildFile; fileRef = C962F1761BCE9E0C008E294E /* NSError+STTwitter.m */; };
 		C962F1951BCE9E0C008E294E /* NSString+STTwitter.m in Sources */ = {isa = PBXBuildFile; fileRef = C962F1781BCE9E0C008E294E /* NSString+STTwitter.m */; };
@@ -79,7 +80,8 @@
 		826CF9D51BCFCF860082C748 /* SocialAgentLoginView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocialAgentLoginView.swift; sourceTree = "<group>"; };
 		827ADCD51BCCE1A800E97362 /* SocialAgentDemoApp-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SocialAgentDemoApp-Bridging-Header.h"; sourceTree = "<group>"; };
 		827ADCD91BCCE5BD00E97362 /* SocialAgentDelegateExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocialAgentDelegateExtension.swift; sourceTree = "<group>"; };
-		C903C9D61BEB477C00618A8E /* SoundCloud.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SoundCloud.swift; sourceTree = "<group>"; };
+		C903C9D61BEB477C00618A8E /* SoundCloudAgent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SoundCloudAgent.swift; sourceTree = "<group>"; };
+		C94949331BF0B1F8001BC3A2 /* MixCloudAgent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MixCloudAgent.swift; sourceTree = "<group>"; };
 		C962F1731BCE9E0C008E294E /* NSDateFormatter+STTwitter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDateFormatter+STTwitter.h"; sourceTree = "<group>"; };
 		C962F1741BCE9E0C008E294E /* NSDateFormatter+STTwitter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDateFormatter+STTwitter.m"; sourceTree = "<group>"; };
 		C962F1751BCE9E0C008E294E /* NSError+STTwitter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSError+STTwitter.h"; sourceTree = "<group>"; };
@@ -176,6 +178,7 @@
 				82171B691BCBE8A4006F7E1D /* Instagram */,
 				82171B6D1BCBE8A4006F7E1D /* Youtube */,
 				C903C9D51BEB476900618A8E /* SoundCloud */,
+				C94949321BF0B1DC001BC3A2 /* MixCloud */,
 			);
 			name = SocialAgentSDK;
 			path = ../../SocialAgentSDK;
@@ -253,9 +256,17 @@
 		C903C9D51BEB476900618A8E /* SoundCloud */ = {
 			isa = PBXGroup;
 			children = (
-				C903C9D61BEB477C00618A8E /* SoundCloud.swift */,
+				C903C9D61BEB477C00618A8E /* SoundCloudAgent.swift */,
 			);
 			path = SoundCloud;
+			sourceTree = "<group>";
+		};
+		C94949321BF0B1DC001BC3A2 /* MixCloud */ = {
+			isa = PBXGroup;
+			children = (
+				C94949331BF0B1F8001BC3A2 /* MixCloudAgent.swift */,
+			);
+			path = MixCloud;
 			sourceTree = "<group>";
 		};
 		C962F1721BCE9E0C008E294E /* STTwitter */ = {
@@ -405,9 +416,10 @@
 				C9C47D9B1BCD295E0000DBC9 /* LoginDelegate.swift in Sources */,
 				82171B491BCBBAA3006F7E1D /* AppDelegate.swift in Sources */,
 				C962F1991BCE9E0C008E294E /* STTwitterHTML.m in Sources */,
-				C903C9D71BEB477C00618A8E /* SoundCloud.swift in Sources */,
+				C903C9D71BEB477C00618A8E /* SoundCloudAgent.swift in Sources */,
 				C9C47D971BCCFC100000DBC9 /* SocialAgentPersistanceConstants.swift in Sources */,
 				C962F19A1BCE9E0C008E294E /* STTwitterOAuth.m in Sources */,
+				C94949341BF0B1F8001BC3A2 /* MixCloudAgent.swift in Sources */,
 				C962F1931BCE9E0C008E294E /* NSDateFormatter+STTwitter.m in Sources */,
 				82171B751BCBE934006F7E1D /* SocialAgentConstants.swift in Sources */,
 			);

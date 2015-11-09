@@ -44,7 +44,7 @@ class SoundCloudAgent: SocialAgentDelegate, LoginDelegate
                 completion(error: error)
             }
             else {
-                self?.getUserInfoForSC("3207", completion: { (error) -> () in
+                self?.getUserInfoFor(nil, completion: { (error) -> () in
                     completion(error: error)
                 })
             }
@@ -205,12 +205,13 @@ class SoundCloudAgent: SocialAgentDelegate, LoginDelegate
     }
     
     //MARK: - Getting user info methods
-    func getUserInfoForSC(userID: String?, completion: CompletionBlock) {
+    
+    func getUserInfoFor(identifier: String?, completion: CompletionBlock) {
         self.validateAccessToken { (validationSuccess) -> Void in
             if validationSuccess {
                 let request: NSMutableURLRequest = NSMutableURLRequest()
                 var URLString = ""
-                if let userID = userID {
+                if let userID = identifier {
                     URLString = APIResponseDictionaryKeys.APIBaseURL + "users/\(userID)?client_id=\(SocialAgentSettings.getSoundCloudClientID())"
                 }
                 else {
