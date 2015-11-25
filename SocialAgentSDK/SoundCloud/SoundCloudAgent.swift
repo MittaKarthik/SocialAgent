@@ -60,26 +60,26 @@ class SoundCloudAgent: SocialAgentDelegate, LoginDelegate
     
     
     //MARK: - Validation and refreshing methods
-    private func validateAccessToken(completion: (validationSuccess: Bool) -> Void) {
+    private func validateAccessToken(completion: (validationSuccess: Bool, didUpdate: Bool) -> Void) {
         
         if self.userModel.accessToken != nil {
-            var timeIntervalSinceTokenIssue = self.userModel.accessTokenIssueTime!.timeIntervalSinceNow
-            if timeIntervalSinceTokenIssue < 0 {
-                timeIntervalSinceTokenIssue = timeIntervalSinceTokenIssue * (-1)
-            }
-            if timeIntervalSinceTokenIssue < self.userModel.expiresIn! {
-                completion(validationSuccess: true)
+            let presentTime = NSDate().timeIntervalSince1970
+            if presentTime < self.userModel.expiresAt! {
+                completion(validationSuccess: true, didUpdate: false)
             }
             else {
                 self.refreshAccessToken({ (error) -> Void in
                     if error == nil {
-                        completion(validationSuccess: true)
+                        completion(validationSuccess: true, didUpdate: true)
+                    }
+                    else {
+                        completion(validationSuccess: false, didUpdate: true)
                     }
                 })
             }
         }
         else {
-            completion(validationSuccess: false)
+            completion(validationSuccess: false, didUpdate: true)
         }
     }
     
@@ -108,8 +108,8 @@ class SoundCloudAgent: SocialAgentDelegate, LoginDelegate
                                         self.userModel.accessToken = accessToken
                                         count++
                                     }
-                                    if let expiresIn = json["expires_in"] as? Double {
-                                        self.userModel.expiresIn = expiresIn
+                                    if let expiresAt = json["expires_in"] as? Double {
+                                        self.userModel.expiresAt = NSDate().timeIntervalSince1970 + expiresAt
                                         count++
                                     }
                                     if let refreshToken = json["refresh_token"] as? String {
@@ -162,8 +162,8 @@ class SoundCloudAgent: SocialAgentDelegate, LoginDelegate
                                         self.userModel.accessToken = accessToken
                                         count++
                                     }
-                                    if let expiresIn = json["expires_in"] as? Double {
-                                        self.userModel.expiresIn = expiresIn
+                                    if let expiresAt = json["expires_in"] as? Double {
+                                        self.userModel.expiresAt = NSDate().timeIntervalSince1970 + expiresAt
                                         count++
                                     }
                                     if count == 2 {
@@ -207,7 +207,7 @@ class SoundCloudAgent: SocialAgentDelegate, LoginDelegate
     //MARK: - Getting user info methods
     
     func getUserInfoFor(identifier: String?, completion: CompletionBlock) {
-        self.validateAccessToken { (validationSuccess) -> Void in
+        self.validateAccessToken { (validationSuccess, didUpdate) -> Void in
             if validationSuccess {
                 let request: NSMutableURLRequest = NSMutableURLRequest()
                 var URLString = ""
@@ -279,6 +279,33 @@ class SoundCloudAgent: SocialAgentDelegate, LoginDelegate
         }
     }
     
+    //MARK: - Reconnection
+    
+    func connectSocialAccount(withDetails: SAConnectionDetails, completion: CompletionBlock) {
+        self.userModel.accessToken = withDetails.accessToken
+        self.userModel.refreshToken = withDetails.refreshToken!
+        self.userModel.expiresAt = withDetails.expirationTime!
+        self.userModel.userID = withDetails.uniqueID
+        self.userModel.userName = withDetails.userName
+        self.validateAccessToken { (validationSuccess, didUpdate) -> Void in
+            if validationSuccess {
+                if didUpdate {
+                    completion(error: nil)
+                }
+                else {
+                    completion(error: nil)
+                }
+            }
+            else {
+                completion(error: NSError(domain:"Reconnection failed", code: 65, userInfo: [NSLocalizedDescriptionKey: "Reconnection failed", NSLocalizedFailureReasonErrorKey: "Reconnection failed"]))
+            }
+        }
+    }
+    
+    func getSocialAccountInfo() -> SAConnectionDetails
+    {
+        return SAConnectionDetails(uniqueID: self.userModel.userID!, accessToken: self.userModel.accessToken!, userName: self.userModel.userName!, refreshToken: self.userModel.refreshToken!, expirationTime: self.userModel.expiresAt)
+    }
     
     //Login Delegate Methods
     

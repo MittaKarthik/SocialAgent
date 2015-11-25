@@ -42,5 +42,11 @@ extension SocialAgentDelegate
         
     }
     
+    //MARK: - Facebook
+    
+    func getPageInfo()
+    {
+    
+    }
 
 }

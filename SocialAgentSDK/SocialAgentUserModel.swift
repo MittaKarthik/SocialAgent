@@ -32,7 +32,7 @@ class SocialAgentUserModel
         }
     }
     
-    var expiresIn : Double? {
+    var expiresAt : Double? {
         get {
             return persistedCredentials.doubleForKey(userConstants.expiresInKey)
         }
@@ -205,7 +205,7 @@ class SocialAgentUserModel
     
     func clearAllData() {
         self.accessToken = nil
-        self.expiresIn = nil
+        self.expiresAt = nil
         self.refreshToken = nil
         self.userID = nil
         self.channelID = nil

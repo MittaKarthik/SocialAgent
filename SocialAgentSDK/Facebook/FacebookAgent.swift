@@ -92,27 +92,40 @@ class FacebookAgent: SocialAgentDelegate
         
     }
     
+    //MARK: - Reconnection
+    
+    func connectSocialAccount(withDetails: SAConnectionDetails, completion: CompletionBlock) {
+        self.userModel.accessToken = withDetails.accessToken
+        self.userModel.userID = withDetails.uniqueID
+        self.userModel.userName = withDetails.userName
+        completion(error: nil)
+    }
+    
+    func getSocialAccountInfo() -> SAConnectionDetails
+    {
+        return SAConnectionDetails(uniqueID: self.userModel.userID!, accessToken: self.userModel.accessToken!, userName: self.userModel.userName!, refreshToken: nil, expirationTime: nil)
+    }
     
     //MARK: - Getting user info methods
       func getUserInfo(completion: CompletionBlock)
       {
-//        self.validateAccessToken { (validationSuccess) -> Void in
-//            if validationSuccess == true
-//            {
+        self.validateAccessToken { (validationSuccess) -> Void in
+            if validationSuccess == true
+            {
                 FBSDKGraphRequest(graphPath:ThisConstants.fbUserInfoPath, parameters:ThisConstants.fbUserFields).startWithCompletionHandler({ (connection, result, error) -> Void in
                     
                     if (error == nil)
                     {
-                        self.userModel.userID = FBSDKAccessToken.currentAccessToken().userID ?? ""
-                        self.userModel.accessToken = FBSDKAccessToken.currentAccessToken().tokenString ?? ""
-                        self.userModel.expiresIn = FBSDKAccessToken.currentAccessToken().expirationDate.timeIntervalSince1970
+                        self.userModel.userID = FBSDKAccessToken.currentAccessToken().userID
+                        self.userModel.accessToken = FBSDKAccessToken.currentAccessToken().tokenString
+                        self.userModel.expiresAt = FBSDKAccessToken.currentAccessToken().expirationDate.timeIntervalSince1970
                         self.userModel.userName = result[ThisConstants.fbName] as? String
-                        self.userModel.userEmailId = result[ThisConstants.fbEmail] as? String ?? ""
-                        self.userModel.age = result.objectForKey(ThisConstants.fbAgeRange)?.objectForKey(ThisConstants.fbAgeMin) as? String ?? ""
+                        self.userModel.userEmailId = result[ThisConstants.fbEmail] as? String
+                        self.userModel.age = result.objectForKey(ThisConstants.fbAgeRange)?.objectForKey(ThisConstants.fbAgeMin) as? String
                         if let profilePicURL = result.objectForKey(ThisConstants.fbPicture)?.objectForKey(ThisConstants.fbPicData)?.objectForKey(ThisConstants.fbPicUrl) {
                             self.userModel.profilePicUrl = profilePicURL as? String
                         }
-                        self.userModel.gender = result[ThisConstants.gender] as? String ?? ""
+                        self.userModel.gender = result[ThisConstants.gender] as? String 
                         
                         completion(error: nil)
                         
@@ -122,22 +135,22 @@ class FacebookAgent: SocialAgentDelegate
                         completion(error: error)
                     }
                 })
-
-//            }
-//            else
-//            {
-//                completion(error: NSError(domain:SocialAgentConstants.authenticationFailedMsg, code: 1, userInfo: [NSLocalizedDescriptionKey: SocialAgentConstants.authenticationFailedMsg,NSLocalizedFailureReasonErrorKey: SocialAgentConstants.authenticationFailedMsg]))
-//            }
-//            }
+                
+            }
+            else
+            {
+                completion(error: NSError(domain:SocialAgentConstants.authenticationFailedMsg, code: 1, userInfo: [NSLocalizedDescriptionKey: SocialAgentConstants.authenticationFailedMsg,NSLocalizedFailureReasonErrorKey: SocialAgentConstants.authenticationFailedMsg]))
+            }
         }
+    }
     
 
     //MARK: - Validation and refreshing methods
     private func validateAccessToken(completion: (validationSuccess: Bool) -> Void) {
         
         if self.userModel.accessToken != nil {
-            let timeIntervalSinceTokenIssue = self.userModel.accessTokenIssueTime?.timeIntervalSinceNow
-            if timeIntervalSinceTokenIssue < self.userModel.expiresIn! {
+            let presentTime = NSDate().timeIntervalSince1970
+            if presentTime < self.userModel.expiresAt! {
                 completion(validationSuccess: true)
             }
             else {
@@ -163,7 +176,7 @@ class FacebookAgent: SocialAgentDelegate
     {
         FBSDKAccessToken.refreshCurrentAccessToken { (connection, result, error) -> Void in
             self.userModel.accessToken = FBSDKAccessToken.currentAccessToken().tokenString ?? ""
-            self.userModel.expiresIn = FBSDKAccessToken.currentAccessToken().expirationDate.timeIntervalSince1970
+            self.userModel.expiresAt = FBSDKAccessToken.currentAccessToken().expirationDate.timeIntervalSince1970
             compeltion(error: nil)
         }
     }
@@ -178,19 +191,19 @@ class FacebookAgent: SocialAgentDelegate
 //            /me/friends - get graph api service for friends list.
         
         
-        //                FBSDKGraphRequest(graphPath:"me/posts", parameters: ["fields": "likes"] , HTTPMethod: "GET").startWithCompletionHandler({ (connection, result, error) -> Void in
-        //
-        //
-        //                    print(result as! Dictionary<String, AnyObject>)
-        //
-        //
-        //                })
-        //
-        //                //Archieve and store the user data in UserDefaults
-        //                let userData = NSKeyedArchiver.archivedDataWithRootObject(self.fbObject)
-        //                NSUserDefaults.standardUserDefaults().setObject(userData, forKey: "CurrentUser")
-        //                print("Saved")
-        //                NSUserDefaults.standardUserDefaults().synchronize()
+                        FBSDKGraphRequest(graphPath:"me/posts", parameters: ["fields": "likes"] , HTTPMethod: "GET").startWithCompletionHandler({ (connection, result, error) -> Void in
+        
+        
+                            print(result as! Dictionary<String, AnyObject>)
+        
+        
+                        })
+        
+                        //Archieve and store the user data in UserDefaults
+//                        let userData = NSKeyedArchiver.archivedDataWithRootObject(self.fbObject)
+//                        NSUserDefaults.standardUserDefaults().setObject(userData, forKey: "CurrentUser")
+//                        print("Saved")
+//                        NSUserDefaults.standardUserDefaults().synchronize()
     }
 }
 

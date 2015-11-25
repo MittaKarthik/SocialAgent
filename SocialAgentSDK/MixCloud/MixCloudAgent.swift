@@ -96,72 +96,7 @@ class MixCloudAgent: SocialAgentDelegate, LoginDelegate
         }
         task.resume()
     }
-    
-    func refreshAccessToken(completion: (error: NSError?) -> Void) {
-        let postbody: String = "client_id=\(SocialAgentSettings.getYouTubeClientID())&client_secret=\(SocialAgentSettings.getYouTubeClientSecret())&refresh_token=\(self.userModel.refreshToken!)&grant_type=refresh_token"
-        let postData: NSData = postbody.dataUsingEncoding(NSASCIIStringEncoding, allowLossyConversion: true)!
-        let postLength: String = "\(postData.length)"
-        let request: NSMutableURLRequest = NSMutableURLRequest()
-        request.URL = NSURL(string: "https://accounts.google.com/o/oauth2/token")
-        request.HTTPMethod = HTTPMethodString.POST.getString()
-        request.setValue(postLength, forHTTPHeaderField: "Content-Length")
-        request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
-        request.HTTPBody = postData
-        let session = NSURLSession.sharedSession()
-        let task = session.dataTaskWithRequest(request) { (data, response, error) -> Void in
-            if error == nil {
-                if let httpResponse = response as? NSHTTPURLResponse {
-                    if httpResponse.statusCode == 200 {
-                        if let dataObtained = data {
-                            do {
-                                if let json = try NSJSONSerialization.JSONObjectWithData(dataObtained, options: .MutableLeaves) as? NSDictionary {
-                                    var count = 0
-                                    if let accessToken = json["access_token"] as? String {
-                                        self.userModel.accessToken = accessToken
-                                        count++
-                                    }
-                                    if let expiresIn = json["expires_in"] as? Double {
-                                        self.userModel.expiresIn = expiresIn
-                                        count++
-                                    }
-                                    if count == 2 {
-                                        completion(error: nil)
-                                    }
-                                    else {
-                                        completion(error: NSError(domain: "Missing Data from API response", code: 2, userInfo: nil))
-                                    }
-                                    
-                                }
-                                else {
-                                    completion(error: NSError(domain: "No JSON response", code: 5, userInfo: nil))
-                                }
-                                
-                            }
-                            catch {
-                                
-                            }
-                        }
-                    }
-                    else {
-                        if let dataObtained = data {
-                            do {
-                                let json = try NSJSONSerialization.JSONObjectWithData(dataObtained, options: .MutableLeaves)
-                                completion(error: NSError(domain: "Response code not 200", code: 6, userInfo: json as? [NSObject : AnyObject]))
-                            }
-                            catch {
-                                
-                            }
-                        }
-                    }
-                }
-            }
-            else {
-                completion(error: error)
-            }
-        }
-        task.resume()
-    }
-    
+        
     //MARK: - Getting user info methods
     
     func getUserInfoFor(identifier: String?, completion: CompletionBlock) {
@@ -230,6 +165,16 @@ class MixCloudAgent: SocialAgentDelegate, LoginDelegate
         }
     }
     
+    func connectSocialAccount(withDetails: SAConnectionDetails, completion: CompletionBlock) {
+        self.userModel.userName = withDetails.uniqueID
+        self.userModel.accessToken = withDetails.accessToken
+        completion(error: nil)
+    }
+    
+    func getSocialAccountInfo() -> SAConnectionDetails
+    {
+        return SAConnectionDetails(uniqueID: self.userModel.userName!, accessToken: self.userModel.accessToken!, userName: self.userModel.userName!, refreshToken: nil, expirationTime: nil)
+    }
     
     //Login Delegate Methods
     

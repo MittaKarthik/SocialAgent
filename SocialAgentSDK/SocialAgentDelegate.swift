@@ -9,6 +9,16 @@
 import UIKit
 
 typealias CompletionBlock = (error : NSError?) -> ()
+typealias UpdateBlock = (error : NSError?, isServerUpdateRequired: Bool) -> ()
+typealias ConnectCompletionBlock = (error: NSError?, connectionDetails: SAConnectionDetails?) -> ()
+
+struct SAConnectionDetails {
+    var uniqueID: String
+    var accessToken: String
+    var userName: String?
+    var refreshToken: String?
+    var expirationTime: Double?
+}
 
 protocol SocialAgentDelegate : class
 {
@@ -26,6 +36,9 @@ protocol SocialAgentDelegate : class
     //For MixCloud - userName
     func getUserInfoFor(identifier: String?, userID: String?, completion: CompletionBlock) //Twitter
     func getUserInfoFor(identifier: String?, completion: CompletionBlock) //Other Platforms
+    func getPageInfo()
+    func connectSocialAccount(withDetails: SAConnectionDetails, completion: CompletionBlock)
+    func getSocialAccountInfo() -> SAConnectionDetails
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool
     func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject) -> Bool

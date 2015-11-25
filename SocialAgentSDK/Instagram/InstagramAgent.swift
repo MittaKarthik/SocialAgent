@@ -130,6 +130,17 @@ class InstagramAgent: SocialAgentDelegate, LoginDelegate
         }
     }
     
+    func connectSocialAccount(withDetails: SAConnectionDetails, completion: CompletionBlock) {
+        self.userModel.accessToken = withDetails.accessToken
+        self.userModel.userID = withDetails.uniqueID
+        self.userModel.userName = withDetails.userName
+        completion(error: nil)
+    }
+    
+    func getSocialAccountInfo() -> SAConnectionDetails
+    {
+        return SAConnectionDetails(uniqueID: self.userModel.userID!, accessToken: self.userModel.accessToken!, userName: self.userModel.userName!, refreshToken: nil, expirationTime: nil)
+    }
  
     //Logout
     

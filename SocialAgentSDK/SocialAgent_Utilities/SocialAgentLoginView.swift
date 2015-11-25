@@ -182,4 +182,9 @@ class SocialAgentLoginView: UIView, UIWebViewDelegate {
         activityView.removeFromSuperview()
     }
     
+    deinit
+    {
+        print("deinit")
+    }
+    
 }
